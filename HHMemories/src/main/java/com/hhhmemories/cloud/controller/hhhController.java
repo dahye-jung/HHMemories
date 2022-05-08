@@ -8,11 +8,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class hhhController {
 
-	@GetMapping("test2")
+	@RequestMapping("/test2")
 	public String home() {
 
 		System.out.println("페이지 출력");
 		return "pub/NewFile";
 
 	}
+	
+	@RequestMapping("/index")
+	public String index() throws Exception {
+		return "index";
+	}
+	
+	
+	
 }
