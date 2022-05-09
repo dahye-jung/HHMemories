@@ -10,4 +10,11 @@ public class PubController {
 	public String index() throws Exception{
 		return "pub/pubIndex";
 	}
+	
+
+	@RequestMapping(value = "/test1")
+	public String test() throws Exception{
+		return "pub/sample/sample-login-layout";
+	}
+
 }
