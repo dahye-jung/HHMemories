@@ -119,22 +119,6 @@
 
 /************************************ Form Style S ************************************/
 
-
-    .list-file{padding-top:0.12rem;}
-    .list-file .top{text-align:right;}
-    .list-file .top .tit{float:left;line-height:0.28rem;font-size:0.16rem;font-weight:bold;}
-    .list-file .top ~ ul{margin-top:0.2rem;padding:0.1rem 0;border-top:solid 0.01rem #e2e5eb;border-bottom:solid 0.01rem #e2e5eb;}
-    .list-file .top ~ ul.cmm-list.dot{padding:0;border:none;}
-    .list-file .top ~ ul li{position:relative;padding:0.1rem 0;}
-    .list-file .top ~ ul li p{color:#666;font-size:0.14rem;}
-    .list-file .top ~ ul li button{position:absolute;top:50%;right:0;transform:translateY(-50%);}
-    .list-file .top ~ ul li p{color:#666;font-size:0.14rem;}
-    .list-file .top ~ ul:last-child{padding-bottom:0;border-bottom:none;}
-
-    .list-file button + ul{margin-top:0.2rem;padding:0.1rem 0;border-top:solid 0.01rem #e2e5eb;border-bottom:solid 0.01rem #e2e5eb;}
-    .list-file button + ul li{position:relative;padding:0.1rem 0;}
-    .list-file button + ul li p{font-size:0.14rem;}
-    .list-file button + ul li button{position:absolute;top:50%;right:0;transform:translateY(-50%);}
     /* Diasbled */
     input[type="radio"]:disabled,
     input[type="checkbox"]:disabled,
