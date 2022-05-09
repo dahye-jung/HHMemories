@@ -12,7 +12,7 @@ public class PubController {
 	}
 	
 
-	@RequestMapping(value = "/test1")
+	@RequestMapping(value = "/sample-login-layout")
 	public String test() throws Exception{
 		return "pub/sample/sample-login-layout";
 	}
