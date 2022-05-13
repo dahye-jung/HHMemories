@@ -38,15 +38,16 @@
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                                 <!--<li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
                                  <li class="nav-item"><a class="nav-link" href="#!">login</a></li> -->
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">로그인</a>
+                                <li class="nav-item active"><a class="nav-link" href="/login">로그인</a></li>
+                                <!-- <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="/login" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">로그인</a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="#!">마이페이지</a>
-                                        <!-- <a class="dropdown-item" href="#!">Another action</a>
+                                        <a class="dropdown-item" href="#!">Another action</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#!">Something else here</a> -->
+                                        <a class="dropdown-item" href="#!">Something else here</a> 
                                     </div>
-                                </li>
+                                </li>-->
                             </ul>
                         </div>
                     </div>
