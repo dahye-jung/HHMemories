@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hhhmemories.cloud.index.controller.IndexController;
 import com.hhhmemories.cloud.login.service.LoginService;
+import com.hhhmemories.cloud.login.service.MemberVO;
 
 /**
  * @author 
@@ -22,6 +23,7 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
+	
 	// 로그인 페이지 이동
 	@RequestMapping(value = "/login")
 	public String loginPage() throws Exception{
@@ -34,7 +36,7 @@ public class LoginController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/signin")
-	public String signIn() {
+	public String signIn(MemberVO memberVo) {
 		
 		return "";
 	}
