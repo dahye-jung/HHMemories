@@ -9,6 +9,6 @@ import com.hhhmemories.cloud.member.service.MemberService;
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
-	private MemberDAO memberDAO;
+	MemberDAO memberDAO;
 	
 }
