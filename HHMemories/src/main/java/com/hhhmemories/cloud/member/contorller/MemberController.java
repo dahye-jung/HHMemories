@@ -1,27 +1,31 @@
-package com.hhhmemories.cloud.login.contorller;
+package com.hhhmemories.cloud.member.contorller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hhhmemories.cloud.index.controller.IndexController;
-import com.hhhmemories.cloud.login.service.LoginService;
-import com.hhhmemories.cloud.login.service.MemberVO;
+import com.hhhmemories.cloud.member.service.MemberService;
+import com.hhhmemories.cloud.member.service.MemberVO;
 
 /**
  * @author 
  * @프로그램 설명 : 로그인 관련 컨트롤러
  */
 @Controller
-public class LoginController {
+public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 	
 	@Autowired
-	private LoginService loginService;
+	private MemberService memberService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	
 	// 로그인 페이지 이동
