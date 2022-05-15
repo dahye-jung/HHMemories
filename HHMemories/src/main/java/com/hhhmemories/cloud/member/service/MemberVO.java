@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.springframework.stereotype.Component;
 
-import lombok.AllArgsConstructor;
+/*import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -16,14 +16,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 @Getter
-@Setter
+@Setter*/
 public class MemberVO {
 	
 	private int memberSeq;
 	
 	private String memberId;
 	
-	private String mbmerPw;
+	private String memberPw;
 
 	private String memberNm;
 
@@ -75,12 +75,12 @@ public class MemberVO {
 		this.memberId = memberId;
 	}
 
-	public String getMbmerPw() {
-		return mbmerPw;
+	public String getMemberPw() {
+		return memberPw;
 	}
 
-	public void setMbmerPw(String mbmerPw) {
-		this.mbmerPw = mbmerPw;
+	public void setMemberPw(String memberPw) {
+		this.memberPw = memberPw;
 	}
 
 	public String getMemberNm() {

@@ -60,7 +60,15 @@ public class MemberController {
 	@RequestMapping(value = "/signup")
 	public String signUp(String memberId, String memberPwd) {
 		
+		MemberVO memberVo = new MemberVO();
+		
+		memberId = "test101";
+		memberVo.setMemberId(memberId);
+		
 		// 입력한 아이디와 비밀번호를 DB에서 조회(select)
+		memberVo = memberService.selectMemberInfo(memberVo);
+		
+		logger.info("INFO ::: " + memberVo);
 		// 리턴값이 존재하면
 		// 기록을 위해 로그인 정보 DB에 업데이트(update)
 		// 세션에 로그인 정보 저장
@@ -91,6 +99,4 @@ public class MemberController {
 		
 		return "";
 	}
-	
-	
 }
