@@ -7,26 +7,7 @@
 */
 
 /************************************ Fonts Style S ************************************/
-    @font-face{
-        font-family:'AppleSDGothicNeo';
-        font-style:normal;
-        font-weight:normal;
-        src:url('../fonts/AppleSDGothicNeoR.eot');
-        src:url('../fonts/AppleSDGothicNeoR.eot') format('embedded-opentype'),
-             url('../fonts/AppleSDGothicNeoR.woff') format('woff'),
-             url('../fonts/AppleSDGothicNeoR.woff2') format('woff'),
-             url('../fonts/AppleSDGothicNeoR.ttf') format('truetype');
-    }
-    @font-face{
-        font-family:'AppleSDGothicNeo';
-        font-style:normal;
-        font-weight:bold;
-        src:url('../fonts/AppleSDGothicNeoB.eot');
-        src:url('../fonts/AppleSDGothicNeoB.eot') format('embedded-opentype'),
-             url('../fonts/AppleSDGothicNeoB.woff') format('woff'),
-             url('../fonts/AppleSDGothicNeoB.woff2') format('woff'),
-             url('../fonts/AppleSDGothicNeoB.ttf') format('truetype');
-    }
+
 /************************************ Fonts Style E ************************************/
 
 
