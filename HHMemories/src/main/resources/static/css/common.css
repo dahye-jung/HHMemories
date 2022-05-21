@@ -109,6 +109,11 @@
 /************************************ Important Style ************************************/
 
 /************************************ Guide Style S ************************************/
+    *[data-layout="guide"]{width:100%;height:100%;}
+    *[data-layout="guide"] .box-guide{display:inline-block;width:46%;height:5rem;margin:2%;padding:0.3rem;vertical-align:top;border:0.01rem solid #888;}
+    *[data-layout="guide"] .box-guide:nth-child(2n){margin-left:0;}
+    *[data-layout="guide"] .box-guide > .guide-title{margin-bottom:0.2rem;font-size:0.3rem;}
+    *[data-layout="guide"] .box-guide > .guide-title:before{display:inline-block;content:'';height:0.2rem;:;width:0.05rem;margin-right:0.1rem;background:#ccc;}
 /************************************ Guide Style E ************************************/
 
 
@@ -122,11 +127,24 @@
     *[data-layout="login"] .main-box > .box-form.left .box-logo > img{display:inline-block;width:100%;height:100%;}
     *[data-layout="login"] .main-box > .box-form:nth-child(2){width:60%;float:right;}
     *[data-layout="login"] .main-box > .box-form{padding:1.1rem 0.75rem;}
-    *[data-layout="login"] .main-box > .box-form .login-logo{margin-bottom:1.12rem;text-align:center;}
+    *[data-layout="login"] .main-box > .box-form .login-logo{/*margin-bottom:1.12rem;*/text-align:center;}
     *[data-layout="login"] .main-box > .box-form .login-logo > img{width:0.6rem;height:0.5rem;}
-    *[data-layout="login"] .main-box > .box-form .login-logo-txt{display:block;margin-top:0.16rem;font-size:0.16rem;color:#666666;}
+    *[data-layout="login"] .main-box > .box-form *[class^=sub-tit]{display:block;margin-top:0.16rem;}
     *[data-layout="login"] .main-box > .box-form .btn-box + .btn-box{padding-top:0.7rem;}
+    *[data-layout="login"] .main-box > .box-form.right{position:relative;}
+    *[data-layout="login"] .main-box > .box-form.right .box-form{position:absolute;bottom:0;left:0;width:100%;padding:1.1rem 0.75rem;}
+
 /************************************ Layout Style E ************************************/
+
+
+/************************************ Text Style S ************************************/
+    .sub-tit-16{font-size:0.16rem;color:#666666;}
+    .sub-tit-17{font-size:0.17rem;color:#000;font-weight:bold;}
+    .txt-17{font-size:0.17rem;color:#3a3a3a;}
+    .txt-15{font-size:0.15rem;color:#3a3a3a;}
+    /* color */
+    .txt-A{color:#c37828;}
+/************************************ Text Style E ************************************/
 
 
 /************************************ Form Style S ************************************/
@@ -156,8 +174,9 @@
     .input .btn-icon.search{margin:0 -0.1rem 0 0;}
     .input .btn-icon.delete{opacity:0;-webkit-transition:all 1s;transition:all 1s;}
     .input > *[class^="btn-icon"]{min-width:0.4rem;height:0.5rem;}
-    .input > *[class^="btn-"][class*="-ss"]{display:block;margin-top:0.1rem;}
-    .input > *[class^="btn-"][class*="-ss"] span{display:block;line-height:0.24rem ! important;font-size:0.14rem ! important;}
+    .input > *[class^="btn-"]{position:absolute;bottom:0.05rem;right:0;z-index:1;}
+    /*.input > *[class^="btn-"][class*="-ss"]{display:block;margin-top:0.1rem;}
+    .input > *[class^="btn-"][class*="-ss"] span{display:block;line-height:0.24rem ! important;font-size:0.14rem ! important;}*/
     .input input:focus ~ .btn-icon.delete,
     .input .btn-icon.delete:focus,
     .input input:not(:placeholder-shown) ~ .btn-icon.delete{opacity:1;z-index:2;}
@@ -318,13 +337,15 @@
     dl.cmm-agree > dd{padding:0.14rem 0;}
     dl.cmm-agree > dd + dd{margin-top:-0.24rem;}
     dl.cmm-agree > *:last-child{margin-bottom:-0.14rem;}
+
 /************************************ Form Style E ************************************/
 
 /************************************ Button Style S ************************************/
     /* box */
     .btn-box{text-align:right;}
+    .cmm-form + .btn-box{margin-top:0.4rem;}
     /* Btn */
-    *[class^="btn-"]{padding:17px 0;}
+    *[class^="btn-"]{padding:16px 0;}
     *[class^="btn-"]:disabled{opacity:0.5rem;}
     /**[class^="btn-"]{display:inline-block;position:relative;padding:0 0.2rem;height:0.6rem;line-height:0.56rem;color:#fff;font-size:0.16rem;text-align:center;background:transparent;box-sizing:border-box;white-space:nowrap;}*/
     *[class^="btn-"] span{display:inline-block;font-size:0.18rem;}
@@ -335,11 +356,15 @@
     *[class^="btn-"][class*="-s"]{padding:0 0.16rem;height:0.36rem;line-height:0.32rem;font-size:0.14rem;font-weight:normal;border-width:0.01rem;border-radius:0.04rem;}
     *[class^="btn-"][class*="-ss"]{padding:0 0.16rem;height:0.28rem;line-height:0.24rem;font-size:0.13rem;font-weight:normal;border-width:0.01rem;border-radius:0.04rem;}
     *[class^="btn-"][class*="-m"]{padding:0 0.16rem;height:0.4rem;line-height:0.36rem;font-size:0.14rem;font-weight:normal;border-radius:0.08rem;}
-    *[class^="btn-"].full{display:block;width:100%;letter-spacing:;}
+    *[class^="btn-"].full{display:block;width:100%;}
     *[class^="btn-"].full > span{font-size:0.18rem;letter-spacing:0.2rem;}
-    *[class^="btn-puple"]{font-size:0.15rem;background:#493bac;}
+    *[class^="btn-"].flex > *[class^="btn-"]{width:100%;}
+    *[class^="btn-"].flex > *[class^="btn-"] + *[class^="btn-"]{margin-left:0.11rem}
+    *[class^="btn-puple"]{background:#493bac;}
     *[class^="btn-puple"] > span{color:#fff;}
-/*    *[class^="btn-gray"]{color:#888;background:#f4f6fb;}
+    *[class^="btn-puple-white"]{display:inline-block;min-width:1.5rem;height:0.32rem;padding:0;border:0.01rem solid #c7c3e6;box-shadow:inset -0.01rem -0.01rem 0px 0px #837fa7;border-radius:0.03rem;background:#fff;box-sizing:border-box;}
+    *[class^="btn-puple-white"] > span{display:block;width:100%;height:100%;padding:0.08rem;font-size:0.13rem;color:#b9b9b9;}
+    /*    *[class^="btn-gray"]{color:#888;background:#f4f6fb;}
     *[class^="btn-black"]{font-size:0.15rem;background:#000;}
     *[class^="btn-white"]{color:#111;font-size:0.15rem;border-color:#e2e5eb;background:#fff;}
     *[class^="btn-white"]:hover{color:#0080ff;border-color:#0080ff;}
@@ -350,6 +375,7 @@
     *[class^="btn-bluegray"]{background:#7f8ba8;}*/
     /* Btn Text */
     *[class^="txt-btn"]{padding:0 ! important;min-width:0.4rem ! important;height:auto ! important;line-height:0.2rem ! important;color:#4C4C4D;border-color:transparent;}
+    *[class^="txt-btn"] > span{font-size:0.15rem;}
     *[class^="txt-btn"] + *[class^="txt-btn"]{margin-left:5px;}
     *[class^="txt-btn"] + *[class^="txt-btn"]:before{display:inline-block;content:"|";margin-right:10px;}
     *[class^="txt-btn"][class*="-m"] > span{font-size:0.16rem;font-weight:normal;}
@@ -365,6 +391,13 @@
     *[class^="txt-btn"].blue > span{color:#0080ff;}
     *[class^="txt-btn"].blue > span:after{background:#0080ff;}
 /************************************ Button Style E ************************************/
+
+
+/************************************ Box Style S ************************************/
+    .center-box{width:100%;padding:0.48rem 0.3rem;border:0.01rem solid #bdb9e0;border-radius:0.03rem;box-shadow:0.03rem 0.02rem 6px 0px #dbd9ef;text-align:center;}
+    .center-box > p + p{margin-top:0.2rem;}
+    .box-form.right .center-box{position:absolute;top:50%;left:50%;width:70%;transform:translate(-50%, -50%);}
+/************************************ Box Style E ************************************/
 
 
 
