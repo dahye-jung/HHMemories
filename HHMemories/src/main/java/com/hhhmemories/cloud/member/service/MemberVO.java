@@ -2,9 +2,7 @@ package com.hhhmemories.cloud.member.service;
 
 import java.util.Date;
 
-import org.springframework.stereotype.Component;
-
-/*import lombok.AllArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
@@ -16,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 @Getter
-@Setter*/
+@Setter
 public class MemberVO {
 	
 	private int memberSeq;
