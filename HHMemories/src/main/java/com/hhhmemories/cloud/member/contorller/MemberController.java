@@ -132,7 +132,13 @@ public class MemberController {
 		return "";
 	}
 	
-	// 임시 비밀번호 작성 함수
+	
+	/**
+	 * 임시 비밀번호 작성 함수
+	 * 
+	 * @param 
+	 * @throws Exception
+	 */
 	public static String tempPassword(int leng) throws Exception{
 		int index = 0;
 		char[] charSet = new char[] {
