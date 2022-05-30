@@ -37,9 +37,9 @@ public class MemberController {
 	
 	
 	// 로그인 페이지 이동
-	@RequestMapping(value = "/login")
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() throws Exception{
-		return "login/login";	
+		return "member/login";	
 	}
 	
 	/**
@@ -47,7 +47,7 @@ public class MemberController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/signin")
+	@RequestMapping(value = "/signup")
 	public String signIn(MemberVO memberVo) {
 		
 		return "";
@@ -59,7 +59,7 @@ public class MemberController {
 	 * @param memberPwd(로그인 비밀번호)
 	 * @return ?
 	 */
-	@RequestMapping(value = "/signup")
+	@RequestMapping(value = "/signin")
 	public String signUp(String memberId, String memberPwd) {
 		
 		MemberVO memberVo = new MemberVO();
