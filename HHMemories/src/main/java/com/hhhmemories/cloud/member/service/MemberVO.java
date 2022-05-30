@@ -63,7 +63,7 @@ public class MemberVO {
 	private String verify;
 
 	//우편번호
-	private String zipcode;
+	private String zipCode;
 	
 	//주소
 	private String address;
@@ -197,12 +197,12 @@ public class MemberVO {
 		this.verify = verify;
 	}
 
-	public String getZipcode() {
-		return zipcode;
+	public String getZipCode() {
+		return zipCode;
 	}
 
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
 
 	public String getAddress() {

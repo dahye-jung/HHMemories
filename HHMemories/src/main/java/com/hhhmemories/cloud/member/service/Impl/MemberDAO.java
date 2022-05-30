@@ -18,4 +18,8 @@ public class MemberDAO {
 	public MemberVO selectMemberInfo(MemberVO memberVo, HttpServletResponse response) throws Exception {
 		return sqlSession.selectOne("member.selectMemberInfo", memberVo);
 	}
+	
+	public int updateMemberPassword(MemberVO memberVo) throws Exception {
+		return sqlSession.update("member.updateMemberPassword", memberVo);
+	}
 }

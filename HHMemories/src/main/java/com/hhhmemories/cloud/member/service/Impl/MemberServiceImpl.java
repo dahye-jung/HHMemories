@@ -19,6 +19,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectMemberInfo(memberVo, response);
 	}
 
+	@Override
+	public int updateMemberPassword(MemberVO memberVo) throws Exception {
+		return memberDAO.updateMemberPassword(memberVo);
+	}
+
 	
 	
 	

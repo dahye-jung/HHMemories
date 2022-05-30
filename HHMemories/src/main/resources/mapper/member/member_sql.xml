@@ -1,25 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
-	    
-	   <resultMap type="com.hhhmemories.cloud.member.service.MemberVO" id="selectMemberInfo">
-          <result property="memberId" column="mmeber_id"/>
-          <result property="memberPw" column="mmeber_pw"/>
-          <result property="memberSeq" column="mmeber_seq"/>
-       </resultMap>
-       
-       
-	    <select id="selectMemberInfo" resultMap="selectMemberInfo">
-	    	/* MEMBER LOGIN > SELECT ONE START */
-	    	SELECT 
-	    		member_seq
-	    		,member_id
-	    		,member_pw 
-	    	FROM 
-	    		tb_member 
-	    	WHERE 
-	    		member_id = #{memberId }
-	    	/* MEMBER LOGIN > SELECT ONE END */
-	    </select>
+
+	<resultMap type="com.hhhmemories.cloud.member.service.MemberVO" id="selectMemberInfo">
+		<result property="memberSeq" column="member_seq" />
+		<result property="memberId" column="member_id" />
+		<result property="memberPw" column="member_pw" />
+		<result property="memberNm" column="member_nm" />
+		<result property="memberEmail" column="member_email" />
+		<result property="memberBirth" column="member_birth" />
+		<result property="memberGender" column="member_gender" />
+		<result property="phoneNumber" column="phone_number" />
+		<result property="loginLastDt" column="login_last_dt" />
+		<result property="pwChgDt" column="pw_chg_dt" />
+		<result property="lockAt" column="lock_at" />
+		<result property="lockCnt" column="lock_cnt" />
+		<result property="lockLastDt" column="lock_last_dt" />
+		<result property="npwYn" column="npw_yn" />
+		<result property="verify" column="verify" />
+		<result property="zipCode" column="zipcode" />
+		<result property="address" column="address" />
+		<result property="addressDetail" column="address_detail" />
+		<result property="regDt" column="reg_dt" />
+		<result property="updDt" column="upd_dt" />
+	</resultMap>
+
+	<!-- 로그인 정보 조회 -->
+	<select id="selectMemberInfo" resultMap="selectMemberInfo">
+		SELECT
+			member_seq,
+			member_id,
+			member_pw
+		FROM
+			tb_member
+		WHERE
+			member_id = #{memberId }
+	</select>
+
+	<!-- 아이디 찾기 정보 조회 -->
+
+	<!-- 비밀번호 찾기 정보 조회 -->
+
+
+	<update id="updateMemberPassword">
+		UPDATE
+			tb_member
+		SET
+			member_pw = #{memberPw }
+		WHERE
+			member_id = #{memberId }
+	</update>
 </mapper>
 

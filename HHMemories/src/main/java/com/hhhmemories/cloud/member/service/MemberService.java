@@ -12,4 +12,6 @@ public interface MemberService {
 	 */
 	MemberVO selectMemberInfo(MemberVO memberVo, HttpServletResponse response) throws Exception;
 	
+	int updateMemberPassword(MemberVO memberVo) throws Exception;
+	
 }

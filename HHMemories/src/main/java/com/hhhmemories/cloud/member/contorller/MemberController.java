@@ -52,34 +52,34 @@ public class MemberController {
 	}
 	
 	/**
-	 * 로그인 페이지
+	 * 로그인 기능
 	 * 
 	 * @param memberId, memberPwd
-	 * @return 로그인 페이지
+	 * @return 메인 페이지
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String signin(MemberVO memberVo, HttpServletRequest req, RedirectAttributes rttr, HttpServletResponse response) throws Exception{
 		
-		MemberVO user = memberService.selectMemberInfo(memberVo, response);
-
 		HttpSession session = req.getSession();
 		
+		MemberVO user = memberService.selectMemberInfo(memberVo, response); // 로그인한 정보로 회원정보가 존재하는 지 조회
 		
-		//login.getMemberPw() null값 오류
-		boolean passMatch = passwordEncoder.matches(memberVo.getMemberPw(), user.getMemberPw());
+		if(user != null) { // 로그인 시도한 아이디가 실제로 존재할 경우
+			boolean passMatch = passwordEncoder.matches(memberVo.getMemberPw(), user.getMemberPw()); // 입력한 패스워드와 DB에 저장되어 있는 패스워드 비교	
 
-		// 등록된 아이디와 비밀번호를 잘못 작성하였을때
-		if (user != null && passMatch) {
-			session.setAttribute("member", user);
-		} else {
-			session.setAttribute("member", null);
-			rttr.addFlashAttribute("msg", "비밀번호를 확인해주세요");
-			return "redirect:/login/login";
+			if (passMatch) { // 패스워드가 동일할 경우	
+				logger.info("Method signin >>>>>>>> Login Success");
+				session.setAttribute("member", user);
+			} else { // 패스워드가 틀릴 경우.
+				logger.info("Method signin >>>>>>>> Login Fail");
+				session.setAttribute("member", null);
+				rttr.addFlashAttribute("msg", "비밀번호를 확인해주세요");
+				return "redirect:/login/login";
+			}
 		}
 
-		return "redirect:/";
-		
+		return "index";
 	}
 	
 	/**
@@ -93,6 +93,7 @@ public class MemberController {
 	public String logOut(MemberVO memberVO, HttpSession session) throws Exception{
 		
 		//세션에 등록된 로그인 정보 삭제
+		session.invalidate();
 		
 		return "redirect:member/login";
 	}
@@ -124,7 +125,7 @@ public class MemberController {
 	}
 	
 	/**
-	 * 비밀번호찾기 페이지
+	 * 비밀번호찾기 기능
 	 * 
 	 * @param 
 	 * @return 
@@ -133,6 +134,7 @@ public class MemberController {
 	@RequestMapping(value = "/findpwd")
 	public String findUserPwd(MemberVO memberVo, HttpServletResponse response) throws Exception{
 		
+		// 이름, 아이디, 이메일로 계정이 있는지 조회
 		memberVo = memberService.selectMemberInfo(memberVo, response);
 		
 		String pw = tempPassword(10); // 임시비밀번호 설정
