@@ -19,8 +19,6 @@
 	    		tb_member 
 	    	WHERE 
 	    		member_id = #{memberId }
-	    	AND
-	    		member_pw = #{memberPw}	
 	    	/* MEMBER LOGIN > SELECT ONE END */
 	    </select>
 </mapper>
