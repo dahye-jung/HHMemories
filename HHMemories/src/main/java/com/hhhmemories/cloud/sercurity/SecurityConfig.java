@@ -8,14 +8,30 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.hhhmemories.cloud.member.service.MemberService;
+
+import lombok.RequiredArgsConstructor;
+
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	// security 기본 login 페이지 x
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
+		
 		httpSecurity.httpBasic().disable();
+		
+		httpSecurity.authorizeRequests().antMatchers("/login","/singup","/resources/**").permitAll() // 로그인 권한은 누구나, resources파일도 모든권한
+					.and()
+						.formLogin()
+						.loginPage("/member/login")
+						.defaultSuccessUrl("/")
+					.and()
+			            .csrf().disable();		//로그인 창	
+			
+			;
 	}
 
 	//비밀번호 암호화

@@ -1,5 +1,7 @@
 package com.hhhmemories.cloud.member.service.Impl;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,9 +13,9 @@ public class MemberDAO {
 	
 
 	@Autowired
-	   private SqlSessionTemplate sqlSession;
+	private SqlSessionTemplate sqlSession;
 	
-	public MemberVO selectMemberInfo(MemberVO memberVo) {
-		return sqlSession.selectOne("login.selectMemberInfo", memberVo);
+	public MemberVO selectMemberInfo(MemberVO memberVo, HttpServletResponse response) throws Exception {
+		return sqlSession.selectOne("member.selectMemberInfo", memberVo);
 	}
 }

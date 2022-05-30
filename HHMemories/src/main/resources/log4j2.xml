@@ -26,24 +26,32 @@
         </RollingFile>
     </Appenders>
  
-    <Loggers>
-        <Root level="INFO">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="File"/>
-        </Root>
- 
-        <Logger name="com.hhhmemories.cloud" level="DEBUG" additivity="false">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="File"/>
-        </Logger>
-    </Loggers>
-    
-    <logger name="jdbc" level="OFF"/>
-	<logger name="jdbc.sqlonly" level="OFF"/>
-	<logger name="jdbc.sqltiming" level="DEBUG"/>
-	<logger name="jdbc.audit" level="OFF"/>
-	<logger name="jdbc.resultset" level="OFF"/>
-	<logger name="jdbc.resultsettable" level="DEBUG"/>
-	<logger name="jdbc.connection" level="OFF"/>
+    <!-- Application Loggers -->
+	<logger name="kr.icia.controller">
+		<level value="info" />
+	</logger>
+
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework.beans">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework.context">
+		<level value="info" />
+	</logger>
+
+	<logger name="org.springframework.web">
+		<level value="info" />
+	</logger>
+
+	<!-- Root Logger -->
+	<root>
+		<priority value="warn" />
+		<appender-ref ref="console" />
+	</root>
     
 </Configuration>

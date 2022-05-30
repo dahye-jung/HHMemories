@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -19,10 +22,10 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light"><img src="img/logo.png" style="width: 200px; height: 50px;"></div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Overview</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Events</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">메뉴1</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">메뉴2</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">메뉴3</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">메뉴4</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
                 </div>
@@ -32,22 +35,33 @@
                 <!-- Top navigation-->
                 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                     <div class="container-fluid">
-                        <button class="btn btn-primary" id="sidebarToggle">button</button>
+                        <button class="btn btn-primary" id="sidebarToggle"></button>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                                 <!--<li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
                                  <li class="nav-item"><a class="nav-link" href="#!">login</a></li> -->
-                                <li class="nav-item active"><a class="nav-link" href="/login">로그인</a></li>
+									<c:choose>
+										<c:when test="${not empty member}">
+											<li class="nav-item active">
+												<a class="nav-link" href="/logout">로그아웃</a>
+											</li>
+										</c:when>
+										<c:otherwise>
+											<li class="nav-item active">
+												<a class="nav-link" href="/login">로그인</a>
+											</li>
+										</c:otherwise>
+									</c:choose>
                                 <!-- <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="/login" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">로그인</a>
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="../member/login" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">로그인</a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="#!">마이페이지</a>
                                         <a class="dropdown-item" href="#!">Another action</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#!">Something else here</a> 
+                                        <a class="dropdown-item" href="#!">Something else here</a>
                                     </div>
-                                </li>-->
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -72,4 +86,3 @@
         <script src="js/scripts.js"></script>
     </body>
 </html>
-
