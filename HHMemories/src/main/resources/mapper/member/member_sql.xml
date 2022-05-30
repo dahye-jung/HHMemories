@@ -1,21 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="login">
+<mapper namespace="member">
 	    
 	   <resultMap type="com.hhhmemories.cloud.member.service.MemberVO" id="selectMemberInfo">
-          <result column="" property=""/>
+          <result property="memberId" column="mmeber_id"/>
+          <result property="memberPw" column="mmeber_pw"/>
+          <result property="memberSeq" column="mmeber_seq"/>
        </resultMap>
        
        
-	    <select id="selectMemberInfo" 
-	    	resultType="com.hhhmemories.cloud.member.service.MemberVO">
+	    <select id="selectMemberInfo" resultMap="selectMemberInfo">
 	    	/* MEMBER LOGIN > SELECT ONE START */
 	    	SELECT 
-	    		member_id 
+	    		member_seq
+	    		,member_id
+	    		,member_pw 
 	    	FROM 
 	    		tb_member 
 	    	WHERE 
-	    		member_id = #{memberId };	
+	    		member_id = #{memberId }
+	    	AND
+	    		member_pw = #{memberPw}	
 	    	/* MEMBER LOGIN > SELECT ONE END */
 	    </select>
 </mapper>

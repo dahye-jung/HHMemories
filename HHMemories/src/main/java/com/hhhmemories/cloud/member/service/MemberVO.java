@@ -17,44 +17,64 @@ import lombok.Setter;
 @Setter
 public class MemberVO {
 	
+	//회원 일련번호
 	private int memberSeq;
 	
+	//회원 아이디
 	private String memberId;
 	
+	//회원 비밀번호
 	private String memberPw;
 
+	//회원명
 	private String memberNm;
 
+	//회원 이메일
 	private String memberEmail;
 
+	//생년월일
 	private String memberBirth;
 	
+	//성별
 	private String memberGender;
 	
+	//휴대전화번호
 	private String phoneNumber;
 	
+	//마지막 로그인 일자
 	private Date loginLastDt;
 	
+	//비밀번호 변경 일자
 	private Date pwChgDt;
 	
+	//잠금여부
 	private String lockAt;
 	
+	//잠금횟수
 	private String lockCnt;
 	
+	//잠금 최종 시점
 	private Date lockLastDt;
 
+	//임시비밀번호 여부
 	private String npwYn;
 	
+	//권한
 	private String verify;
 
+	//우편번호
 	private String zipcode;
 	
+	//주소
 	private String address;
 	
+	//상세주소
 	private String addressDetail;
 	
+	//등록일자
 	private Date regDt;
 
+	//수정일자
 	private Date updDt;
 
 	public int getMemberSeq() {

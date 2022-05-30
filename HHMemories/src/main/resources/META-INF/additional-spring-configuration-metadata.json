@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "configuration",
+    "type": "java.lang.String",
+    "description": "A description for 'configuration'"
+  },
+  {
+    "name": "map-underscore-to-camel-case",
+    "type": "java.lang.String",
+    "description": "A description for 'map-underscore-to-camel-case'"
+  }
+]}

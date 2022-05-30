@@ -1,5 +1,7 @@
 package com.hhhmemories.cloud.member.service.Impl;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,8 @@ public class MemberServiceImpl implements MemberService {
 	MemberDAO memberDAO;
 
 	@Override
-	public MemberVO selectMemberInfo(MemberVO memberVo) {
-		
-		return memberDAO.selectMemberInfo(memberVo);
+	public MemberVO selectMemberInfo(MemberVO memberVo, HttpServletResponse response) throws Exception {
+		return memberDAO.selectMemberInfo(memberVo, response);
 	}
 
 	

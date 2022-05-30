@@ -2,8 +2,10 @@ package com.hhhmemories.cloud.member.contorller;
 
 import java.util.Random;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,20 +17,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.hhhmemories.cloud.index.controller.IndexController;
 import com.hhhmemories.cloud.member.service.MemberService;
 import com.hhhmemories.cloud.member.service.MemberVO;
+
+import lombok.extern.log4j.Log4j;
 
 /**
  * @author 
  * @프로그램 설명 : 로그인 관련 컨트롤러
  */
 @Controller
+@Log4j
 public class MemberController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(IndexController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
-	@Autowired
+	@Resource(name = "memberService")
 	private MemberService memberService;
 	
 	//암호화
@@ -54,24 +58,28 @@ public class MemberController {
 	 * @return 로그인 페이지
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/signin", method = RequestMethod.POST)
-	public String signUp(String memberId, String memberPwd) throws Exception{
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String signin(MemberVO memberVo, HttpServletRequest req, RedirectAttributes rttr, HttpServletResponse response) throws Exception{
 		
-		MemberVO memberVo = new MemberVO();
+		MemberVO login = memberService.selectMemberInfo(memberVo, response);
+
+		HttpSession session = req.getSession();
 		
-		memberId = "test101";
-		memberVo.setMemberId(memberId);
 		
-		// 입력한 아이디와 비밀번호를 DB에서 조회(select)
-		memberVo = memberService.selectMemberInfo(memberVo);
+		//login.getMemberPw() null값 오류
+		boolean passMatch = passwordEncoder.matches(memberVo.getMemberPw(), login.getMemberPw());
+
+		// 등록된 아이디와 비밀번호를 잘못 작성하였을때
+		if (login != null && passMatch) {
+			session.setAttribute("member", login);
+		} else {
+			session.setAttribute("member", null);
+			rttr.addFlashAttribute("msg", "비밀번호를 확인해주세요");
+			return "redirect:/login/login";
+		}
+
+		return "redirect:/";
 		
-		logger.info("INFO ::: " + memberVo);
-		// 리턴값이 존재하면
-		// 기록을 위해 로그인 정보 DB에 업데이트(update)
-		// 세션에 로그인 정보 저장
-		// 로그인 자동 유지 시간 30분으로 설정
-		
-		return "";
 	}
 	
 	/**
@@ -82,11 +90,11 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET )
-	public String logOut() throws Exception{
+	public String logOut(MemberVO memberVO, HttpSession session) throws Exception{
 		
 		//세션에 등록된 로그인 정보 삭제
 		
-		return "/index";
+		return "redirect:member/login";
 	}
 	
 	/**
@@ -97,7 +105,7 @@ public class MemberController {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/signup")
-	public String signIn(MemberVO memberVo) throws Exception{
+	public String signUp(MemberVO memberVo) throws Exception{
 		
 		return "";
 	}
@@ -123,9 +131,9 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/findpwd")
-	public String findUserPwd(MemberVO memberVo) throws Exception{
+	public String findUserPwd(MemberVO memberVo, HttpServletResponse response) throws Exception{
 		
-		memberVo = memberService.selectMemberInfo(memberVo);
+		memberVo = memberService.selectMemberInfo(memberVo, response);
 		
 		String pw = tempPassword(10); // 임시비밀번호 설정
 		

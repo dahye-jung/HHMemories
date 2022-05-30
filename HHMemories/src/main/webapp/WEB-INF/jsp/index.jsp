@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,7 +41,18 @@
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
                                 <!--<li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
                                  <li class="nav-item"><a class="nav-link" href="#!">login</a></li> -->
-                                 <li class="nav-item active"><a class="nav-link" href="/login">로그인</a></li>
+									<c:choose>
+										<c:when test="${not empty member}">
+											<li class="nav-item active">
+												<a class="nav-link" href="/logout">로그아웃</a>
+											</li>
+										</c:when>
+										<c:otherwise>
+											<li class="nav-item active">
+												<a class="nav-link" href="/login">로그인</a>
+											</li>
+										</c:otherwise>
+									</c:choose>
                                 <!-- <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="../member/login" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">로그인</a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
