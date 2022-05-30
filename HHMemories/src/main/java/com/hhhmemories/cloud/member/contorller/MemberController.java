@@ -36,31 +36,26 @@ public class MemberController {
 	private PasswordEncoder passwordEncoder;
 	
 	
-	// 로그인 페이지 이동
+	/**
+	 * 로그인 페이지
+	 * 
+	 * @return 로그인 페이지
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() throws Exception{
 		return "member/login";	
 	}
 	
 	/**
-	 * @Method 회원가입 기능
-	 * @return
+	 * 로그인 페이지
+	 * 
+	 * @param memberId, memberPwd
+	 * @return 로그인 페이지
+	 * @throws Exception
 	 */
-	@ResponseBody
-	@RequestMapping(value = "/signup")
-	public String signIn(MemberVO memberVo) {
-		
-		return "";
-	}
-	
-	/**
-	 * @Method 로그인 기능
-	 * @param memberId(로그인 아이디)
-	 * @param memberPwd(로그인 비밀번호)
-	 * @return ?
-	 */
-	@RequestMapping(value = "/signin")
-	public String signUp(String memberId, String memberPwd) {
+	@RequestMapping(value = "/signin", method = RequestMethod.POST)
+	public String signUp(String memberId, String memberPwd) throws Exception{
 		
 		MemberVO memberVo = new MemberVO();
 		
@@ -79,25 +74,56 @@ public class MemberController {
 		return "";
 	}
 	
-	// 로그아웃 기능
-	@RequestMapping(value = "/logout")
-	public String logOut() {
+	/**
+	 * 로그아웃
+	 * 
+	 * @param 
+	 * @return 메인 페이지
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/logout", method = RequestMethod.GET )
+	public String logOut() throws Exception{
 		
 		//세션에 등록된 로그인 정보 삭제
 		
-		return "";
+		return "/index";
 	}
 	
-	// 아이디 찾기 기능
-	@RequestMapping(value = "/findid")
-	public String findUserId() { 
+	/**
+	 * 회원가입 페이지
+	 * 
+	 * @return 메인 페이지
+	 * @throws Exception
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/signup")
+	public String signIn(MemberVO memberVo) throws Exception{
 		
 		return "";
 	}
 	
-	// 비빌번호 찾기 기능
+	/**
+	 * 아이디찾기 페이지
+	 * 
+	 * @param 
+	 * @return 
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/findid")
+	public String findUserId() throws Exception{ 
+		
+		return "";
+	}
+	
+	/**
+	 * 비밀번호찾기 페이지
+	 * 
+	 * @param 
+	 * @return 
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/findpwd")
-	public String findUserPwd(MemberVO memberVo) {
+	public String findUserPwd(MemberVO memberVo) throws Exception{
 		
 		memberVo = memberService.selectMemberInfo(memberVo);
 		
@@ -107,7 +133,7 @@ public class MemberController {
 	}
 	
 	// 임시 비밀번호 작성 함수
-	public static String tempPassword(int leng){
+	public static String tempPassword(int leng) throws Exception{
 		int index = 0;
 		char[] charSet = new char[] {
 				'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
