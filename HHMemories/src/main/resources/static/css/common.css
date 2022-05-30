@@ -91,7 +91,7 @@
 
 /************************************ Guide Style S ************************************/
     *[data-layout="guide"]{width:100%;height:100%;}
-    *[data-layout="guide"] .box-guide{display:inline-block;width:46%;height:5rem;margin:2%;padding:0.3rem;vertical-align:top;border:0.01rem solid #888;}
+    *[data-layout="guide"] .box-guide{display:inline-block;width:46%;height:7rem;margin:2%;padding:0.3rem;overflow-y:scroll;vertical-align:top;border:0.01rem solid #888;}
     *[data-layout="guide"] .box-guide:nth-child(2n){margin-left:0;}
     *[data-layout="guide"] .box-guide > .guide-title{margin-bottom:0.2rem;font-size:0.3rem;}
     *[data-layout="guide"] .box-guide > .guide-title:before{display:inline-block;content:'';height:0.2rem;:;width:0.05rem;margin-right:0.1rem;background:#ccc;}
@@ -120,10 +120,11 @@
 
 
 /************************************ Text Style S ************************************/
-    .sub-tit-16{font-size:0.16rem;color:#666666;}
+    .sub-tit-16{font-size:0.16rem;color:#858585;font-weight:bold;}
     .sub-tit-17{font-size:0.17rem;color:#000;font-weight:bold;}
     .txt-17{font-size:0.17rem;color:#3a3a3a;}
-    .txt-15{font-size:0.15rem;color:#3a3a3a;}
+    *[class^="txt-15"]{font-size:0.15rem;color:#3a3a3a;}
+    *[class^="txt-"].light{font-weight:lighter;}
     /* color */
     .txt-A{color:#c37828;}
 /************************************ Text Style E ************************************/
@@ -325,7 +326,9 @@
 /************************************ Button Style S ************************************/
     /* box */
     .btn-box{text-align:right;}
-    .cmm-form + .btn-box{margin-top:0.4rem;}
+    .btn-box *[class^="btn-"]{text-align:center;}
+    .cmm-form:nth-child(2) + .btn-box{margin-top:1rem;}
+    .cmm-form:nth-child(3) + .btn-box{margin-top:0.4rem;}
     /* Btn */
     *[class^="btn-"]{padding:16px 0;}
     *[class^="btn-"]:disabled{opacity:0.5rem;}
