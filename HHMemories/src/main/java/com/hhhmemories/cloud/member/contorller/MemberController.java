@@ -61,17 +61,17 @@ public class MemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String signin(MemberVO memberVo, HttpServletRequest req, RedirectAttributes rttr, HttpServletResponse response) throws Exception{
 		
-		MemberVO login = memberService.selectMemberInfo(memberVo, response);
+		MemberVO user = memberService.selectMemberInfo(memberVo, response);
 
 		HttpSession session = req.getSession();
 		
 		
 		//login.getMemberPw() null값 오류
-		boolean passMatch = passwordEncoder.matches(memberVo.getMemberPw(), login.getMemberPw());
+		boolean passMatch = passwordEncoder.matches(memberVo.getMemberPw(), user.getMemberPw());
 
 		// 등록된 아이디와 비밀번호를 잘못 작성하였을때
-		if (login != null && passMatch) {
-			session.setAttribute("member", login);
+		if (user != null && passMatch) {
+			session.setAttribute("member", user);
 		} else {
 			session.setAttribute("member", null);
 			rttr.addFlashAttribute("msg", "비밀번호를 확인해주세요");
