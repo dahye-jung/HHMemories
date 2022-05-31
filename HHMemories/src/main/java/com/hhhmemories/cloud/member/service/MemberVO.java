@@ -76,6 +76,9 @@ public class MemberVO {
 
 	//수정일자
 	private Date updDt;
+	
+	//사용여부
+	private String useYn;
 
 	public int getMemberSeq() {
 		return memberSeq;
@@ -236,5 +239,14 @@ public class MemberVO {
 	public void setUpdDt(Date updDt) {
 		this.updDt = updDt;
 	}
+
+	public String getUseYn() {
+		return useYn;
+	}
+
+	public void setUseYn(String useYn) {
+		this.useYn = useYn;
+	}
+	
 	
 }

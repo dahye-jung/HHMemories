@@ -10,8 +10,11 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,7 +44,7 @@ public class MemberController {
 	
 	
 	/**
-	 * 로그인 페이지
+	 * 로그인 페이지(GET)
 	 * 
 	 * @return 로그인 페이지
 	 * @throws Exception
@@ -52,10 +55,10 @@ public class MemberController {
 	}
 	
 	/**
-	 * 로그인 기능
+	 * 로그인 기능(POST)
 	 * 
 	 * @param memberId, memberPwd
-	 * @return 메인 페이지
+	 * @return 로그인 기능
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -75,11 +78,11 @@ public class MemberController {
 				logger.info("Method signin >>>>>>>> Login Fail");
 				session.setAttribute("member", null);
 				rttr.addFlashAttribute("msg", "비밀번호를 확인해주세요");
-				return "redirect:/login/login";
+				return "redirect:/member/login";
 			}
 		}
 
-		return "index";
+		return "redirect:/index";
 	}
 	
 	/**
@@ -89,26 +92,46 @@ public class MemberController {
 	 * @return 메인 페이지
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/logout", method = RequestMethod.GET )
-	public String logOut(MemberVO memberVO, HttpSession session) throws Exception{
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logOut(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
-		//세션에 등록된 로그인 정보 삭제
-		session.invalidate();
+		 new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder
+	                .getContext().getAuthentication());
 		
-		return "redirect:member/login";
+		return "redirect:/index";
 	}
 	
 	/**
-	 * 회원가입 페이지
+	 * 회원가입 페이지(GET)
 	 * 
-	 * @return 메인 페이지
+	 * @return 회원가입 페이지
 	 * @throws Exception
 	 */
-	@ResponseBody
-	@RequestMapping(value = "/signup")
-	public String signUp(MemberVO memberVo) throws Exception{
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public String signUpForm(MemberVO memberVo) throws Exception{
 		
-		return "";
+		return "member/signup";
+	}
+	
+	/**
+	 * 회원가입 기능(POST)
+	 * 
+	 * @return 회원가입 기능
+	 * @param HttpServletRequest httpreq,Model model,MemberVO memberVo, RedirectAttributes rttr
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public String signUp(HttpServletRequest httpreq,Model model,MemberVO memberVo, RedirectAttributes rttr) throws Exception{
+		
+		String pass = passwordEncoder.encode(memberVo.getMemberPw());
+		
+		memberVo.setMemberPw(pass);
+		memberService.insertMember(memberVo);
+		
+		rttr.addFlashAttribute("request", memberVo.getMemberId());
+		rttr.addFlashAttribute("msg", "회원가입이 완료되었습니다.");
+		
+		return "redirect:/member/login";
 	}
 	
 	/**
@@ -127,7 +150,7 @@ public class MemberController {
 	/**
 	 * 비밀번호찾기 기능
 	 * 
-	 * @param 
+	 * @param MemberVO memberVo, HttpServletResponse response
 	 * @return 
 	 * @throws Exception
 	 */
@@ -146,7 +169,7 @@ public class MemberController {
 	/**
 	 * 임시 비밀번호 작성 함수
 	 * 
-	 * @param 
+	 * @param leng
 	 * @throws Exception
 	 */
 	public static String tempPassword(int leng) throws Exception{

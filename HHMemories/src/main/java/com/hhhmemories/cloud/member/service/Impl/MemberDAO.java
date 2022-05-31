@@ -19,7 +19,7 @@ public class MemberDAO {
 		return sqlSession.selectOne("member.selectMemberInfo", memberVo);
 	}
 	
-	public int updateMemberPassword(MemberVO memberVo) throws Exception {
-		return sqlSession.update("member.updateMemberPassword", memberVo);
+	public int insertMember(MemberVO memberVo) throws Exception {
+		return sqlSession.insert("member.insertMember", memberVo);
 	}
 }

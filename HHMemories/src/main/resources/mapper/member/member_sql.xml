@@ -36,19 +36,47 @@
 		WHERE
 			member_id = #{memberId }
 	</select>
+	
+	<!-- 회원가입 -->
+	<insert id = "insertMember" parameterType="hashMap">
+	
+		INSERT INTO tb_member(
+			member_seq
+		   ,member_id
+		   ,member_pw
+		   ,member_nm
+		   ,member_email
+		   ,member_birth
+		   ,member_gender
+		   ,phone_number
+		   ,verify
+		   ,zipcode
+		   ,address
+		   ,address_detail
+		   ,reg_dt
+		   ,upd_dt)
+		VALUES(
+			(SELECT get_seq('member_seq'))
+		   ,#{memberId}
+		   ,#{memberPw}
+		   ,#{memberNm}
+		   ,#{memberEmail}
+		   ,#{memberBirth}
+		   ,#{memberGender}
+		   ,#{phoneNumber}
+		   ,#{verify}
+		   ,#{zipCode}
+		   ,#{address}
+		   ,#{addressDetail}
+		   ,NOW()
+		   ,NOW()
+		)
+		
+	</insert>
 
 	<!-- 아이디 찾기 정보 조회 -->
 
 	<!-- 비밀번호 찾기 정보 조회 -->
 
-
-	<update id="updateMemberPassword" parameterType = "com.hhhmemories.cloud.member.service.MemberVO">
-		UPDATE
-			tb_member
-		SET
-			member_pw = #{memberPw }
-		WHERE
-			member_id = #{memberId }
-	</update>
 </mapper>
 
