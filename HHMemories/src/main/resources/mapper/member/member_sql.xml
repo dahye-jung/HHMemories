@@ -42,7 +42,7 @@
 	<!-- 비밀번호 찾기 정보 조회 -->
 
 
-	<update id="updateMemberPassword">
+	<update id="updateMemberPassword" parameterType = "com.hhhmemories.cloud.member.service.MemberVO">
 		UPDATE
 			tb_member
 		SET
