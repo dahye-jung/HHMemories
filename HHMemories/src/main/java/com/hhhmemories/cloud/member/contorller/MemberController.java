@@ -51,7 +51,7 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() throws Exception{
-		return "member/login";	
+		return "user/login";	
 	}
 	
 	/**

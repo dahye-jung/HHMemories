@@ -27,7 +27,10 @@
                 </div>
             </div>
 	        <div class="box-form">
-	           <form action="/login" method="POST">    
+	           <form action="/login" method="POST">  
+	           		
+	           	   <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}" />
+	           	  
 	                <div class="box-form">
 	                    <div class="login-logo">
 	                        <img src="img/loginLogo02.png">

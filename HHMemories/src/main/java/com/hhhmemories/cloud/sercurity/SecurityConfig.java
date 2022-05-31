@@ -3,6 +3,7 @@ package com.hhhmemories.cloud.sercurity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,14 +17,26 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	private MemberService memberService;
 
 	// security 기본 login 페이지 x
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		
+		web.ignoring().antMatchers("/css/**","/js/**","/img/**","/lib/**");
+	}
+	
+	
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		
 		httpSecurity.httpBasic().disable();
 		
-		httpSecurity.authorizeRequests().antMatchers("/login","/singup","/resources/**").permitAll() // 로그인 권한은 누구나, resources파일도 모든권한
+		httpSecurity.authorizeRequests().antMatchers("/**").permitAll() // 로그인 권한은 누구나, resources파일도 모든권한
+										//페이지 권한 설정
+										.antMatchers("/admin/**").hasRole("ADMIN")
+										.antMatchers("/member/**").hasRole("MEMBER")
 					.and()
 						.formLogin()
 						.loginPage("/member/login")
