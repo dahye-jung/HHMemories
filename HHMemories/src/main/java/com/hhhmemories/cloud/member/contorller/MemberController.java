@@ -141,7 +141,20 @@ public class MemberController {
 	 * @return 
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/findid")
+	@RequestMapping(value = "/findId" , method = RequestMethod.GET)
+	public String findUserIdForm() throws Exception{ 
+		
+		return "member/findId";
+	}
+	
+	/**
+	 * 아이디찾기 기능
+	 * 
+	 * @param 
+	 * @return 
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/findid" , method = RequestMethod.POST)
 	public String findUserId() throws Exception{ 
 		
 		return "";
@@ -154,8 +167,22 @@ public class MemberController {
 	 * @return 
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/findpwd")
-	public String findUserPwd(MemberVO memberVo, HttpServletResponse response) throws Exception{
+	@RequestMapping(value = "/findPwd", method = RequestMethod.GET)
+	public String findPwdForm(MemberVO memberVo, HttpServletResponse response) throws Exception{
+		
+		
+		return "member/findPwd";
+	}
+	
+	/**
+	 * 비밀번호찾기 기능
+	 * 
+	 * @param MemberVO memberVo, HttpServletResponse response
+	 * @return 
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/findPwd", method = RequestMethod.POST)
+	public String findPwd(MemberVO memberVo, HttpServletResponse response) throws Exception{
 		
 		// 이름, 아이디, 이메일로 계정이 있는지 조회
 		memberVo = memberService.selectMemberInfo(memberVo, response);
