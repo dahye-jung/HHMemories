@@ -142,7 +142,7 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/findId" , method = RequestMethod.GET)
-	public String findUserIdForm() throws Exception{ 
+	public String findIdForm() throws Exception{ 
 		
 		return "member/findId";
 	}
@@ -155,7 +155,7 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/findid" , method = RequestMethod.POST)
-	public String findUserId() throws Exception{ 
+	public String findId() throws Exception{ 
 		
 		return "";
 	}
