@@ -51,7 +51,7 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() throws Exception{
-		return "user/login";	
+		return "login/login";	
 	}
 	
 	/**
@@ -78,7 +78,7 @@ public class MemberController {
 				logger.info("Method signin >>>>>>>> Login Fail");
 				session.setAttribute("member", null);
 				rttr.addFlashAttribute("msg", "비밀번호를 확인해주세요");
-				return "redirect:/member/login";
+				return "redirect:/login/login";
 			}
 		}
 
@@ -110,7 +110,7 @@ public class MemberController {
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signUpForm(MemberVO memberVo) throws Exception{
 		
-		return "member/signup";
+		return "login/signup";
 	}
 	
 	/**
@@ -131,7 +131,7 @@ public class MemberController {
 		rttr.addFlashAttribute("request", memberVo.getMemberId());
 		rttr.addFlashAttribute("msg", "회원가입이 완료되었습니다.");
 		
-		return "redirect:/member/login";
+		return "redirect:/login/login";
 	}
 	
 	/**
@@ -144,7 +144,7 @@ public class MemberController {
 	@RequestMapping(value = "/findId" , method = RequestMethod.GET)
 	public String findIdForm() throws Exception{ 
 		
-		return "member/findId";
+		return "login/findId";
 	}
 	
 	/**
@@ -171,7 +171,7 @@ public class MemberController {
 	public String findPwdForm(MemberVO memberVo, HttpServletResponse response) throws Exception{
 		
 		
-		return "member/findPwd";
+		return "login/findPwd";
 	}
 	
 	/**
