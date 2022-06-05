@@ -30,7 +30,6 @@ import lombok.extern.log4j.Log4j;
  * @프로그램 설명 : 로그인 관련 컨트롤러
  */
 @Controller
-@Log4j
 public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
