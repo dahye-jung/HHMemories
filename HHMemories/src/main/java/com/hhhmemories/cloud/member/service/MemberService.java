@@ -6,10 +6,19 @@ public interface MemberService {
 
 	
 	/**
-	 * @param response 
-	 * @Method 로그인 시도한 회원정보 조회
-	 * @return 결과값
+	 * 로그인
+	 * 
+	 * @param MemberVO memberVo, HttpServletResponse response
+	 * @throws Exception
 	 */
 	MemberVO selectMemberInfo(MemberVO memberVo, HttpServletResponse response) throws Exception;
+	
+	/**
+	 * 회원가입
+	 * 
+	 * @param MemberVO memberVo
+	 * @throws Exception
+	 */
+	int insertMember(MemberVO memberVo) throws Exception;
 	
 }

@@ -14,9 +14,26 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberDAO memberDAO;
 
+	/**
+	 * 로그인
+	 * 
+	 * @param MemberVO memberVo, HttpServletResponse response
+	 * @throws Exception
+	 */
 	@Override
 	public MemberVO selectMemberInfo(MemberVO memberVo, HttpServletResponse response) throws Exception {
 		return memberDAO.selectMemberInfo(memberVo, response);
+	}
+
+	/**
+	 * 회원가입
+	 * 
+	 * @param MemberVO memberVo
+	 * @throws Exception
+	 */
+	@Override
+	public int insertMember(MemberVO memberVo) throws Exception {
+		return memberDAO.insertMember(memberVo);
 	}
 
 	

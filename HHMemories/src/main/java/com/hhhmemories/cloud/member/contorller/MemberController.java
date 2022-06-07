@@ -10,8 +10,11 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,7 +30,6 @@ import lombok.extern.log4j.Log4j;
  * @프로그램 설명 : 로그인 관련 컨트롤러
  */
 @Controller
-@Log4j
 public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
@@ -41,45 +43,45 @@ public class MemberController {
 	
 	
 	/**
-	 * 로그인 페이지
+	 * 로그인 페이지(GET)
 	 * 
 	 * @return 로그인 페이지
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage() throws Exception{
-		return "member/login";	
+		return "login/login";	
 	}
 	
 	/**
-	 * 로그인 페이지
+	 * 로그인 기능(POST)
 	 * 
 	 * @param memberId, memberPwd
-	 * @return 로그인 페이지
+	 * @return 로그인 기능
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String signin(MemberVO memberVo, HttpServletRequest req, RedirectAttributes rttr, HttpServletResponse response) throws Exception{
 		
-		MemberVO user = memberService.selectMemberInfo(memberVo, response);
-
 		HttpSession session = req.getSession();
 		
+		MemberVO user = memberService.selectMemberInfo(memberVo, response); // 로그인한 정보로 회원정보가 존재하는 지 조회
 		
-		//login.getMemberPw() null값 오류
-		boolean passMatch = passwordEncoder.matches(memberVo.getMemberPw(), user.getMemberPw());
+		if(user != null) { // 로그인 시도한 아이디가 실제로 존재할 경우
+			boolean passMatch = passwordEncoder.matches(memberVo.getMemberPw(), user.getMemberPw()); // 입력한 패스워드와 DB에 저장되어 있는 패스워드 비교	
 
-		// 등록된 아이디와 비밀번호를 잘못 작성하였을때
-		if (user != null && passMatch) {
-			session.setAttribute("member", user);
-		} else {
-			session.setAttribute("member", null);
-			rttr.addFlashAttribute("msg", "비밀번호를 확인해주세요");
-			return "redirect:/login/login";
+			if (passMatch) { // 패스워드가 동일할 경우	
+				logger.info("Method signin >>>>>>>> Login Success");
+				session.setAttribute("member", user);
+			} else { // 패스워드가 틀릴 경우.
+				logger.info("Method signin >>>>>>>> Login Fail");
+				session.setAttribute("member", null);
+				rttr.addFlashAttribute("msg", "비밀번호를 확인해주세요");
+				return "redirect:/login/login";
+			}
 		}
 
-		return "redirect:/";
-		
+		return "redirect:/index";
 	}
 	
 	/**
@@ -89,25 +91,46 @@ public class MemberController {
 	 * @return 메인 페이지
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/logout", method = RequestMethod.GET )
-	public String logOut(MemberVO memberVO, HttpSession session) throws Exception{
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logOut(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
-		//세션에 등록된 로그인 정보 삭제
+		 new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder
+	                .getContext().getAuthentication());
 		
-		return "redirect:member/login";
+		return "redirect:/index";
 	}
 	
 	/**
-	 * 회원가입 페이지
+	 * 회원가입 페이지(GET)
 	 * 
-	 * @return 메인 페이지
+	 * @return 회원가입 페이지
 	 * @throws Exception
 	 */
-	@ResponseBody
-	@RequestMapping(value = "/signup")
-	public String signUp(MemberVO memberVo) throws Exception{
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public String signUpForm(MemberVO memberVo) throws Exception{
 		
-		return "";
+		return "login/signup";
+	}
+	
+	/**
+	 * 회원가입 기능(POST)
+	 * 
+	 * @return 회원가입 기능
+	 * @param HttpServletRequest httpreq,Model model,MemberVO memberVo, RedirectAttributes rttr
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	public String signUp(HttpServletRequest httpreq,Model model,MemberVO memberVo, RedirectAttributes rttr) throws Exception{
+		
+		String pass = passwordEncoder.encode(memberVo.getMemberPw());
+		
+		memberVo.setMemberPw(pass);
+		memberService.insertMember(memberVo);
+		
+		rttr.addFlashAttribute("request", memberVo.getMemberId());
+		rttr.addFlashAttribute("msg", "회원가입이 완료되었습니다.");
+		
+		return "redirect:/login/login";
 	}
 	
 	/**
@@ -117,22 +140,50 @@ public class MemberController {
 	 * @return 
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/findid")
-	public String findUserId() throws Exception{ 
+	@RequestMapping(value = "/findId" , method = RequestMethod.GET)
+	public String findIdForm() throws Exception{ 
 		
-		return "";
+		return "login/findId";
 	}
 	
 	/**
-	 * 비밀번호찾기 페이지
+	 * 아이디찾기 기능
 	 * 
 	 * @param 
 	 * @return 
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/findpwd")
-	public String findUserPwd(MemberVO memberVo, HttpServletResponse response) throws Exception{
+	@RequestMapping(value = "/findid" , method = RequestMethod.POST)
+	public String findId() throws Exception{ 
 		
+		return "";
+	}
+	
+	/**
+	 * 비밀번호찾기 기능
+	 * 
+	 * @param MemberVO memberVo, HttpServletResponse response
+	 * @return 
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/findPwd", method = RequestMethod.GET)
+	public String findPwdForm(MemberVO memberVo, HttpServletResponse response) throws Exception{
+		
+		
+		return "login/findPwd";
+	}
+	
+	/**
+	 * 비밀번호찾기 기능
+	 * 
+	 * @param MemberVO memberVo, HttpServletResponse response
+	 * @return 
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/findPwd", method = RequestMethod.POST)
+	public String findPwd(MemberVO memberVo, HttpServletResponse response) throws Exception{
+		
+		// 이름, 아이디, 이메일로 계정이 있는지 조회
 		memberVo = memberService.selectMemberInfo(memberVo, response);
 		
 		String pw = tempPassword(10); // 임시비밀번호 설정
@@ -144,7 +195,7 @@ public class MemberController {
 	/**
 	 * 임시 비밀번호 작성 함수
 	 * 
-	 * @param 
+	 * @param leng
 	 * @throws Exception
 	 */
 	public static String tempPassword(int leng) throws Exception{
