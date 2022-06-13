@@ -116,6 +116,18 @@
     *[data-layout="login"] .main-box > .box-form.right{position:relative;}
     *[data-layout="login"] .main-box > .box-form.right .box-form{position:absolute;bottom:0;left:0;width:100%;padding:1.1rem 0.75rem;}
 
+    /*팝업*/
+    *[data-layout="layer"] .inner{position:fixed;left:50%;top:50%;padding:0.24rem;width:4.5rem;font-size:0;border-radius:0.08rem;background:#fff;transform:translate(-50%,-50%);box-sizing:border-box;z-index:5;}
+    *[data-layout="layer"]{display:none;position:fixed;left:0;top:0;width:100%;height:100%;z-index:10;}
+    *[aria-hidden="false"]{display:block ! important;}
+    *[class^="btn-icon"].dim{width: 100%;height: 100%;min-height: 0.5rem;background: #222 ! important;opacity: 0.8;}
+    *[class^="btn-icon"]{position:relative;padding:0;width:0.4rem;min-width:0.4rem;vertical-align:middle;background:transparent ! important;}
+    *[class^="btn-icon"]:before,
+    *[class^="btn-icon"]:after{display:block;content:'';position:absolute;left:50%;top:50%;width:50%;height:50%;transform:translate(-50%, -50%);z-index:0;}
+    *[class^="btn-icon"].close:before {top: 0.1rem;width: 0.02rem;height: 0.15rem;border-radius: 0.02rem;background: #303741;transform: rotate(45deg);}
+    *[class^="btn-icon"].close:after {top: 0.1rem;width: 0.02rem;height: 0.15rem;border-radius: 0.02rem;background: #303741;transform: rotate(-45deg);} 
+    *[class^="btn-icon"] span{display:block;position:absolute;left:0;top:0;width:100%;height:100%;color:transparent;overflow:hidden;z-index:1;}
+    [data-layout="layer"] .header *[class^="btn-icon"].close {position: absolute;right: 0;top: 0;}
 /************************************ Layout Style E ************************************/
 
 
