@@ -127,10 +127,7 @@ public class MemberController {
 		memberVo.setMemberPw(pass);
 		memberService.insertMember(memberVo);
 		
-		rttr.addFlashAttribute("request", memberVo.getMemberId());
-		rttr.addFlashAttribute("msg", "회원가입이 완료되었습니다.");
-		
-		return "redirect:/login/login";
+		return "login/signUpComplete";
 	}
 	
 	/**
