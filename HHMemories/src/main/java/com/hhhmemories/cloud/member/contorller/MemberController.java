@@ -150,7 +150,7 @@ public class MemberController {
 	 * @return 
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/findid" , method = RequestMethod.POST)
+	@RequestMapping(value = "/findId" , method = RequestMethod.POST)
 	public String findId() throws Exception{ 
 		
 		return "";

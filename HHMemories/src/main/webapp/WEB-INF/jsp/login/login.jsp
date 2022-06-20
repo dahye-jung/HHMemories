@@ -49,8 +49,8 @@
 	                        </div>
 	                    </div>
 	                    <div class="btn-box">
-	                        <a href="#" class="txt-btn"><span>아이디찾기</span></a>
-	                        <a href="#" class="txt-btn"><span>비밀번호찾기</span></a>
+	                        <a href="/findId" class="txt-btn"><span>아이디찾기</span></a>
+	                        <a href="/findPwd" class="txt-btn"><span>비밀번호찾기</span></a>
 	                        <a href="/signup" class="txt-btn"><span>회원가입</span></a>
 	                    </div>
 	                    <div class="btn-box">
