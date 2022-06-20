@@ -47,7 +47,7 @@
                     </div>
                     <div class="btn-box flex m-t100">
                         <a href="#" class="btn-puple"><span>확인</span></a>
-                        <a href="#" class="btn-puple"><span>취소</span></a>
+                        <a href="/login" class="btn-puple"><span>취소</span></a>
                     </div>
                 </div>
             </div>
