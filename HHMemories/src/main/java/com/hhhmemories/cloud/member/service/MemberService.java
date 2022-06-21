@@ -1,5 +1,7 @@
 package com.hhhmemories.cloud.member.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 public interface MemberService {
@@ -20,5 +22,13 @@ public interface MemberService {
 	 * @throws Exception
 	 */
 	int insertMember(MemberVO memberVo) throws Exception;
+
+	/**
+	 * 아이디 찾기
+	 * 
+	 * @param MemberVO memberVo
+	 * @throws Exception
+	
+	String findId(MemberVO memberVo) throws Exception; */
 	
 }

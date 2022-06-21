@@ -1,5 +1,6 @@
 package com.hhhmemories.cloud.member.contorller;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -15,9 +16,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hhhmemories.cloud.member.service.MemberService;
@@ -127,10 +130,7 @@ public class MemberController {
 		memberVo.setMemberPw(pass);
 		memberService.insertMember(memberVo);
 		
-		rttr.addFlashAttribute("request", memberVo.getMemberId());
-		rttr.addFlashAttribute("msg", "회원가입이 완료되었습니다.");
-		
-		return "redirect:/login/login";
+		return "login/signUpComplete";
 	}
 	
 	/**
@@ -153,10 +153,12 @@ public class MemberController {
 	 * @return 
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/findid" , method = RequestMethod.POST)
-	public String findId() throws Exception{ 
+	@RequestMapping(value = "/findId" , method = RequestMethod.POST)
+	public String  findId(Model model,MemberVO memberVo) throws Exception{ 
 		
-		return "";
+		model.addAttribute("");
+		
+		return "login/findIdConfirm";
 	}
 	
 	/**
