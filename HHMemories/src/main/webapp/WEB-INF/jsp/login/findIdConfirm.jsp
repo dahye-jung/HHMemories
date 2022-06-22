@@ -20,29 +20,31 @@
 
 <div id="view-wrap" data-layout="login" data-page-id="findIdConfirm" aria-hidden="false">
     <div id="content">
-        <div class="main-box">
-            <div class="box-form left">
-                <div class="box-logo">
-                    <img src="img/loginLogo01.png" alt="로고이미지" class="logo"></img>
-                </div>
-            </div>
-            <div class="box-form right">
-                <div class="login-logo">
-                    <img src="img/loginLogo02.png">
-                    <span class="sub-tit-16">아이디찾기</span>
-                </div>
-                <div class="center-box">
-                    <p class="txt-17"><strong>홍길동</strong>&nbsp;회원님의 아이디는&nbsp;<span class="txt-B">abc124</span>&nbsp;입니다.</p>
-                    <p class="txt-15 light">(가입날짜&nbsp;:&nbsp;<span>2022.05.08</span>)</p>
-                </div>
-                <div class="box-form">
-                    <div class="btn-box flex">
-                        <a href="/login" class="btn-puple"><span>로그인</span></a>
-                        <a href="/findPwd" class="btn-puple"><span>비밀번호찾기</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <form action="/findId" method="GET">
+	        <div class="main-box">
+	            <div class="box-form left">
+	                <div class="box-logo">
+	                    <img src="img/loginLogo01.png" alt="로고이미지" class="logo"></img>
+	                </div>
+	            </div>
+	            <div class="box-form right">
+	                <div class="login-logo">
+	                    <img src="img/loginLogo02.png">
+	                    <span class="sub-tit-16">아이디찾기</span>
+	                </div>
+	                <div class="center-box">
+	                    <p class="txt-17"><strong>${memberVO.memberNm}</strong>&nbsp;회원님의 아이디는&nbsp;<span class="txt-B">${memberVO.memberId}</span>&nbsp;입니다.</p>
+	                    <p class="txt-15 light">(가입날짜&nbsp;:&nbsp;<span>${memberVO.regDt}</span>)</p>
+	                </div>
+	                <div class="box-form">
+	                    <div class="btn-box flex">
+	                        <a href="/login" class="btn-puple"><span>로그인</span></a>
+	                        <a href="/findPwd" class="btn-puple"><span>비밀번호찾기</span></a>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+        </form>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

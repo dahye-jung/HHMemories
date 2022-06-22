@@ -23,7 +23,7 @@ public class MemberDAO {
 		return sqlSession.insert("member.insertMember", memberVo);
 	}
 
-	public Object findId(String memberEmail) throws Exception {
+	public MemberVO findId(String memberEmail) throws Exception {
 		return sqlSession.selectOne("member.findId",memberEmail);
 	}
 }

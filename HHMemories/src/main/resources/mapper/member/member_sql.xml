@@ -75,9 +75,11 @@
 	</insert>
 
 	<!-- 아이디 찾기 정보 조회 -->
-	<select id="findId" parameterType="String" resultType="String">
+	<select id="findId" resultMap="selectMemberInfo">
 		SELECT 
-			member_id
+			member_id,
+			member_nm,
+			reg_dt
 		FROM
 			tb_member
 		WHERE

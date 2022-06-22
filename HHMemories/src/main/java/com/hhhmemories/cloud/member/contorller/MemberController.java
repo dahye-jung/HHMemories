@@ -157,7 +157,7 @@ public class MemberController {
 	@RequestMapping(value = "/findId" , method = RequestMethod.POST)
 	public String  findId(Model model,  @RequestParam("memberEmail") String memberEmail) throws Exception{ 
 		
-		model.addAttribute("user_id", memberService.findId(memberEmail));
+		memberService.findId(memberEmail);
 		
 		return "login/findIdConfirm";
 	}
@@ -170,7 +170,11 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/findIdConfirm" , method = RequestMethod.GET)
-	public String  findIdConfirm() throws Exception{ 
+	public String  findIdConfirm(Model model, MemberVO memberVO, @RequestParam("memberEmail") String memberEmail) throws Exception{ 
+		
+		memberVO = memberService.findId(memberEmail);
+		
+		model.addAttribute("memberVO", memberVO);
 		
 		return "login/findIdConfirm";
 	}
@@ -183,7 +187,7 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/findIdReConfirm" , method = RequestMethod.GET)
-	public String  findIdReConfirm() throws Exception{ 
+	public String  findIdReConfirm(Model model) throws Exception{ 
 		
 		return "login/findIdReConfirm";
 	}
