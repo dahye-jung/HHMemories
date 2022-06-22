@@ -4,13 +4,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>index</title>
+    <title>회원 로그인</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -18,7 +18,7 @@
 </head>
 <body>
 
-<div id="view-wrap" data-layout="login" data-page-id="00-login" aria-hidden="false">
+<div id="view-wrap" data-layout="login" data-page-id="login" aria-hidden="false">
     <div id="content">
         <div class="main-box">
             <div class="box-form left">
@@ -26,15 +26,15 @@
                     <img src="img/loginLogo01.png" alt="로고이미지" class="logo"></img>
                 </div>
             </div>
-	        <div class="box-form">
+	        <div class="box-form right">
 	           <form action="/login" method="POST">  
 	           		
 	           	   <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}" />
 	           	  
-	                <div class="box-form">
+	               
 	                    <div class="login-logo">
 	                        <img src="img/loginLogo02.png">
-	                        <span class="login-logo-txt">HHmemories에 오신걸 환영합니다.</span>
+	                        <span class="sub-tit-16">HHmemories에 오신걸 환영합니다.</span>
 	                    </div>
 	                    <div class="cmm-form">
 	                        <div class="input">
@@ -53,14 +53,13 @@
 	                        <a href="/findPwd" class="txt-btn"><span>비밀번호찾기</span></a>
 	                        <a href="/signup" class="txt-btn"><span>회원가입</span></a>
 	                    </div>
-	                    <div class="btn-box">
+	                    <div class="btn-box m-t70">
 	                        <button class="btn-puple full" type="submit">
 	                        	<span>로그인</span>
 	                        </button>
 	                    </div>
-	                </div>
             	</form>
-	       </div>
+	         </div>
         </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

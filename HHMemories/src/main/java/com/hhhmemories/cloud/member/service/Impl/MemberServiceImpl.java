@@ -36,6 +36,17 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.insertMember(memberVo);
 	}
 
+	/**
+	 * 아이디 찾기
+	 * 
+	 * @param HttpServletResponse response, String memberEmail
+	 * @throws Exception
+	*/
+	@Override
+	public Object findId(String memberEmail) throws Exception {
+		return memberDAO.findId(memberEmail);
+	}
+
 	
 	
 	

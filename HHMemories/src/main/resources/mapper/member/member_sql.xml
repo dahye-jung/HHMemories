@@ -75,6 +75,14 @@
 	</insert>
 
 	<!-- 아이디 찾기 정보 조회 -->
+	<select id="findId" parameterType="String" resultType="String">
+		SELECT 
+			member_id
+		FROM
+			tb_member
+		WHERE
+			member_email = #{memberEmail}	
+	</select>
 
 	<!-- 비밀번호 찾기 정보 조회 -->
 

@@ -22,4 +22,8 @@ public class MemberDAO {
 	public int insertMember(MemberVO memberVo) throws Exception {
 		return sqlSession.insert("member.insertMember", memberVo);
 	}
+
+	public Object findId(String memberEmail) throws Exception {
+		return sqlSession.selectOne("member.findId",memberEmail);
+	}
 }

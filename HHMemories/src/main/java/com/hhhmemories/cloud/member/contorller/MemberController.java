@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -149,16 +150,42 @@ public class MemberController {
 	/**
 	 * 아이디찾기 기능
 	 * 
+	 * @param Model model,  @RequestParam("memberEmail") String memberEmail
+	 * @return login/findIdConfirm
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/findId" , method = RequestMethod.POST)
+	public String  findId(Model model,  @RequestParam("memberEmail") String memberEmail) throws Exception{ 
+		
+		model.addAttribute("user_id", memberService.findId(memberEmail));
+		
+		return "login/findIdConfirm";
+	}
+	
+	/**
+	 * 아이디찾기 성공시
+	 * 
+	 * @param 
+	 * @return login/findIdConfirm
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/findIdConfirm" , method = RequestMethod.GET)
+	public String  findIdConfirm() throws Exception{ 
+		
+		return "login/findIdConfirm";
+	}
+	
+	/**
+	 * 아이디찾기 실패시
+	 * 
 	 * @param 
 	 * @return 
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/findId" , method = RequestMethod.POST)
-	public String  findId(Model model,MemberVO memberVo) throws Exception{ 
+	@RequestMapping(value = "/findIdReConfirm" , method = RequestMethod.GET)
+	public String  findIdReConfirm() throws Exception{ 
 		
-		model.addAttribute("");
-		
-		return "login/findIdConfirm";
+		return "login/findIdReConfirm";
 	}
 	
 	/**
