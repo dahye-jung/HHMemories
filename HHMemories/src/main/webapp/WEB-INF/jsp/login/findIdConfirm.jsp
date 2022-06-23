@@ -20,7 +20,6 @@
 
 <div id="view-wrap" data-layout="login" data-page-id="findIdConfirm" aria-hidden="false">
     <div id="content">
-        <form action="/findId" method="GET">
 	        <div class="main-box">
 	            <div class="box-form left">
 	                <div class="box-logo">
@@ -44,7 +43,6 @@
 	                </div>
 	            </div>
 	        </div>
-        </form>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
