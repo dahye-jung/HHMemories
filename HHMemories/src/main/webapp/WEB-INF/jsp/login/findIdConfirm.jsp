@@ -32,8 +32,8 @@
 	                    <span class="sub-tit-16">아이디찾기</span>
 	                </div>
 	                <div class="center-box">
-	                    <p class="txt-17"><strong>${memberVO.memberNm}</strong>&nbsp;회원님의 아이디는&nbsp;<span class="txt-B">${memberVO.memberId}</span>&nbsp;입니다.</p>
-	                    <p class="txt-15 light">(가입날짜&nbsp;:&nbsp;<span>${memberVO.regDt}</span>)</p>
+	                    <p class="txt-17"><strong>${memberNm}</strong>&nbsp;회원님의 아이디는&nbsp;<span class="txt-B">${memberId}</span>&nbsp;입니다.</p>
+	                    <p class="txt-15 light">(가입날짜&nbsp;:&nbsp;<span>${regDt}</span>)</p>
 	                </div>
 	                <div class="box-form">
 	                    <div class="btn-box flex">

@@ -1,6 +1,5 @@
 package com.hhhmemories.cloud.member.contorller;
 
-import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -16,18 +15,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hhhmemories.cloud.member.service.MemberService;
 import com.hhhmemories.cloud.member.service.MemberVO;
-
-import lombok.extern.log4j.Log4j;
 
 /**
  * @author 
@@ -172,9 +166,15 @@ public class MemberController {
 	@RequestMapping(value = "/findIdConfirm" , method = RequestMethod.GET)
 	public String  findIdConfirm(Model model, MemberVO memberVO, @RequestParam("memberEmail") String memberEmail) throws Exception{ 
 		
-		memberVO = memberService.findId(memberEmail);
+		MemberVO member = memberService.findId(memberEmail);
 		
-		model.addAttribute("memberVO", memberVO);
+		if(member != null) {
+			model.addAttribute("memberId", memberVO.getMemberId());
+			model.addAttribute("memberNm", memberVO.getMemberNm());
+			model.addAttribute("regDt", memberVO.getRegDt());
+		}else {
+			return "login/findIdReConfirm";
+		}
 		
 		return "login/findIdConfirm";
 	}
