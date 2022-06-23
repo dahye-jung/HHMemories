@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="btn-box flex m-t100">
-                        <button class="btn-puple full" id="findIdConfirm" name = "findIdConfirm" type="submit"><span>확인</span></button>
+                        <button type="submit" class="btn-puple full" id="findIdConfirm" name = "findIdConfirm"><span>확인</span></button>
                         <button type="button" onclick="history.go(-1);" class="btn-puple"><span>취소</span></button>
                     </div>
                 </div>

@@ -37,8 +37,8 @@
                 </div>
                 <div class="box-form">
                     <div class="btn-box flex">
-                        <a href="#" class="btn-puple"><span>재입력</span></a>
-                        <a href="#" class="btn-puple"><span>취소</span></a>
+                        <a href="/findId" class="btn-puple"><span>재입력</span></a>
+                        <a href="/login" class="btn-puple"><span>취소</span></a>
                     </div>
                 </div>
             </div>
