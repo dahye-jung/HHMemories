@@ -35,7 +35,7 @@
                 <div class="box-form">
                     <div class="cmm-form">
                         <div class="input">
-                            <input type="text" title="이름" id = "memberId" name="memberId" placeholder="이름">
+                            <input type="text" title="이름" id = "memberNm" name="memberNm" placeholder="이름">
                             <!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
                         </div>
                     </div>

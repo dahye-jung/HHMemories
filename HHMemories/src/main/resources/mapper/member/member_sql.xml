@@ -77,8 +77,9 @@
 	<!-- 아이디 찾기 정보 조회 -->
 	<select id="findId" resultMap="selectMemberInfo">
 		SELECT 
-			member_id,
+			member_seq,
 			member_nm,
+			member_id,
 			reg_dt
 		FROM
 			tb_member

@@ -149,9 +149,17 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/findId" , method = RequestMethod.POST)
-	public String  findId(Model model,  @RequestParam("memberEmail") String memberEmail) throws Exception{ 
+	public String  findId(Model model, MemberVO memberVO ,@RequestParam("memberEmail") String memberEmail) throws Exception{ 
 		
-		memberService.findId(memberEmail);
+		MemberVO member = memberService.findId(memberEmail);
+		
+		if(member != null) {
+			model.addAttribute("memberId", memberVO.getMemberId());
+			model.addAttribute("memberNm", memberVO.getMemberNm());
+			model.addAttribute("regDt", memberVO.getRegDt());
+		}else {
+			return "login/findIdReConfirm";
+		}
 		
 		return "login/findIdConfirm";
 	}
@@ -164,17 +172,7 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/findIdConfirm" , method = RequestMethod.GET)
-	public String  findIdConfirm(Model model, MemberVO memberVO, @RequestParam("memberEmail") String memberEmail) throws Exception{ 
-		
-		MemberVO member = memberService.findId(memberEmail);
-		
-		if(member != null) {
-			model.addAttribute("memberId", memberVO.getMemberId());
-			model.addAttribute("memberNm", memberVO.getMemberNm());
-			model.addAttribute("regDt", memberVO.getRegDt());
-		}else {
-			return "login/findIdReConfirm";
-		}
+	public String  findIdConfirm() throws Exception{ 
 		
 		return "login/findIdConfirm";
 	}
