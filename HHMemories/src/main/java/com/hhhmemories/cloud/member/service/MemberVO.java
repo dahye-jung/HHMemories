@@ -72,10 +72,10 @@ public class MemberVO {
 	private String addressDetail;
 	
 	//등록일자
-	private Date regDt;
+	private String regDt;
 
 	//수정일자
-	private Date updDt;
+	private String updDt;
 	
 	//사용여부
 	private String useYn;
@@ -224,19 +224,19 @@ public class MemberVO {
 		this.addressDetail = addressDetail;
 	}
 
-	public Date getRegDt() {
+	public String getRegDt() {
 		return regDt;
 	}
 
-	public void setRegDt(Date regDt) {
+	public void setRegDt(String regDt) {
 		this.regDt = regDt;
 	}
 
-	public Date getUpdDt() {
+	public String getUpdDt() {
 		return updDt;
 	}
 
-	public void setUpdDt(Date updDt) {
+	public void setUpdDt(String updDt) {
 		this.updDt = updDt;
 	}
 
