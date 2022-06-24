@@ -78,11 +78,11 @@ public class MemberController {
 				logger.info("Method signin >>>>>>>> Login Fail");
 				session.setAttribute("member", null);
 				rttr.addFlashAttribute("msg", "비밀번호를 확인해주세요");
-				return "redirect:/login/login";
+				return "redirect:/login";
 			}
 		}
 
-		return "redirect:/login";
+		return "redirect:/index";
 	}
 	
 	/**
