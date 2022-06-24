@@ -17,6 +17,9 @@
     <link href="css/common.css" rel="stylesheet" />
 </head>
 <body>
+<!-- jQuery에서 제공하는 3.5.1 버전의 jQuery CDN 호스트 --> 
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 
 <div id="view-wrap" data-layout="page" data-page-id="signUpForm" aria-hidden="false">
     <div id="content">
@@ -117,8 +120,6 @@
         <script src="js/scripts.js"></script>
         <!-- 우편번호 찾기 -->
 		<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-		<!-- 제이쿼리 사용하기 위해 호출 -->
-		<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 		
     	<script type="text/javascript" lang="javascript">
 	    	$(document).ready(function(){
@@ -165,7 +166,7 @@
 	    			$.ajax({
 	    				url : "/idCheck",
 	    				type : "POST",
-	    				data : {'memberId': $("#memberId").val()},
+	    				data : {'memberId': memberId},
 	    				datatype : "json",
 	    				beforeSend : function(xhr) {
 	    					xhr.setRequestHeader("AJAX", "true");
