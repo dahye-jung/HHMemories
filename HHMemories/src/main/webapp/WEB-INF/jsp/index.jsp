@@ -47,6 +47,9 @@
 												<p class="nav-link"><strong>${memberNm}</strong>&nbsp;님</p>
 											</li>
 											<li class="nav-item active">
+												<a class="nav-link" href="/myPage">마이페이지</a>
+											</li>
+											<li class="nav-item active">
 												<a class="nav-link" href="/logout">로그아웃</a>
 											</li>
 										</c:when>
