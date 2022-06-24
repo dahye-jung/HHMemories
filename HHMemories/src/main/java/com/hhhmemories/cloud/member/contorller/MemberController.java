@@ -276,6 +276,7 @@ public class MemberController {
 			int result = memberService.updatePassword(vo);
 
 			model.addAttribute("memberEmail", vo.getMemberEmail());
+			model.addAttribute("memberNm", vo.getMemberNm());
 			
 			return "login/findPwConfirm";
 		}

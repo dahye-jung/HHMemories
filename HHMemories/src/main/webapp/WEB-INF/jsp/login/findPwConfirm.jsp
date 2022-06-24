@@ -25,7 +25,7 @@
 	                    <span class="sub-tit-16">비밀번호찾기</span>
 	                </div>
 	                <div class="center-box">
-	                    <p class="txt-17"><strong>홍길동</strong>&nbsp;회원님의 임시비밀번호를</p>
+	                    <p class="txt-17"><strong>${memberNm }</strong>&nbsp;회원님의 임시비밀번호를</p>
 	                    <p class="txt-17"><strong class="txt-B">${memberEmail }</strong>으로 발송되었습니다</p>
 	                </div>
 	                <div class="box-form">
