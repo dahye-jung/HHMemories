@@ -28,46 +28,46 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">이름<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="이름" placeholder="이름">
+                    <input type="text" title="이름" placeholder="이름" id= "memberNm" name = "memberNm">
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">아이디<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="아이디" placeholder="아이디">
-                    <button class="btn-puple-white"><span>중복확인</span></button>
+                    <input type="text" title="아이디" placeholder="아이디" id = "memberId" name = "memberId">
+                    <button type="button" class="btn-puple-white"><span>중복확인</span></button>
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">비밀번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="password" title="비밀번호" placeholder="비밀번호">
+                    <input type="password" title="비밀번호" placeholder="비밀번호" id = "memberPw" name = "memberPw">
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">비밀번호 확인<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="password" title="비밀번호 확인" placeholder="비밀번호 확인">
+                    <input type="password" title="비밀번호 확인" placeholder="비밀번호 확인" id="memberPw2" name = "memberPw2">
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">휴대전화번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="휴대전화번호" placeholder="휴대전화번호">
+                    <input type="text" title="휴대전화번호" placeholder="휴대전화번호" id = "phoneNumber" name = "phoneNumber">
                     <!-- <button class="btn-puple-white"><span>중복확인</span></button> -->
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">생년월일<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="생년월일" placeholder="생년월일">
-                    <div class="btn-puple-white">
-                        <label class="radio">
-                            <input type="radio" name="radio01" checked>
+                    <input type="text" title="생년월일" placeholder="생년월일" id = "memberBirth" name="memberBirth">
+                    <div class="btn-puple-white" id = "memberGender" >
+                        <label class="radio" >
+                            <input type="radio" id = "memberGender" name="memberGender" value = "M" checked>
                             <span class="label">남</span>
                         </label>
                         <label class="radio">
-                            <input type="radio" name="radio01">
+                            <input type="radio" id = "memberGender" name="memberGender" name="radio01" value="W">
                             <span class="label">여</span>
                         </label>
                     </div>
@@ -76,8 +76,8 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">이메일<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="이메일" placeholder="이메일">
-                    <button class="btn-puple-white"><span>중복확인</span></button>
+                    <input type="text" title="이메일" placeholder="이메일" name="memberEmail" id = "memberEmail">
+                    <button type="button" class="btn-puple-white"><span>중복확인</span></button>
                 </div>
             </div>
             <!-- <div class="cmm-form">
@@ -90,24 +90,25 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">우편번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="우편번호" placeholder="우편번호">
+                    <input type="text" title="우편번호" placeholder="우편번호" id = "zipCode" name = "zipCode">
+                	<button type="button" class="btn-puple-white"><span>주소 검색</span></button>
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">주소</span>
-                    <input type="text" title="주소" placeholder="주소">
+                    <input type="text" title="주소" placeholder="주소" id = "address" name="address">
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">상세주소</span>
-                    <input type="text" title="상세주소" placeholder="상세주소">
+                    <input type="text" title="상세주소" placeholder="상세주소" id= "addressDetail" name="addressDetail">
                 </div>
             </div>
             <div class="btn-box flex m-t40">
-                <button class="btn-puple"><span>확인</span></button>
-                <button class="btn-puple"><span>취소</span></button>
+                <button type="submit" class="btn-puple" id = "signUpComplete" name="signUpComplete"><span>확인</span></button>
+                <button type="button" class="btn-puple" onclick="location.href='/login'"><span>취소</span></button>
             </div>
         </div>
         </form>

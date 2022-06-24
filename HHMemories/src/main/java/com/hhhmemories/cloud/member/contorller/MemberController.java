@@ -125,6 +125,20 @@ public class MemberController {
 		memberVo.setMemberPw(pass);
 		memberService.insertMember(memberVo);
 		
+		
+		return "login/signUpComplete";
+	}
+	
+	/**
+	 * 회원가입 완료 페이지
+	 * 
+	 * @param 
+	 * @return 
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/signUpComplete" , method = RequestMethod.GET)
+	public String signUpComplete() throws Exception{ 
+		
 		return "login/signUpComplete";
 	}
 	
