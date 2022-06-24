@@ -67,7 +67,7 @@
                             <span class="label">남</span>
                         </label>
                         <label class="radio">
-                            <input type="radio" id = "memberGender" name="memberGender" name="radio01" value="W">
+                            <input type="radio" id = "memberGender" name="memberGender" value="W">
                             <span class="label">여</span>
                         </label>
                     </div>
