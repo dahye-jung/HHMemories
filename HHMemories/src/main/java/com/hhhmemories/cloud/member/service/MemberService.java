@@ -28,4 +28,6 @@ public interface MemberService {
 	 * @throws Exception
 	*/
 	MemberVO findId(MemberVO memberVo) throws Exception;
+
+	int idCheck(MemberVO memberVo) throws Exception;
 }

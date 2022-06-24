@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>회원가입 정보 입력</title>
+    <title>회원가입</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -20,7 +20,7 @@
 
 <div id="view-wrap" data-layout="page" data-page-id="signUpForm" aria-hidden="false">
     <div id="content">
-       <form action="/signup" method="POST"> 
+       <form action="/signup" method="POST" id = "signupForm" name= "signupForm"> 
         <div class="main-box">
            <div class="box-logo">
                <img src="img/loginLogo02.png" alt="로고이미지" class="logo"></img>
@@ -35,7 +35,7 @@
                 <div class="input">
                     <span class="label">아이디<i class="required" aria-label="필수입력항목"></i></span>
                     <input type="text" title="아이디" placeholder="아이디" id = "memberId" name = "memberId">
-                    <button type="button" class="btn-puple-white"><span>중복확인</span></button>
+                    <button type="button" onclick = "idCheck()" class="btn-puple-white"><span>중복확인</span></button>
                 </div>
             </div>
             <div class="cmm-form">
@@ -54,7 +54,6 @@
                 <div class="input">
                     <span class="label">휴대전화번호<i class="required" aria-label="필수입력항목"></i></span>
                     <input type="text" title="휴대전화번호" placeholder="휴대전화번호" id = "phoneNumber" name = "phoneNumber">
-                    <!-- <button class="btn-puple-white"><span>중복확인</span></button> -->
                 </div>
             </div>
             <div class="cmm-form">
@@ -63,7 +62,7 @@
                     <input type="text" title="생년월일" placeholder="생년월일" id = "memberBirth" name="memberBirth">
                     <div class="btn-puple-white" id = "memberGender" >
                         <label class="radio" >
-                            <input type="radio" id = "memberGender" name="memberGender" value = "M" checked>
+                            <input type="radio" id = "memberGender" name="memberGender" value = "M" checked="checked">
                             <span class="label">남</span>
                         </label>
                         <label class="radio">
@@ -90,14 +89,14 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">우편번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="우편번호" placeholder="우편번호" id = "zipCode" name = "zipCode">
-                	<button type="button" class="btn-puple-white"><span>주소 검색</span></button>
+                    <input type="text" title="우편번호" placeholder="우편번호" id = "zipCode" name = "zipCode" readonly="readonly">
+                	<button type="button" onclick = "addressFind()" class="btn-puple-white"><span>우편번호 찾기</span></button>
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
-                    <span class="label">주소</span>
-                    <input type="text" title="주소" placeholder="주소" id = "address" name="address">
+                    <span class="label">주소<i class="required" aria-label="필수입력항목"></i></span>
+                    <input type="text" title="주소" placeholder="주소" id = "address" name="address" readonly="readonly">
                 </div>
             </div>
             <div class="cmm-form">
@@ -108,7 +107,7 @@
             </div>
             <div class="btn-box flex m-t40">
                 <button type="submit" class="btn-puple" id = "signUpComplete" name="signUpComplete"><span>확인</span></button>
-                <button type="button" class="btn-puple" onclick="location.href='/login'"><span>취소</span></button>
+                <button type="button" class="btn-puple" id = "cencle" name = "cencle"><span>취소</span></button>
             </div>
         </div>
         </form>
@@ -116,6 +115,105 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <!-- 우편번호 찾기 -->
+		<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+		<!-- 제이쿼리 사용하기 위해 호출 -->
+		<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+		
+    	<script type="text/javascript" lang="javascript">
+	    	$(document).ready(function(){
+	    		// 취소
+	    		$("#cencle").on("click", function(){
+	    			location.href = "/login";
+	    		})
+	    		
+	    		$("#signUpComplete").on("click", function(){
+	    			
+	    			if($("#memberNm").val()==""){
+	    				alert("성명을 입력해주세요.");
+	    				$("#memberNm").focus();
+	    				return false;
+	    			}
+	    			if($("#memberId").val()==""){
+	    				alert("아이디를 입력해주세요.");
+	    				$("#memberId").focus();
+	    				return false;
+	    			}
+	    			
+	    			var idChkVal = $("#idCheck").val();
+	    			if(idChkVal == "N"){
+	    				alert("중복확인 버튼을 눌러주세요.");
+	    			}else if(idChkVal == "Y"){
+	    				$("#signupForm").submit();
+	    			}
+	    			
+	    			if($("#memberPw").val()==""){
+	    				alert("비밀번호를 입력해주세요.");
+	    				$("#memberPw").focus();
+	    				return false;
+	    			}
+	    			
+	    		});
+	    	})
+	
+	    	//아이디 중복 체크
+	    	function idCheck() {
+	    		
+	    		var memberId = signupForm.memberId.value;
+	
+	    		if (memberId != "") {
+	    			$.ajax({
+	    				url : "/idCheck",
+	    				type : "POST",
+	    				data : {'memberId': $("#memberId").val()},
+	    				datatype : "json",
+	    				beforeSend : function(xhr) {
+	    					xhr.setRequestHeader("AJAX", "true");
+	    					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	    				},
+	    				success : function(data) {
+	    					if (data == 1) {
+	    						alert("사용 불가능한 아이디입니다.");
+	    					} else if(data == 0){
+	    						$("#idCheck").attr("value","Y")
+	    						alert("사용 가능한 아이디입니다.");
+	    					}
+	    				}
+	    			}); // ajax 끝
+	    		} else {
+	    			alert("아이디 입력을 해주세요.");
+	    			signupForm.memberId.focus();
+	    		}
+	    	}; // 아이디 체크 끝
+    		
+    	
+	    	// 우편번호찾기
+			function addressFind() {
+			       new daum.Postcode({
+			           oncomplete: function(data) {
+			               // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+			
+			               // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+			               // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+			               var addr = ''; // 주소 변수
+			               var extraAddr = ''; // 참고항목 변수
+			
+			               //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+			               if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+			                   addr = data.roadAddress;
+			               } else { // 사용자가 지번 주소를 선택했을 경우(J)
+			                   addr = data.jibunAddress;
+			               }
+			
+			               // 우편번호와 주소 정보를 해당 필드에 넣는다.
+			               document.getElementById('zipCode').value = data.zonecode;
+			               document.getElementById("address").value = addr;
+			               // 커서를 상세주소 필드로 이동한다.
+			               document.getElementById("addressDetail").focus();
+			           }
+			       }).open();
+			}
+		</script>
     </div>
 </div>
 </body>

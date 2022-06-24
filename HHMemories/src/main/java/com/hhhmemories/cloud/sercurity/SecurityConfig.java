@@ -18,8 +18,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	private MemberService memberService;
-
 	// security 기본 login 페이지 x
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -36,10 +34,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.authorizeRequests().antMatchers("/**").permitAll() // 로그인 권한은 누구나, resources파일도 모든권한
 										//페이지 권한 설정
 										.antMatchers("/admin/**").hasRole("ADMIN")
-										.antMatchers("/member/**").hasRole("MEMBER")
+										.antMatchers("/user/**").hasRole("MEMBER")
 					.and()
 						.formLogin()
-						.loginPage("/user/login")
+						.loginPage("/login/login")
 						.defaultSuccessUrl("/")
 					.and()
 						.logout()

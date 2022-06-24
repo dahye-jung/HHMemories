@@ -26,4 +26,9 @@ public class MemberDAO {
 	public MemberVO findId(MemberVO memberVo) throws Exception {
 		return sqlSession.selectOne("member.findId",memberVo);
 	}
+
+	public int idCheck(MemberVO memberVo) throws Exception {
+		int result = sqlSession.selectOne("member.idCheck",memberVo);
+		return result;
+	}
 }

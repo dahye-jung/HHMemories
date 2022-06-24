@@ -1,5 +1,6 @@
 package com.hhhmemories.cloud.member.contorller;
 
+import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -7,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.jasper.tagplugins.jstl.core.Out;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hhhmemories.cloud.member.service.MemberService;
@@ -118,15 +121,34 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signUp(HttpServletRequest httpreq,Model model,MemberVO memberVo, RedirectAttributes rttr) throws Exception{
+	public String signUp(HttpServletRequest httpreq,Model model,MemberVO memberVo,HttpServletResponse response, RedirectAttributes rttr) throws Exception{
 		
 		String pass = passwordEncoder.encode(memberVo.getMemberPw());
 		
 		memberVo.setMemberPw(pass);
-		memberService.insertMember(memberVo);
 		
+		int result = memberService.idCheck(memberVo);
+		if(result == 0) {
+			memberService.insertMember(memberVo);
+		}
 		
 		return "login/signUpComplete";
+	}
+	
+	/**
+	 * 회원가입 - 아이디 중복확인(POST)
+	 * 
+	 * @return 회원가입 기능
+	 * @param HttpServletRequest httpreq,Model model,MemberVO memberVo, RedirectAttributes rttr
+	 * @throws Exception
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
+	public int idCheck(MemberVO memberVo) throws Exception{
+
+		int result = memberService.idCheck(memberVo);;
+		return result;
+		
 	}
 	
 	/**

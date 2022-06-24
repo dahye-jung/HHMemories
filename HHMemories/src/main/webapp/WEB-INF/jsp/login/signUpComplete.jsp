@@ -19,15 +19,6 @@
 </head>
 <body>
 
-<!-- view-wrap S -->
-<div id="view-wrap" data-layout="page" aria-hidden="true">
-    <div id="content">
-        <button type="button" class="btn-puple" data-layer-open="signUpComplete"><span>회원가입 완료 열기</span></button>
-    </div>
-</div>
-<!-- view-wrap E -->
-
-
 <!-- 회원가입 완료 S -->
 <div id="signUpComplete" class="cmm-alert" data-layout="layer" data-page-id="signUpComplete" aria-hidden="false">
     <div class="inner">
@@ -51,7 +42,7 @@
                 </div>
             </div>
             <div class="btn-box m-t100">
-                <a href="#" class="btn-puple full"><span>로그인</span></a>
+                <a href="/login" class="btn-puple full"><span>로그인</span></a>
             </div>
         </div>
     </div>

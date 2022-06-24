@@ -73,6 +73,16 @@
 		)
 		
 	</insert>
+	
+	<!-- 아이디 중복체크 -->
+	<select id="idCheck" parameterType="String" resultType="int">
+		SELECT
+		 	count(*)
+		FROM
+			tb_member
+		WHERE
+			member_id = #{memberId}	 	
+	</select>
 
 	<!-- 아이디 찾기 정보 조회 -->
 	<select id="findId" resultMap="selectMemberInfo">
