@@ -30,4 +30,20 @@ public interface MemberService {
 	MemberVO findId(MemberVO memberVo) throws Exception;
 
 	int idCheck(MemberVO memberVo) throws Exception;
+
+	/**
+	 * 비밀번호 찾기
+	 * 
+	 * @param MemberVO memberVo
+	 * @throws Exception
+	*/
+	MemberVO findPwdUserInfo(MemberVO memberVo);
+
+	/**
+	 * 임시 비밀번호 저장
+	 * 
+	 * @param String tempPassword
+	 * @throws Exception
+	*/
+	int updatePassword(MemberVO vo);
 }

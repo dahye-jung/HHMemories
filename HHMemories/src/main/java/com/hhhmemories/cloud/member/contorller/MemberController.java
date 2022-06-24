@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hhhmemories.cloud.member.service.MemberService;
 import com.hhhmemories.cloud.member.service.MemberVO;
+import com.hhhmemories.cloud.mail.controller.mailController;
 
 /**
  * @author 
@@ -41,6 +42,9 @@ public class MemberController {
 	//암호화
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private mailController mailController;
 	
 	
 	/**
@@ -146,7 +150,7 @@ public class MemberController {
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
 	public int idCheck(MemberVO memberVo) throws Exception{
 
-		int result = memberService.idCheck(memberVo);;
+		int result = memberService.idCheck(memberVo);
 		return result;
 		
 	}
@@ -248,22 +252,39 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/findPwd", method = RequestMethod.POST)
-	public String findPwd(MemberVO memberVo, HttpServletResponse response) throws Exception{
+	public String findPwd(MemberVO to, HttpServletResponse response, Model model) throws Exception{
 		
 		// 이름, 아이디, 이메일로 계정이 있는지 조회
-		memberVo = memberService.selectMemberInfo(memberVo, response);
 		
-		// 존재하면 임시비밀번호 발급
-		String pw = tempPassword(10); // 임시비밀번호 설정
+		MemberVO vo = memberService.findPwdUserInfo(to);
+		System.out.println("개인정보 : " + to.toString());
 		
-		// 임시비밀번호 DB에 저장
-		
-		
-		// 임시비밀번호 입력한 메일로 전송
-		
-		
-		
-		return "";
+		// 입력한 정보로 조회한 값이 존재할 경우
+		if(vo != null) {
+			
+			// 임시비밀번호 설정
+			String pw = tempPassword(10); 
+			
+			// 임시비밀번호 입력한 메일로 전송
+			mailController.naverMailSend(to.getMemberEmail(), to.getMemberId(), pw);
+			
+			// 임시비밀번호 암호화
+			String tempPassword = passwordEncoder.encode(pw);
+			
+			// 생성된 임시비밀번호 VO에 저장
+			vo.setMemberPw(tempPassword);
+			
+			// 임시비밀번호 DB에 저장
+			int result = memberService.updatePassword(vo);
+			System.out.println("결과 : " + result);
+			
+			model.addAttribute("memberEmail", vo.getMemberEmail());
+			
+			return "login/findPwConfirm";
+		}
+
+
+		return "login/findIdReConfirm";
 	}
 	
 	

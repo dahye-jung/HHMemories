@@ -99,6 +99,29 @@
 	</select>
 
 	<!-- 비밀번호 찾기 정보 조회 -->
+	<select id="findPwd" resultMap="selectMemberInfo">
+		SELECT 
+			member_seq,
+			member_nm,
+			member_id,
+			member_email,
+			DATE_FORMAT(reg_dt , '%Y.%m.%d') AS reg_dt
+		FROM
+			tb_member
+		WHERE
+			member_nm = #{memberNm } 
+			AND member_id = #{memberId }
+			AND member_email = #{memberEmail }
+	</select>
 
+	<update id="updateTempPassword" parameterType="java.util.HashMap">
+		UPDATE
+			tb_member
+		SET
+			member_pw = #{memberPw }
+		WHERE 
+			member_id = #{memberId }
+			AND member_email = #{memberEmail }
+	</update>
 </mapper>
 

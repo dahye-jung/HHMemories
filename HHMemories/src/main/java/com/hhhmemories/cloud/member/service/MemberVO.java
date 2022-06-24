@@ -245,6 +245,15 @@ public class MemberVO {
 	public void setUseYn(String useYn) {
 		this.useYn = useYn;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "MemberVO [memberSeq=" + memberSeq + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberNm="
+				+ memberNm + ", memberEmail=" + memberEmail + ", memberBirth=" + memberBirth + ", memberGender="
+				+ memberGender + ", phoneNumber=" + phoneNumber + ", loginLastDt=" + loginLastDt + ", pwChgDt="
+				+ pwChgDt + ", lockAt=" + lockAt + ", lockCnt=" + lockCnt + ", lockLastDt=" + lockLastDt + ", npwYn="
+				+ npwYn + ", verify=" + verify + ", zipCode=" + zipCode + ", address=" + address + ", addressDetail="
+				+ addressDetail + ", regDt=" + regDt + ", updDt=" + updDt + ", useYn=" + useYn + "]";
+	}
+
 }
