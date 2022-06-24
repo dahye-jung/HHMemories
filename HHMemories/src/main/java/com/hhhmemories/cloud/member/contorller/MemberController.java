@@ -255,9 +255,7 @@ public class MemberController {
 	public String findPwd(MemberVO to, HttpServletResponse response, Model model) throws Exception{
 		
 		// 이름, 아이디, 이메일로 계정이 있는지 조회
-		
 		MemberVO vo = memberService.findPwdUserInfo(to);
-		System.out.println("개인정보 : " + to.toString());
 		
 		// 입력한 정보로 조회한 값이 존재할 경우
 		if(vo != null) {
@@ -276,8 +274,7 @@ public class MemberController {
 			
 			// 임시비밀번호 DB에 저장
 			int result = memberService.updatePassword(vo);
-			System.out.println("결과 : " + result);
-			
+
 			model.addAttribute("memberEmail", vo.getMemberEmail());
 			
 			return "login/findPwConfirm";
