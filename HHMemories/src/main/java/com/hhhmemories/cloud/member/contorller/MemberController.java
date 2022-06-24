@@ -82,7 +82,7 @@ public class MemberController {
 			}
 		}
 
-		return "redirect:/index";
+		return "redirect:/login";
 	}
 	
 	/**
@@ -253,10 +253,24 @@ public class MemberController {
 		// 이름, 아이디, 이메일로 계정이 있는지 조회
 		memberVo = memberService.selectMemberInfo(memberVo, response);
 		
+		// 존재하면 임시비밀번호 발급
 		String pw = tempPassword(10); // 임시비밀번호 설정
+		
+		// 임시비밀번호 DB에 저장
+		
+		
+		// 임시비밀번호 입력한 메일로 전송
+		
+		
 		
 		return "";
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	/**
