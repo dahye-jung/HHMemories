@@ -49,8 +49,6 @@
                         <button type="submit" class="btn-puple full" id="findIdConfirm" name = "findIdConfirm"><span>확인</span></button>
                         <button type="button" onclick="history.go(-1);" class="btn-puple"><span>취소</span></button>
                     </div>
-                    <input type="hidden" title="아이디" id = "memberId" name="memberId" placeholder="아이디">
-                    <input type="hidden" title="등록일자" id = "regDt" name="regDt" placeholder="등록일자">
                 </div>
             </div>
           </div>

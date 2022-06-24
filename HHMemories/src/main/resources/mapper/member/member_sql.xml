@@ -80,11 +80,12 @@
 			member_seq,
 			member_nm,
 			member_id,
-			reg_dt
+			DATE_FORMAT(reg_dt , '%Y.%m.%d') AS reg_dt
 		FROM
 			tb_member
 		WHERE
-			member_email = #{memberEmail}	
+			member_email = #{memberEmail}
+
 	</select>
 
 	<!-- 비밀번호 찾기 정보 조회 -->

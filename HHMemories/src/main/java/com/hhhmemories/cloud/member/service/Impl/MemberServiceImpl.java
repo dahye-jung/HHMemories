@@ -43,8 +43,8 @@ public class MemberServiceImpl implements MemberService {
 	 * @throws Exception
 	*/
 	@Override
-	public MemberVO findId(String memberEmail) throws Exception {
-		return memberDAO.findId(memberEmail);
+	public MemberVO findId(MemberVO memberVo) throws Exception {
+		return memberDAO.findId(memberVo);
 	}
 
 	

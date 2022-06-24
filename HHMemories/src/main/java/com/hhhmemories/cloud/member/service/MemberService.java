@@ -27,5 +27,5 @@ public interface MemberService {
 	 * @param String memberEmail
 	 * @throws Exception
 	*/
-	MemberVO findId(String memberEmail) throws Exception;
+	MemberVO findId(MemberVO memberVo) throws Exception;
 }

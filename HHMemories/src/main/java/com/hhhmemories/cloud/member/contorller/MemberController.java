@@ -149,14 +149,14 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/findId" , method = RequestMethod.POST)
-	public String  findId(Model model, MemberVO memberVO ,@RequestParam("memberEmail") String memberEmail) throws Exception{ 
+	public String  findId(Model model, MemberVO memberVo) throws Exception{ 
 		
-		MemberVO member = memberService.findId(memberEmail);
+		MemberVO member = memberService.findId(memberVo);
 		
 		if(member != null) {
-			model.addAttribute("memberId", memberVO.getMemberId());
-			model.addAttribute("memberNm", memberVO.getMemberNm());
-			model.addAttribute("regDt", memberVO.getRegDt());
+			model.addAttribute("memberId", member.getMemberId());
+			model.addAttribute("memberNm", member.getMemberNm());
+			model.addAttribute("regDt", member.getRegDt());
 		}else {
 			return "login/findIdReConfirm";
 		}

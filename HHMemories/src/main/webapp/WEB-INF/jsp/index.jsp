@@ -44,6 +44,9 @@
 									<c:choose>
 										<c:when test="${not empty member}">
 											<li class="nav-item active">
+												<p class="nav-link"><strong>${memberNm}</strong>&nbsp;님</p>
+											</li>
+											<li class="nav-item active">
 												<a class="nav-link" href="/logout">로그아웃</a>
 											</li>
 										</c:when>
