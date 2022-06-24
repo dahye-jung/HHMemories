@@ -8,8 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import com.hhhmemories.cloud.member.service.MemberService;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.RequiredArgsConstructor;
 
@@ -40,9 +39,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						.loginPage("/login/login")
 						.defaultSuccessUrl("/")
 					.and()
-						.logout()
-						.logoutSuccessUrl("/index")//로그아웃 성공시 리다이렉트 주소
-						.invalidateHttpSession(true) // 로그아웃 이후 세션 전체 삭제 여부
+		                .logout()
+		                .logoutRequestMatcher(new AntPathRequestMatcher("/login/logout"))
+		                .logoutSuccessUrl("/index")//로그아웃 성공시 리다이렉트 주소
+		                .invalidateHttpSession(true)// 로그아웃 이후 세션 전체 삭제 여부
 					.and()
 			            .csrf().disable()		//로그인 창	
 			       
