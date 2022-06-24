@@ -47,16 +47,27 @@
                     </div>
                     <div class="btn-box flex m-t100">
                         <button type="submit" class="btn-puple full" id="findIdConfirm" name = "findIdConfirm"><span>확인</span></button>
-                        <button type="button" onclick="location.href='/login'" class="btn-puple"><span>취소</span></button>
+                        <button type="button" id = "cencle" name = "cencle" class="btn-puple"><span>취소</span></button>
                     </div>
                 </div>
             </div>
           </div>
         </form>
+        
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <!-- jQuery에서 제공하는 3.5.1 버전의 jQuery CDN 호스트 --> 
+		<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" lang="javascript">
+	    	$(document).ready(function(){
+	    		// 취소
+	    		$("#cencle").on("click", function(){
+	    			location.href = "/login";
+	    		})
+	    	})
+		</script>
     </div>
 </div>
 </body>
