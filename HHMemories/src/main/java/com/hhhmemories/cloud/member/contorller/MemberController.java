@@ -1,6 +1,6 @@
 package com.hhhmemories.cloud.member.contorller;
 
-import java.util.List;
+import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.jasper.tagplugins.jstl.core.Out;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hhhmemories.cloud.member.service.MemberService;
 import com.hhhmemories.cloud.member.service.MemberVO;
-
-import lombok.extern.log4j.Log4j;
+import com.hhhmemories.cloud.mail.controller.mailController;
 
 /**
  * @author 
@@ -43,6 +42,9 @@ public class MemberController {
 	//암호화
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private mailController mailController;
 	
 	
 	/**
@@ -80,7 +82,7 @@ public class MemberController {
 				logger.info("Method signin >>>>>>>> Login Fail");
 				session.setAttribute("member", null);
 				rttr.addFlashAttribute("msg", "비밀번호를 확인해주세요");
-				return "redirect:/login/login";
+				return "redirect:/login";
 			}
 		}
 
@@ -123,12 +125,45 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signUp(HttpServletRequest httpreq,Model model,MemberVO memberVo, RedirectAttributes rttr) throws Exception{
+	public String signUp(HttpServletRequest httpreq,Model model,MemberVO memberVo,HttpServletResponse response, RedirectAttributes rttr) throws Exception{
 		
 		String pass = passwordEncoder.encode(memberVo.getMemberPw());
 		
 		memberVo.setMemberPw(pass);
-		memberService.insertMember(memberVo);
+		
+		int result = memberService.idCheck(memberVo);
+		if(result == 0) {
+			memberService.insertMember(memberVo);
+		}
+		
+		return "login/signUpComplete";
+	}
+	
+	/**
+	 * 회원가입 - 아이디 중복확인(POST)
+	 * 
+	 * @return 회원가입 기능
+	 * @param HttpServletRequest httpreq,Model model,MemberVO memberVo, RedirectAttributes rttr
+	 * @throws Exception
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
+	public int idCheck(MemberVO memberVo) throws Exception{
+
+		int result = memberService.idCheck(memberVo);
+		return result;
+		
+	}
+	
+	/**
+	 * 회원가입 완료 페이지
+	 * 
+	 * @param 
+	 * @return 
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/signUpComplete" , method = RequestMethod.GET)
+	public String signUpComplete() throws Exception{ 
 		
 		return "login/signUpComplete";
 	}
@@ -149,16 +184,50 @@ public class MemberController {
 	/**
 	 * 아이디찾기 기능
 	 * 
+	 * @param Model model,  @RequestParam("memberEmail") String memberEmail
+	 * @return login/findIdConfirm
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/findId" , method = RequestMethod.POST)
+	public String  findId(Model model, MemberVO memberVo) throws Exception{ 
+		
+		MemberVO member = memberService.findId(memberVo);
+		
+		if(member != null) {
+			model.addAttribute("memberId", member.getMemberId());
+			model.addAttribute("memberNm", member.getMemberNm());
+			model.addAttribute("regDt", member.getRegDt());
+		}else {
+			return "login/findIdReConfirm";
+		}
+		
+		return "login/findIdConfirm";
+	}
+	
+	/**
+	 * 아이디찾기 성공시
+	 * 
+	 * @param 
+	 * @return login/findIdConfirm
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/findIdConfirm" , method = RequestMethod.GET)
+	public String  findIdConfirm() throws Exception{ 
+		
+		return "login/findIdConfirm";
+	}
+	
+	/**
+	 * 아이디찾기 실패시
+	 * 
 	 * @param 
 	 * @return 
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/findId" , method = RequestMethod.POST)
-	public String  findId(Model model,MemberVO memberVo) throws Exception{ 
+	@RequestMapping(value = "/findIdReConfirm" , method = RequestMethod.GET)
+	public String  findIdReConfirm(Model model) throws Exception{ 
 		
-		model.addAttribute("");
-		
-		return "login/findIdConfirm";
+		return "login/findIdReConfirm";
 	}
 	
 	/**
@@ -183,15 +252,47 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/findPwd", method = RequestMethod.POST)
-	public String findPwd(MemberVO memberVo, HttpServletResponse response) throws Exception{
+	public String findPwd(MemberVO to, HttpServletResponse response, Model model) throws Exception{
 		
 		// 이름, 아이디, 이메일로 계정이 있는지 조회
-		memberVo = memberService.selectMemberInfo(memberVo, response);
 		
-		String pw = tempPassword(10); // 임시비밀번호 설정
+		MemberVO vo = memberService.findPwdUserInfo(to);
+		System.out.println("개인정보 : " + to.toString());
 		
-		return "";
+		// 입력한 정보로 조회한 값이 존재할 경우
+		if(vo != null) {
+			
+			// 임시비밀번호 설정
+			String pw = tempPassword(10); 
+			
+			// 임시비밀번호 입력한 메일로 전송
+			mailController.naverMailSend(to.getMemberEmail(), to.getMemberId(), pw);
+			
+			// 임시비밀번호 암호화
+			String tempPassword = passwordEncoder.encode(pw);
+			
+			// 생성된 임시비밀번호 VO에 저장
+			vo.setMemberPw(tempPassword);
+			
+			// 임시비밀번호 DB에 저장
+			int result = memberService.updatePassword(vo);
+			System.out.println("결과 : " + result);
+			
+			model.addAttribute("memberEmail", vo.getMemberEmail());
+			model.addAttribute("memberNm", vo.getMemberNm());
+			
+			return "login/findPwConfirm";
+		}
+
+
+		return "login/findIdReConfirm";
 	}
+	
+	
+	
+	
+	
+	
 	
 	
 	/**

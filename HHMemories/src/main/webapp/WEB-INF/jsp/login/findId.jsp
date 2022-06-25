@@ -20,7 +20,7 @@
 
 <div id="view-wrap" data-layout="login" data-page-id="findIdForm" aria-hidden="false">
     <div id="content">
-     <form action="/fingId" method="POST"> 
+     <form action="/findId" method="POST"> 
         <div class="main-box">
             <div class="box-form left">
                 <div class="box-logo">
@@ -35,28 +35,39 @@
                 <div class="box-form">
                     <div class="cmm-form">
                         <div class="input">
-                            <input type="text" title="이름" placeholder="이름">
+                            <input type="text" title="이름" id = "memberNm" name="memberNm" placeholder="이름">
                             <!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
                         </div>
                     </div>
                     <div class="cmm-form">
                         <div class="input">
-                            <input type="text" title="이메일" placeholder="이메일">
+                            <input type="text" title="이메일" id="memberEmail" name = "memberEmail" placeholder="이메일">
                             <!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
                         </div>
                     </div>
                     <div class="btn-box flex m-t100">
-                        <a href="#" class="btn-puple"><span>확인</span></a>
-                        <a href="/login" class="btn-puple"><span>취소</span></a>
+                        <button type="submit" class="btn-puple full" id="findIdConfirm" name = "findIdConfirm"><span>확인</span></button>
+                        <button type="button" id = "cencle" name = "cencle" class="btn-puple"><span>취소</span></button>
                     </div>
                 </div>
             </div>
           </div>
         </form>
+        
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <!-- jQuery에서 제공하는 3.5.1 버전의 jQuery CDN 호스트 --> 
+		<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript" lang="javascript">
+	    	$(document).ready(function(){
+	    		// 취소
+	    		$("#cencle").on("click", function(){
+	    			location.href = "/login";
+	    		})
+	    	})
+		</script>
     </div>
 </div>
 </body>

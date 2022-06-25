@@ -1,7 +1,5 @@
 package com.hhhmemories.cloud.member.service;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,10 +40,10 @@ public class MemberVO {
 	private String phoneNumber;
 	
 	//마지막 로그인 일자
-	private Date loginLastDt;
+	private String loginLastDt;
 	
 	//비밀번호 변경 일자
-	private Date pwChgDt;
+	private String pwChgDt;
 	
 	//잠금여부
 	private String lockAt;
@@ -54,7 +52,7 @@ public class MemberVO {
 	private String lockCnt;
 	
 	//잠금 최종 시점
-	private Date lockLastDt;
+	private String lockLastDt;
 
 	//임시비밀번호 여부
 	private String npwYn;
@@ -72,10 +70,10 @@ public class MemberVO {
 	private String addressDetail;
 	
 	//등록일자
-	private Date regDt;
+	private String regDt;
 
 	//수정일자
-	private Date updDt;
+	private String updDt;
 	
 	//사용여부
 	private String useYn;
@@ -144,19 +142,19 @@ public class MemberVO {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Date getLoginLastDt() {
+	public String getLoginLastDt() {
 		return loginLastDt;
 	}
 
-	public void setLoginLastDt(Date loginLastDt) {
+	public void setLoginLastDt(String loginLastDt) {
 		this.loginLastDt = loginLastDt;
 	}
 
-	public Date getPwChgDt() {
+	public String getPwChgDt() {
 		return pwChgDt;
 	}
 
-	public void setPwChgDt(Date pwChgDt) {
+	public void setPwChgDt(String pwChgDt) {
 		this.pwChgDt = pwChgDt;
 	}
 
@@ -176,11 +174,11 @@ public class MemberVO {
 		this.lockCnt = lockCnt;
 	}
 
-	public Date getLockLastDt() {
+	public String getLockLastDt() {
 		return lockLastDt;
 	}
 
-	public void setLockLastDt(Date lockLastDt) {
+	public void setLockLastDt(String lockLastDt) {
 		this.lockLastDt = lockLastDt;
 	}
 
@@ -224,19 +222,19 @@ public class MemberVO {
 		this.addressDetail = addressDetail;
 	}
 
-	public Date getRegDt() {
+	public String getRegDt() {
 		return regDt;
 	}
 
-	public void setRegDt(Date regDt) {
+	public void setRegDt(String regDt) {
 		this.regDt = regDt;
 	}
 
-	public Date getUpdDt() {
+	public String getUpdDt() {
 		return updDt;
 	}
 
-	public void setUpdDt(Date updDt) {
+	public void setUpdDt(String updDt) {
 		this.updDt = updDt;
 	}
 
@@ -247,6 +245,15 @@ public class MemberVO {
 	public void setUseYn(String useYn) {
 		this.useYn = useYn;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "MemberVO [memberSeq=" + memberSeq + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberNm="
+				+ memberNm + ", memberEmail=" + memberEmail + ", memberBirth=" + memberBirth + ", memberGender="
+				+ memberGender + ", phoneNumber=" + phoneNumber + ", loginLastDt=" + loginLastDt + ", pwChgDt="
+				+ pwChgDt + ", lockAt=" + lockAt + ", lockCnt=" + lockCnt + ", lockLastDt=" + lockLastDt + ", npwYn="
+				+ npwYn + ", verify=" + verify + ", zipCode=" + zipCode + ", address=" + address + ", addressDetail="
+				+ addressDetail + ", regDt=" + regDt + ", updDt=" + updDt + ", useYn=" + useYn + "]";
+	}
+
 }

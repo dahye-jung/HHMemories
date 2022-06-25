@@ -8,8 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import com.hhhmemories.cloud.member.service.MemberService;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,8 +17,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	private MemberService memberService;
-
 	// security 기본 login 페이지 x
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -36,15 +33,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.authorizeRequests().antMatchers("/**").permitAll() // 로그인 권한은 누구나, resources파일도 모든권한
 										//페이지 권한 설정
 										.antMatchers("/admin/**").hasRole("ADMIN")
-										.antMatchers("/member/**").hasRole("MEMBER")
+										.antMatchers("/user/**").hasRole("MEMBER")
 					.and()
 						.formLogin()
-						.loginPage("/user/login")
+						.loginPage("/login/login")
 						.defaultSuccessUrl("/")
 					.and()
-						.logout()
-						.logoutSuccessUrl("/index")//로그아웃 성공시 리다이렉트 주소
-						.invalidateHttpSession(true) // 로그아웃 이후 세션 전체 삭제 여부
+		                .logout()
+		                .logoutRequestMatcher(new AntPathRequestMatcher("/login/logout"))
+		                .logoutSuccessUrl("/index")//로그아웃 성공시 리다이렉트 주소
+		                .invalidateHttpSession(true)// 로그아웃 이후 세션 전체 삭제 여부
 					.and()
 			            .csrf().disable()		//로그인 창	
 			       

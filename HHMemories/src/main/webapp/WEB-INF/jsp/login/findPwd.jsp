@@ -15,6 +15,13 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/common.css" rel="stylesheet" />
+    
+    <script type="text/javascript">
+    	function submit() {
+    		$("#click").submit();
+    	}
+    
+    </script>
 </head>
 <body>
 
@@ -31,30 +38,32 @@
                     <img src="img/loginLogo02.png">
                     <span class="sub-tit-16">비밀번호찾기</span>
                 </div>
-                <div class="box-form">
-                    <div class="cmm-form">
-                        <div class="input">
-                            <input type="text" title="이름" placeholder="이름">
-                            <!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
-                        </div>
-                    </div>
-                    <div class="cmm-form">
-                        <div class="input">
-                            <input type="text" title="아이디" placeholder="아이디">
-                            <!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
-                        </div>
-                    </div>
-                    <div class="cmm-form">
-                        <div class="input">
-                            <input type="text" title="이메일" placeholder="이메일">
-                            <!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
-                        </div>
-                    </div>
-                    <div class="btn-box flex m-t70">
-                        <a href="#" class="btn-puple"><span>확인</span></a>
-                        <a href="/login" class="btn-puple"><span>취소</span></a>
-                    </div>
-                </div>
+                <form action="/findPwd" method="post">
+	                <div class="box-form">
+	                    <div class="cmm-form">
+	                        <div class="input">
+	                            <input type="text" name="memberNm" title="이름" placeholder="이름">
+	                            <!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
+	                        </div>
+	                    </div>
+	                    <div class="cmm-form">
+	                        <div class="input">
+	                            <input type="text" name="memberId" title="아이디" placeholder="아이디">
+	                            <!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
+	                        </div>
+	                    </div>
+	                    <div class="cmm-form">
+	                        <div class="input">
+	                            <input type="text" name="memberEmail" title="이메일" placeholder="이메일">
+	                            <!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
+	                        </div>
+	                    </div>
+	                    <div class="btn-box flex m-t70">
+	                    	<button type="submit" class="btn-puple" id="" name = ""><span>확인</span></button>
+	                        <a href="/login" class="btn-puple"><span>취소</span></a>
+	                    </div>
+	                </div>
+                </form>
             </div>
         </div>
         <!-- Bootstrap core JS-->

@@ -36,6 +36,36 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.insertMember(memberVo);
 	}
 
+	/**
+	 * 아이디 찾기
+	 * 
+	 * @param HttpServletResponse response, String memberEmail
+	 * @throws Exception
+	*/
+	@Override
+	public MemberVO findId(MemberVO memberVo) throws Exception {
+		return memberDAO.findId(memberVo);
+	}
+
+	@Override
+	public int idCheck(MemberVO memberVo) throws Exception {
+		int result = memberDAO.idCheck(memberVo);
+		return result;
+	}
+
+	@Override
+	public MemberVO findPwdUserInfo(MemberVO memberVo) {
+		// TODO Auto-generated method stub
+
+		return memberDAO.findPwd(memberVo);
+	}
+
+	@Override
+	public int updatePassword(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return memberDAO.updateTempPassword(vo);
+	}
+
 	
 	
 	
