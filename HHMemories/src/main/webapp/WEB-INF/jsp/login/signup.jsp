@@ -24,8 +24,8 @@
     <div id="content">
        <form action="/signup" method="POST" id = "signupForm" name= "signupForm"> 
         <div class="main-box">
-           <div class="box-logo">
-               <img src="img/loginLogo02.png" alt="로고이미지" class="logo"></img>
+           <div class="login-logo">
+                <img src="img/loginLogo03.png">
             </div>
             <div class="cmm-form">
                 <div class="input">
@@ -62,7 +62,7 @@
                 <div class="input">
                     <span class="label">생년월일<i class="required" aria-label="필수입력항목"></i></span>
                     <input type="text" title="생년월일" placeholder="생년월일" id = "memberBirth" name="memberBirth">
-                    <div class="btn-puple-white" id = "memberGender" >
+                    <!-- <div class="btn-puple-white" id = "memberGender" >
                         <label class="radio" >
                             <input type="radio" id = "memberGender" name="memberGender" value = "M" checked="checked">
                             <span class="label">남</span>
@@ -71,7 +71,7 @@
                             <input type="radio" id = "memberGender" name="memberGender" value="W">
                             <span class="label">여</span>
                         </label>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="cmm-form">
@@ -81,13 +81,13 @@
                     <button type="button" class="btn-puple-white"><span>중복확인</span></button>
                 </div>
             </div>
-            <!-- <div class="cmm-form">
+            <div class="cmm-form">
                 <div class="input">
                     <span class="label">인증번호<i class="required" aria-label="필수입력항목"></i></span>
                     <input type="text" title="인증번호" placeholder="인증번호">
                     <button class="btn-puple-white"><span>확인</span></button>
                 </div>
-            </div> -->
+            </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">우편번호<i class="required" aria-label="필수입력항목"></i></span>
@@ -158,23 +158,19 @@
 	
 	    	//아이디 중복 체크
 	    	function idCheck() {
-	    		
-	    		var memberId = signupForm.memberId.value;
+	    		var mem = {
+	    				memberId : $('#memberId').val()
+	    		}
 	
-	    		if (memberId != "") {
+	    		if (mem.memberId.length != "") {
 	    			$.ajax({
 	    				url : "/idCheck",
 	    				type : "POST",
-	    				data : {'memberId': memberId},
-	    				datatype : "json",
-	    				beforeSend : function(xhr) {
-	    					xhr.setRequestHeader("AJAX", "true");
-	    					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-	    				},
-	    				success : function(data) {
-	    					if (data == 1) {
+	    				data : mem,
+	    				success : function(result) {
+	    					if (result == 1) {
 	    						alert("사용 불가능한 아이디입니다.");
-	    					} else if(data == 0){
+	    					} else if(result == 0){
 	    						$("#idCheck").attr("value","Y")
 	    						alert("사용 가능한 아이디입니다.");
 	    					}

@@ -20,48 +20,52 @@
 
 <div id="view-wrap" data-layout="login" data-page-id="login" aria-hidden="false">
     <div id="content">
-        <div class="main-box">
-            <div class="box-form left">
-                <div class="box-logo">
-                    <img src="img/loginLogo01.png" alt="로고이미지" class="logo"></img>
-                </div>
-            </div>
-	        <div class="box-form right">
-	           <form action="/login" method="POST">  
-	           		
-	           	   <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}" />
-	           	  
-	               
-	                    <div class="login-logo">
-	                        <img src="img/loginLogo02.png">
-	                        <span class="sub-tit-16">HHmemories에 오신걸 환영합니다.</span>
-	                    </div>
-	                    <div class="cmm-form">
-	                        <div class="input">
-	                            <input type="text" id = "memberId" name = "memberId" title="아이디" placeholder="아이디">
-	                            <!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
-	                        </div>
-	                    </div>
-	                    <div class="cmm-form">
-	                        <div class="input">
-	                            <input type="password" id = "memberPw" name = "memberPw" title="비밀번호" placeholder="비밀번호">
-	                            <!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
-	                        </div>
-	                    </div>
-	                    <div class="btn-box">
-	                        <a href="/findId" class="txt-btn"><span>아이디찾기</span></a>
-	                        <a href="/findPwd" class="txt-btn"><span>비밀번호찾기</span></a>
-	                        <a href="/signup" class="txt-btn"><span>회원가입</span></a>
-	                    </div>
-	                    <div class="btn-box m-t70">
-	                        <button class="btn-puple full" type="submit">
-	                        	<span>로그인</span>
-	                        </button>
-	                    </div>
-            	</form>
-	         </div>
-        </div>
-        <!-- Bootstrap core JS-->
+			<form action="/login" method="POST">
+				<input type="hidden" name="${_csrf.parameterName }"
+					value="${_csrf.token}" />
+				<div class="main-box">
+					<div class="box-form left">
+						<div class="box-logo">
+							<img src="img/loginLogo01.png" alt="로고이미지" class="logo"></img>
+						</div>
+					</div>
+
+					<div class="box-form right">
+						<div class="login-logo">
+							<img src="img/loginLogo02.png"> <span class="sub-tit-16">HHmemories에
+								오신걸 환영합니다.</span>
+						</div>
+
+						<div class="box-form">
+							<div class="cmm-form">
+								<div class="input">
+									<input type="text" id="memberId" name="memberId" title="아이디"
+										placeholder="아이디">
+									<!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
+								</div>
+							</div>
+							<div class="cmm-form">
+								<div class="input">
+									<input type="password" id="memberPw" name="memberPw"
+										title="비밀번호" placeholder="비밀번호">
+									<!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
+								</div>
+							</div>
+							<div class="btn-box">
+								<a href="/findId" class="txt-btn"><span>아이디찾기</span></a> <a
+									href="/findPwd" class="txt-btn"><span>비밀번호찾기</span></a> <a
+									href="/signup" class="txt-btn"><span>회원가입</span></a>
+							</div>
+							<div class="btn-box m-t70">
+								<button class="btn-puple full" type="submit">
+									<span>로그인</span>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		<!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
