@@ -30,10 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		httpSecurity.httpBasic().disable();
 		
-		httpSecurity.authorizeRequests().antMatchers("/**").permitAll() // 로그인 권한은 누구나, resources파일도 모든권한
-										//페이지 권한 설정
-										.antMatchers("/admin/**").hasRole("ADMIN")
-										.antMatchers("/user/**").hasRole("MEMBER")
+		httpSecurity.csrf().disable()		//csrf 토큰 비활성화
+					.authorizeRequests()
+					.antMatchers("/","/js/**","/css/**","/image/**").permitAll() // 로그인 권한은 누구나, resources파일도 모든권한
 					.and()
 						.formLogin()
 						.loginPage("/login/login")
@@ -43,9 +42,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		                .logoutRequestMatcher(new AntPathRequestMatcher("/login/logout"))
 		                .logoutSuccessUrl("/index")//로그아웃 성공시 리다이렉트 주소
 		                .invalidateHttpSession(true)// 로그아웃 이후 세션 전체 삭제 여부
+		                .deleteCookies("JSESSIONID","remember-me") //JSESSIONID, rememeber-me 쿠키 삭제
 					.and()
-			            .csrf().disable()		//로그인 창	
-			       
+						.rememberMe() //로그인 유지
+						.alwaysRemember(false) //항상 기억할 것인지 여부
+						.rememberMeParameter("remember-me")
+						.tokenValiditySeconds(43200) //12시간 유지
 			;
 	}
 

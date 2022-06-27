@@ -56,8 +56,8 @@
 									href="/findPwd" class="txt-btn"><span>비밀번호찾기</span></a> <a
 									href="/signup" class="txt-btn"><span>회원가입</span></a>
 							</div>
-							<div class="btn-box m-t70">
-								<button type="submit" class="btn-puple full" id = "loginBtn" name = "loginBtn">
+							<div class="btn-box flex m-t70">
+								<button type="submit" class="btn-puple" id = "loginBtn" name = "loginBtn">
 									<span>로그인</span>
 								</button>
 							</div>

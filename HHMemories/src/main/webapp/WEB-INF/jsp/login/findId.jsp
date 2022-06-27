@@ -46,7 +46,7 @@
                         </div>
                     </div>
                     <div class="btn-box flex m-t100">
-                        <button type="submit" class="btn-puple full" id="findIdConfirm" name = "findIdConfirm"><span>확인</span></button>
+                        <button type="submit" class="btn-puple" id="findIdConfirm" name = "findIdConfirm"><span>확인</span></button>
                         <button type="button" id = "cencle" name = "cencle" class="btn-puple"><span>취소</span></button>
                     </div>
                 </div>
