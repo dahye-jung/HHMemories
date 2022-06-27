@@ -25,24 +25,24 @@
         <div class="header">
             <div class="login-logo">
                 <img src="img/loginLogo02.png">
-                <span class="txt-17"><strong>홍길동님</strong> 환영합니다<br>회원가입이 완료되었습니다.</span>
+                <span class="txt-17"><strong>${memberNm }님</strong> 환영합니다<br>회원가입이 완료되었습니다.</span>
             </div>
         </div>
         <div class="content">
             <div class="box-form">
                 <div class="cmm-form">
                     <div class="input">
-                        <span class="input-title">아이디</span><span class="input-txt">abcdefu123</span>
+                        <span class="input-title">아이디</span><span class="input-txt">${memberId }</span>
                     </div>
                 </div>
                 <div class="cmm-form">
                     <div class="input">
-                        <span class="input-title">이메일</span><span class="input-txt">abcdefu123</span>
+                        <span class="input-title">이메일</span><span class="input-txt">${memberEmail }</span>
                     </div>
                 </div>
             </div>
-            <div class="btn-box m-t100">
-                <a href="/login" class="btn-puple full"><span>로그인</span></a>
+            <div class="btn-box flex m-t100">
+                <a href="/login" class="btn-puple"><span>로그인</span></a>
             </div>
         </div>
     </div>

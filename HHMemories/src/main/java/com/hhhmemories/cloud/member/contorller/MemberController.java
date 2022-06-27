@@ -1,6 +1,5 @@
 package com.hhhmemories.cloud.member.contorller;
 
-import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -8,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.jasper.tagplugins.jstl.core.Out;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +17,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.hhhmemories.cloud.mail.controller.mailController;
 import com.hhhmemories.cloud.member.service.MemberService;
 import com.hhhmemories.cloud.member.service.MemberVO;
-import com.hhhmemories.cloud.mail.controller.mailController;
 
 /**
  * @author 
@@ -61,7 +58,7 @@ public class MemberController {
 	/**
 	 * 로그인 기능(POST)
 	 * 
-	 * @param memberId, memberPwd
+	 * @param Model model,MemberVO memberVo, HttpServletRequest req, RedirectAttributes rttr, HttpServletResponse response
 	 * @return 로그인 기능
 	 * @throws Exception
 	 */
@@ -134,7 +131,17 @@ public class MemberController {
 		int result = memberService.idCheck(memberVo);
 		if(result == 0) {
 			memberService.insertMember(memberVo);
+			
+			// 임시비밀번호 설정
+			String pw = tempPassword(6); 
+			
+			// 임시비밀번호 입력한 메일로 전송
+			mailController.naverMailSend(memberVo.getMemberEmail(), memberVo.getMemberId(), pw);
 		}
+		
+		model.addAttribute("memberId", memberVo.getMemberId());
+		model.addAttribute("memberNm", memberVo.getMemberNm());
+		model.addAttribute("memberEmail", memberVo.getMemberEmail());
 		
 		return "login/signUpComplete";
 	}
@@ -287,13 +294,6 @@ public class MemberController {
 
 		return "login/findIdReConfirm";
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	/**
 	 * 임시 비밀번호 작성 함수
