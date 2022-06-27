@@ -66,6 +66,22 @@
 	    		$("#cencle").on("click", function(){
 	    			location.href = "/login";
 	    		})
+	    		
+				$("#findIdConfirm").on("click", function(){
+	    			
+	    			if($("#memberNm").val()==""){
+	    				alert("이름을 입력해주세요.");
+	    				$("#memberNm").focus();
+	    				return false;
+	    			}
+	    			
+	    			if($("#memberEmail").val()==""){
+	    				alert("이메일을 입력해주세요.");
+	    				$("#memberEmail").focus();
+	    				return false;
+	    			}
+	    			
+	    		});
 	    	})
 		</script>
     </div>

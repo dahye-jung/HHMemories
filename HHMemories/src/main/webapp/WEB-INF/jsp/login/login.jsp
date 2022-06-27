@@ -57,7 +57,7 @@
 									href="/signup" class="txt-btn"><span>회원가입</span></a>
 							</div>
 							<div class="btn-box m-t70">
-								<button class="btn-puple full" type="submit">
+								<button type="submit" class="btn-puple full" id = "loginBtn" name = "loginBtn">
 									<span>로그인</span>
 								</button>
 							</div>
@@ -69,6 +69,27 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <!-- jQuery에서 제공하는 3.5.1 버전의 jQuery CDN 호스트 --> 
+		<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script type="text/javascript">
+	        $(document).ready(function(){
+	    		$("#loginBtn").on("click", function(){
+	    			
+	    			if($("#memberId").val()==""){
+	    				alert("아이디를 입력해주세요.");
+	    				$("#memberId").focus();
+	    				return false;
+	    			}
+	    			
+	    			if($("#memberPw").val()==""){
+	    				alert("비밀번호를 입력해주세요.");
+	    				$("#memberPw").focus();
+	    				return false;
+	    			}
+	    			
+	    		});
+	    	})
+        </script>
     </div>
 </div>
 </body>

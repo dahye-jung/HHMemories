@@ -17,8 +17,6 @@
     <link href="css/common.css" rel="stylesheet" />
 </head>
 <body>
-<!-- jQuery에서 제공하는 3.5.1 버전의 jQuery CDN 호스트 --> 
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <div id="view-wrap" data-layout="page" data-page-id="signUpForm" aria-hidden="false">
     <div id="content">
@@ -84,7 +82,7 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">인증번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="인증번호" placeholder="인증번호">
+                    <input type="text" title="인증번호" placeholder="인증번호" id = "emailNumber" name = "emailNumber">
                     <button class="btn-puple-white"><span>확인</span></button>
                 </div>
             </div>
@@ -119,7 +117,8 @@
         <script src="js/scripts.js"></script>
         <!-- 우편번호 찾기 -->
 		<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-		
+		<!-- jQuery에서 제공하는 3.5.1 버전의 jQuery CDN 호스트 --> 
+		<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
     	<script type="text/javascript" lang="javascript">
 	    	$(document).ready(function(){
 	    		// 취소
@@ -140,19 +139,48 @@
 	    				return false;
 	    			}
 	    			
-	    			var idChkVal = $("#idCheck").val();
+	    			/* var idChkVal = $("#idCheck").val();
 	    			if(idChkVal == "N"){
 	    				alert("중복확인 버튼을 눌러주세요.");
 	    			}else if(idChkVal == "Y"){
 	    				$("#signupForm").submit();
-	    			}
+	    			} */
 	    			
 	    			if($("#memberPw").val()==""){
 	    				alert("비밀번호를 입력해주세요.");
 	    				$("#memberPw").focus();
 	    				return false;
 	    			}
-	    			
+	    			if($("#phoneNumber").val()==""){
+	    				alert("휴대전화를 입력해주세요.");
+	    				$("#phoneNumber").focus();
+	    				return false;
+	    			}
+	    			if($("#memberBirth").val()==""){
+	    				alert("생년월일을 선택해주세요.");
+	    				$("#memberBirth").focus();
+	    				return false;
+	    			}
+	    			if($("#memberEmail").val()==""){
+	    				alert("이메일을 입력해주세요.");
+	    				$("#memberEmail").focus();
+	    				return false;
+	    			}
+	    			if($("#emailNumber").val()==""){
+	    				alert("인증번호를 입력해주세요.");
+	    				$("#emailNumber").focus();
+	    				return false;
+	    			}
+	    			if($("#zipCode").val()==""){
+	    				alert("우편번호를 입력해주세요.");
+	    				addressFind();
+	    				return false;
+	    			}
+	    			if($("#address").val()==""){
+	    				alert("주소를 입력해주세요.");
+	    				addressFind();
+	    				return false;
+	    			}
 	    		});
 	    	})
 	
@@ -171,7 +199,7 @@
 	    					if (result == 1) {
 	    						alert("사용 불가능한 아이디입니다.");
 	    					} else if(result == 0){
-	    						$("#idCheck").attr("value","Y")
+	    						/* $("#idCheck").attr("value","Y") */
 	    						alert("사용 가능한 아이디입니다.");
 	    					}
 	    				}
