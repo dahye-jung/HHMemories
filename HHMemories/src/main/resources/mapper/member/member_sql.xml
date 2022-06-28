@@ -84,6 +84,16 @@
 			member_id = #{memberId}	 	
 	</select>
 
+	<!-- 이메일 중복체크 -->
+	<select id="emailCheck" parameterType="String" resultType="int">
+		SELECT
+		 	count(*)
+		FROM
+			tb_member
+		WHERE
+			member_email = #{memberEmail}	 	
+	</select>
+
 	<!-- 아이디 찾기 정보 조회 -->
 	<select id="findId" resultMap="selectMemberInfo">
 		SELECT 

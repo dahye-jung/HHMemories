@@ -66,6 +66,12 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.updateTempPassword(vo);
 	}
 
+	@Override
+	public int emailCheck(MemberVO memberVo) throws Exception {
+		int result = memberDAO.emailCheck(memberVo);
+		return result;
+	}
+
 	
 	
 	

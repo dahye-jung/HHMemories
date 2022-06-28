@@ -3,6 +3,7 @@ package com.hhhmemories.cloud.member.contorller;
 import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -42,6 +45,9 @@ public class MemberController {
 	
 	@Autowired
 	private mailController mailController;
+	
+	 @Autowired
+	 private JavaMailSender mailSender;
 	
 	
 	/**
@@ -128,15 +134,11 @@ public class MemberController {
 		
 		memberVo.setMemberPw(pass);
 		
-		int result = memberService.idCheck(memberVo);
-		if(result == 0) {
+		int idCheck = memberService.idCheck(memberVo);
+		int emailCheck = memberService.emailCheck(memberVo);
+		
+		if(idCheck == 0 || emailCheck == 0 ) {
 			memberService.insertMember(memberVo);
-			
-			// 임시비밀번호 설정
-			String pw = tempPassword(6); 
-			
-			// 임시비밀번호 입력한 메일로 전송
-			mailController.naverMailSend(memberVo.getMemberEmail(), memberVo.getMemberId(), pw);
 		}
 		
 		model.addAttribute("memberId", memberVo.getMemberId());
@@ -160,6 +162,53 @@ public class MemberController {
 		int result = memberService.idCheck(memberVo);
 		return result;
 		
+	}
+	
+	/**
+	 * 회원가입 - 이메일 중복확인(POST)
+	 * 
+	 * @return 회원가입 기능
+	 * @param HttpServletRequest httpreq,Model model,MemberVO memberVo, RedirectAttributes rttr
+	 * @throws Exception
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/emailCheck", method = RequestMethod.GET)
+	public String emailCheck(String memberEmail) throws Exception{
+		
+        /* 인증번호(난수) 생성 */
+        Random random = new Random();
+        int checkNum = random.nextInt(888888) + 111111;
+        
+        logger.info("이메일 전송 확인 되라ㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
+        logger.info("인증번호" + memberEmail);
+        
+        /* 이메일 보내기 */
+        String setFrom = "hyesounglee@naver.com";
+        String toMail = memberEmail;
+        String title = "회원가입 인증 이메일 입니다.";
+        String content = 
+                "홈페이지를 방문해주셔서 감사합니다." +
+                "<br><br>" + 
+                "인증 번호는 " + checkNum + "입니다." + 
+                "<br>" + 
+                "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+		
+		  try {
+		  
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+				helper.setFrom(setFrom);
+				helper.setTo(toMail);
+				helper.setSubject(title);
+				helper.setText(content, true);
+				mailSender.send(message);
+		  
+		  }catch(Exception e) { e.printStackTrace(); }
+		 
+ 
+        String num = Integer.toString(checkNum);
+		
+        return num;
 	}
 	
 	/**
@@ -327,4 +376,26 @@ public class MemberController {
 	    //StringBuffer를 String으로 변환해서 return 하려면 toString()을 사용하면 된다.
 	}	
 
+	//인증번호(숫자)
+	 public static String createKey()throws Exception{
+	      StringBuffer key = new StringBuffer();
+	      Random rnd = new Random();
+
+	      for (int i = 0; i < 5; i++) { 
+	    	 int index = rnd.nextInt(3);
+	           switch (index) {
+	           case 0:
+	               key.append(((int) (rnd.nextInt(10))));
+	               break;
+	           case 1:
+	               key.append(((int) (rnd.nextInt(10))));
+	               break;
+	           case 2:
+	               key.append((rnd.nextInt(5)));
+	               break;
+	       }
+	    }
+	    return key.toString();
+	   }
+	
 }

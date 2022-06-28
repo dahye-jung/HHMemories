@@ -20,6 +20,10 @@ public interface MemberService {
 	 * @throws Exception
 	 */
 	int insertMember(MemberVO memberVo) throws Exception;
+	
+	int idCheck(MemberVO memberVo) throws Exception;
+	
+	int emailCheck(MemberVO memberVo)throws Exception;
 
 	/**
 	 * 아이디 찾기
@@ -28,8 +32,6 @@ public interface MemberService {
 	 * @throws Exception
 	*/
 	MemberVO findId(MemberVO memberVo) throws Exception;
-
-	int idCheck(MemberVO memberVo) throws Exception;
 
 	/**
 	 * 비밀번호 찾기

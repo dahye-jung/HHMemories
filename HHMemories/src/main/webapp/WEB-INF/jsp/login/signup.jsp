@@ -47,7 +47,7 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">비밀번호 확인<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="password" title="비밀번호 확인" placeholder="비밀번호 확인" id="memberPw2" name = "memberPw2">
+                    <input type="password" title="비밀번호 확인" placeholder="비밀번호 확인" id="memberPwChk" name = "memberPwChk">
                 </div>
             </div>
             <div class="cmm-form">
@@ -76,14 +76,15 @@
                 <div class="input">
                     <span class="label">이메일<i class="required" aria-label="필수입력항목"></i></span>
                     <input type="text" title="이메일" placeholder="이메일" name="memberEmail" id = "memberEmail">
-                    <button type="button" class="btn-puple-white"><span>중복확인</span></button>
+                    <button type="button" class="btn-puple-white" onclick="emailCheck()"><span>인증번호 전송</span></button>
                 </div>
             </div>
             <div class="cmm-form">
-                <div class="input">
+                <div class="input" id = "checkEmailBox">
                     <span class="label">인증번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="인증번호" placeholder="인증번호" id = "emailNumber" name = "emailNumber">
-                    <button class="btn-puple-white"><span>확인</span></button>
+                    <input type="text" title="인증번호" placeholder="인증번호" id = "emailNumber" name = "emailNumber" readonly="readonly">
+                	<div class= "clearfix"></div>
+                	<span id = "mail_check_input_box_warn"></span>
                 </div>
             </div>
             <div class="cmm-form">
@@ -120,6 +121,9 @@
 		<!-- jQuery에서 제공하는 3.5.1 버전의 jQuery CDN 호스트 --> 
 		<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
     	<script type="text/javascript" lang="javascript">
+    	
+    		var code = "";
+    	
 	    	$(document).ready(function(){
 	    		// 취소
 	    		$("#cencle").on("click", function(){
@@ -205,12 +209,52 @@
 	    				}
 	    			}); // ajax 끝
 	    		} else {
-	    			alert("아이디 입력을 해주세요.");
+	    			alert("아이디를 입력해주세요.");
 	    			signupForm.memberId.focus();
 	    		}
 	    	}; // 아이디 체크 끝
+	    	
+	    	//이메일 중복 체크
+	    	function emailCheck() {
+	    		var email = {
+	    				memberEmail : $('#memberEmail').val()
+	    		}
+	    		var checkEmail = $('#emailNumber');
+	    		var checkBox = $('#checkEmailBox');
+	
+	    		if (email.memberEmail.length != "") {
+	    			$.ajax({
+	    				url : "/emailCheck",
+	    				type : "GET",
+	    				data : email,
+	    				success : function(data) {
+	    					checkEmail.attr("readonly",false);
+	    					checkBox.attr("id", "mail_check_input_box_true");
+	    					code = data;
+	    				}
+	    			}); // ajax 끝
+	    		} else {
+	    			alert("이메일을 입력해주세요.");
+	    			signupForm.memberEmail.focus();
+	    		}
+	    	}; // 이메일 체크 끝
     		
-    	
+	    	/* 인증번호 비교 */
+	    	$("#emailNumber").blur(function(){
+	    	    
+	    		 var inputCode = $("#emailNumber").val();        // 입력코드    
+	    		 var checkResult = $("#mail_check_input_box_warn");    // 비교 결과   
+	    		 
+	    		 if(inputCode == code){                            // 일치할 경우
+	    		        checkResult.html("인증번호가 일치합니다.");
+	    		        /* checkResult.attr("class", "correct");   */      
+	    		    } else {                                            // 일치하지 않을 경우
+	    		        checkResult.html("인증번호를 다시 확인해주세요.");
+	    		        /* checkResult.attr("class", "incorrect"); */
+	    		    }    
+	    	});	
+	    	
+	    	
 	    	// 우편번호찾기
 			function addressFind() {
 			       new daum.Postcode({

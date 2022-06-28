@@ -34,6 +34,11 @@ public class MemberDAO {
 		return result;
 	}
 
+	public int emailCheck(MemberVO memberVo) {
+		int result = sqlSession.selectOne("member.emailCheck",memberVo);
+		return result;
+	}
+	
 	public MemberVO findPwd(MemberVO memberVo) {
 		return sqlSession.selectOne("member.findPwd",memberVo);
 	}

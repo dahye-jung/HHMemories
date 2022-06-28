@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class mailController {
 	
-	
 	public void naverMailSend(String email, String memberId, String tempPassword) {
 		// 메일 발신자 계정 정보
 		String host = "smtp.naver.com";
