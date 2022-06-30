@@ -76,7 +76,7 @@
                 <div class="input">
                     <span class="label">이메일<i class="required" aria-label="필수입력항목"></i></span>
                     <input type="text" title="이메일" placeholder="이메일" name="memberEmail" id = "memberEmail">
-                    <button type="button" class="btn-puple-white" onclick="emailCheck()"><span>인증번호 전송</span></button>
+                    <button type="button" class="btn-puple-white" onclick="emailCheck()"><span>인증번호 받기</span></button>
                 </div>
             </div>
             <div class="cmm-form">
