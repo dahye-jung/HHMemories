@@ -212,7 +212,7 @@
     .input .input-txt{position:relative;padding-left:0.2rem;font-weight:bold;}
     .input .input-title + .input-txt:before{display:inline-block;position:absolute;bottom:0.12rem;left:0;content:'';height:0.15rem;width:0.02rem;background:#A2A2A2;}
     /*인풋타이틀고정*/
-    .cmm-form .label{position:absolute;left:0;bottom:0.07rem;line-height:0.25rem;color:#A1A1A1;font-size:0.15rem;}
+    .cmm-form .label{position:absolute;left:0;bottom:0.07rem;line-height:0.25rem;color:#A1A1A1;font-size:0.15rem;z-index:2;}
     .cmm-form .label + input{padding-left:1.3rem;}
     /* 필수입력 */
     .required{display:inline-block;content:'필수';margin:0.05rem;width:0.05rem;height:0.05rem;color:transparent;vertical-align:middle;border-radius:50%;background:#feb926;overflow:hidden;}
