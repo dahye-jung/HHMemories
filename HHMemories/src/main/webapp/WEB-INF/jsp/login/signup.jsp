@@ -82,7 +82,7 @@
             <div class="cmm-form">
                 <div class="input" id = "checkEmailBox">
                     <span class="label">인증번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="인증번호" placeholder="인증번호" id = "emailNumber" name = "emailNumber" readonly="readonly">
+                    <input type="text" title="인증번호" placeholder="인증번호" id = "emailNumber" name = "emailNumber" disabled="disabled">
                 	<div class= "clearfix"></div>
                 	<span id = "mail_check_input_box_warn"></span>
                 </div>
@@ -228,7 +228,7 @@
 	    				type : "GET",
 	    				data : email,
 	    				success : function(data) {
-	    					checkEmail.attr("readonly",false);
+	    					checkEmail.attr("disabled",false);
 	    					checkBox.attr("id", "mail_check_input_box_true");
 	    					code = data;
 	    				}
