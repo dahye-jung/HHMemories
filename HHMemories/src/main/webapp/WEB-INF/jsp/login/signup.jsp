@@ -57,19 +57,28 @@
                 </div>
             </div>
             <div class="cmm-form">
-                <div class="input">
+                <div class="select flex" title="Title">
                     <span class="label">생년월일<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="생년월일" placeholder="생년월일" id = "memberBirth" name="memberBirth">
-                    <!-- <div class="btn-puple-white" id = "memberGender" >
-                        <label class="radio" >
-                            <input type="radio" id = "memberGender" name="memberGender" value = "M" checked="checked">
-                            <span class="label">남</span>
-                        </label>
-                        <label class="radio">
-                            <input type="radio" id = "memberGender" name="memberGender" value="W">
-                            <span class="label">여</span>
-                        </label>
-                    </div> -->
+                    <div class="flex">
+                        <select title="Label" id = "memberBirth" name="memberBirth">
+                            <option>선택</option>
+                            <option>선택</option>
+                            <option>선택</option>
+                            <option>선택</option>
+                        </select>
+                        <select title="Label">
+                            <option>선택</option>
+                            <option>선택</option>
+                            <option>선택</option>
+                            <option>선택</option>
+                        </select>
+                        <select title="Label">
+                            <option>선택</option>
+                            <option>선택</option>
+                            <option>선택</option>
+                            <option>선택</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="cmm-form">
@@ -82,7 +91,7 @@
             <div class="cmm-form">
                 <div class="input" id = "checkEmailBox">
                     <span class="label">인증번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="인증번호" placeholder="인증번호" id = "emailNumber" name = "emailNumber" disabled="disabled">
+                    <input type="text" title="인증번호" placeholder="인증번호" id = "emailNumber" name = "emailNumber" disabled="disabled" style="background-color:#FFFFFF;">
                 	<div class= "clearfix"></div>
                 	<span id = "mail_check_input_box_warn"></span>
                 </div>
