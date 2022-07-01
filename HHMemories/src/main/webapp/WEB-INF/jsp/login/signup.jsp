@@ -60,11 +60,8 @@
                 <div class="select flex" title="Title">
                     <span class="label">생년월일<i class="required" aria-label="필수입력항목"></i></span>
                     <div class="flex">
-                        <select title="Label" id = "memberBirth" name="memberBirth">
-                            <option>선택</option>
-                            <option>선택</option>
-                            <option>선택</option>
-                            <option>선택</option>
+                        <select title="Label" id = "memberBirth" name="memberBirth" >
+                       		<option>선택</option>
                         </select>
                         <select title="Label">
                             <option>선택</option>
@@ -134,6 +131,20 @@
     		var code = "";
     	
 	    	$(document).ready(function(){
+	    		
+	    		var date = new Date();
+	    		var selYear = date.getFullYear();
+	    		
+	    		getYears(selYear);
+	    		
+	    		$('#memberBirth').val(selYear);
+	    		
+	    		$('#memberBirth').change(function(){
+	    			var chgYear = $(this).val();
+	    			getYears(chgYear);
+	    			$('#memberBirth').val(chgYear);
+	    		})
+	    		
 	    		// 취소
 	    		$("#cencle").on("click", function(){
 	    			location.href = "/login";
@@ -197,6 +208,17 @@
 	    		});
 	    	})
 	
+	    	function getYears(getY){
+	    		//$('#memberBirth option').remove();
+	    		
+	    		var stY = Number(getY)-2;
+	    		var enY = Number(getY)+5;
+	    		
+	    		for(var y = stY; y <= enY; y++){
+	    			$('#memberBirth').append("<option vlaue='"+y+"'>"+y+" 년"+"</option>");
+	    		}
+	    	}
+	    	
 	    	//아이디 중복 체크
 	    	function idCheck() {
 	    		var mem = {
