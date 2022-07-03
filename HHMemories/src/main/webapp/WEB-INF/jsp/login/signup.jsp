@@ -57,9 +57,10 @@
                 </div>
             </div>
             <div class="cmm-form">
-                <div class="select flex" title="Title">
+                  <div class="input"> 
                     <span class="label">생년월일<i class="required" aria-label="필수입력항목"></i></span>
-                    <div class="flex">
+                    <input type="text" title="생년월일" placeholder="생년월일" id = "memberBirth" name = "memberBirth">
+                    <!-- <div class="flex">
                         <select title="Label" id = "memberBirth" name="memberBirth" >
                        		<option>선택</option>
                         </select>
@@ -75,8 +76,8 @@
                             <option>선택</option>
                             <option>선택</option>
                         </select>
-                    </div>
-                </div>
+                    </div> -->
+                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
