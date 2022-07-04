@@ -60,14 +60,11 @@
                 <div class="select flex" title="Title">
                     <span class="label">생년월일<i class="required" aria-label="필수입력항목"></i></span>
                     <div class="flex">
-                        <select title="Label" id = "memberBirth" name="memberBirth" >
-                       		<option>선택</option>
+                        <select title="Label" id = "year" name="memberBirth" >
                         </select>
-                        <select title="Label">
-                            <option>선택</option>
+                        <select title="Label" id = "month" name="memberBirth2">
                         </select>
-                        <select title="Label">
-                            <option>선택</option>
+                        <select title="Label" id = "day" name="memberBirth3">
                         </select>
                     </div>
                 </div>
@@ -126,18 +123,7 @@
     	
 	    	$(document).ready(function(){
 	    		
-	    		var date = new Date();
-	    		var selYear = date.getFullYear();
-	    		
-	    		getYears(selYear);
-	    		
-	    		$('#memberBirth').val(selYear);
-	    		
-	    		$('#memberBirth').change(function(){
-	    			var chgYear = $(this).val();
-	    			getYears(chgYear);
-	    			$('#memberBirth').val(chgYear);
-	    		})
+	    		setDateBox();
 	    		
 	    		// 취소
 	    		$("#cencle").on("click", function(){
@@ -202,16 +188,35 @@
 	    		});
 	    	})
 	
-	    	function getYears(getY){
-	    		//$('#memberBirth option').remove();
-	    		
-	    		var stY = Number(getY)-2;
-	    		var enY = Number(getY)+5;
-	    		
-	    		for(var y = stY; y <= enY; y++){
-	    			$('#memberBirth').append("<option vlaue='"+y+"'>"+y+" 년"+"</option>");
-	    		}
-	    	}
+	    	function setDateBox() {
+			    
+	    		var dt = new Date();
+			    var year = "";
+			    var com_year = dt.getFullYear();
+			
+			    // 발행 뿌려주기
+			    $("#year").append("<option value=''>년도</option>");
+			
+			    // 올해 기준으로 -100년부터 +100년을 보여준다.
+			    for (var y = (com_year - 100); y <= (com_year + 100); y++) {
+			      $("#year").append("<option value='" + y + "'>" + y + " 년" + "</option>");
+			    }
+			
+			    // 월 뿌려주기(1월부터 12월)
+			    var month;
+			    $("#month").append("<option value=''>월</option>");
+			    for (var i = 1; i <= 12; i++) {
+			      $("#month").append("<option value='" + i + "'>" + i + " 월" + "</option>");
+			    }
+			
+			    // 일 뿌려주기(1일부터 31일)
+			    var day;
+			    $("#day").append("<option value=''>일</option>");
+			    for (var i = 1; i <= 31; i++) {
+			      $("#day").append("<option value='" + i + "'>" + i + " 일" + "</option>");
+			    }
+			
+			}
 	    	
 	    	//아이디 중복 체크
 	    	function idCheck() {
@@ -253,6 +258,7 @@
 	    				type : "GET",
 	    				data : email,
 	    				success : function(data) {
+	    					alert("해당하는 이메일로 인증번호를 발송하였습니다.");
 	    					checkEmail.attr("disabled",false);
 	    					checkBox.attr("id", "mail_check_input_box_true");
 	    					code = data;
