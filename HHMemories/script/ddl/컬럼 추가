@@ -1,2 +1,5 @@
 -- 지정 컬럼 다음에 추가
 ALTER TABLE '테이블명' ADD '컬럼명' 자료형  AFTER '앞 컬럼명';
+
+-- 여러 문자열을 하나의 문자열로 합치기
+select CONCAT('문자열1','문자열2','문자열3')as member_birth from 테이블명;
