@@ -9,6 +9,9 @@
 		<result property="memberNm" column="member_nm" />
 		<result property="memberEmail" column="member_email" />
 		<result property="memberBirth" column="member_birth" />
+		<result property="year" column="year" />
+		<result property="month" column="month" />
+		<result property="day" column="day" />
 		<result property="memberGender" column="member_gender" />
 		<result property="phoneNumber" column="phone_number" />
 		<result property="loginLastDt" column="login_last_dt" />
@@ -46,7 +49,9 @@
 		   ,member_pw
 		   ,member_nm
 		   ,member_email
-		   ,member_birth
+		   ,year
+		   ,month
+		   ,day
 		   ,member_gender
 		   ,phone_number
 		   ,verify
@@ -61,7 +66,9 @@
 		   ,#{memberPw}
 		   ,#{memberNm}
 		   ,#{memberEmail}
-		   ,#{memberBirth}
+		   ,#{year}
+		   ,#{month}
+		   ,#{day}
 		   ,#{memberGender}
 		   ,#{phoneNumber}
 		   ,#{verify}

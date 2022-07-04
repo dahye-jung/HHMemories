@@ -60,11 +60,11 @@
                 <div class="select flex" title="Title">
                     <span class="label">생년월일<i class="required" aria-label="필수입력항목"></i></span>
                     <div class="flex">
-                        <select title="Label" id = "year" name="memberBirth" >
+                        <select title="Label" id = "year" name="year" >
                         </select>
-                        <select title="Label" id = "month" name="memberBirth2">
+                        <select title="Label" id = "month" name="month">
                         </select>
-                        <select title="Label" id = "day" name="memberBirth3">
+                        <select title="Label" id = "day" name="day">
                         </select>
                     </div>
                 </div>
@@ -258,7 +258,7 @@
 	    				type : "GET",
 	    				data : email,
 	    				success : function(data) {
-	    					alert("해당하는 이메일로 인증번호를 발송하였습니다.");
+	    					alert("인증번호를 발송하였습니다.");
 	    					checkEmail.attr("disabled",false);
 	    					checkBox.attr("id", "mail_check_input_box_true");
 	    					code = data;

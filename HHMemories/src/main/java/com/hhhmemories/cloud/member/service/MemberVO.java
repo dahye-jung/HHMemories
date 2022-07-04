@@ -45,6 +45,15 @@ public class MemberVO implements UserDetails{
 	//생년월일
 	private String memberBirth;
 	
+	//생년월일 - 년도
+	private String year;
+	
+	//생년월일 - 월
+	private String month;
+	
+	//생년월일 - 일
+	private String day;
+	
 	//성별
 	private String memberGender;
 	
@@ -301,6 +310,30 @@ public class MemberVO implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public String getDay() {
+		return day;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
 	}
 
 }
