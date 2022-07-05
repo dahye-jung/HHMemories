@@ -42,12 +42,14 @@
                 <div class="input">
                     <span class="label">비밀번호<i class="required" aria-label="필수입력항목"></i></span>
                     <input type="password" title="비밀번호" placeholder="비밀번호" id = "memberPw" name = "memberPw">
+                    <div class="check_font" id="pw_check"></div>
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">비밀번호 확인<i class="required" aria-label="필수입력항목"></i></span>
                     <input type="password" title="비밀번호 확인" placeholder="비밀번호 확인" id="memberPwChk" name = "memberPwChk">
+                    <div class="check_font" id="pw_check"></div>
                 </div>
             </div>
             <div class="cmm-form">
@@ -80,9 +82,9 @@
                 <div class="input" id = "checkEmailBox">
                     <span class="label">인증번호<i class="required" aria-label="필수입력항목"></i></span>
                     <input type="text" title="인증번호" placeholder="인증번호" id = "emailNumber" name = "emailNumber" disabled="disabled" style="background-color:#FFFFFF;">
+                </div>
                 	<div class= "clearfix"></div>
                 	<span id = "mail_check_input_box_warn"></span>
-                </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
@@ -278,10 +280,12 @@
 	    		 
 	    		 if(inputCode == code){                            // 일치할 경우
 	    		        checkResult.html("인증번호가 일치합니다.");
+	    		        checkResult.css('color', 'blue');
 	    		        /* checkResult.attr("class", "correct");   */      
 	    		    } else {                                            // 일치하지 않을 경우
 	    		        checkResult.html("인증번호를 다시 확인해주세요.");
-	    		        /* checkResult.attr("class", "incorrect"); */
+	    		        checkResult.css('color', 'red');    
+	    		    /* checkResult.attr("class", "incorrect"); */
 	    		    }    
 	    	});	
 	    	
