@@ -197,7 +197,7 @@
 			    var com_year = dt.getFullYear();
 			
 			    // 발행 뿌려주기
-			    $("#year").append("<option value=''>년도</option>");
+			    $("#year").append("<option value=''>선택</option>");
 			
 			    // 올해 기준으로 -100년부터 +100년을 보여준다.
 			    for (var y = (com_year - 100); y <= (com_year + 100); y++) {
@@ -206,14 +206,14 @@
 			
 			    // 월 뿌려주기(1월부터 12월)
 			    var month;
-			    $("#month").append("<option value=''>월</option>");
+			    $("#month").append("<option value=''>선택</option>");
 			    for (var i = 1; i <= 12; i++) {
 			      $("#month").append("<option value='" + i + "'>" + i + " 월" + "</option>");
 			    }
 			
 			    // 일 뿌려주기(1일부터 31일)
 			    var day;
-			    $("#day").append("<option value=''>일</option>");
+			    $("#day").append("<option value=''>선택</option>");
 			    for (var i = 1; i <= 31; i++) {
 			      $("#day").append("<option value='" + i + "'>" + i + " 일" + "</option>");
 			    }
