@@ -165,15 +165,31 @@ public class MemberController {
 	}
 	
 	/**
-	 * 회원가입 - 이메일 중복확인(POST)
+	 * 회원가입 - 이메일 중복체크(POST)
 	 * 
 	 * @return 회원가입 기능
 	 * @param HttpServletRequest httpreq,Model model,MemberVO memberVo, RedirectAttributes rttr
 	 * @throws Exception
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/emailCheck", method = RequestMethod.GET)
-	public String emailCheck(String memberEmail) throws Exception{
+	@RequestMapping(value = "/emailCheck", method = RequestMethod.POST)
+	public int emailCheck(MemberVO memberVo) throws Exception{
+		
+		int result = memberService.emailCheck(memberVo);
+		return result;
+		
+	}
+	
+	/**
+	 * 회원가입 - 이메일 인증번호(POST)
+	 * 
+	 * @return 회원가입 기능
+	 * @param HttpServletRequest httpreq,Model model,MemberVO memberVo, RedirectAttributes rttr
+	 * @throws Exception
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/emailSend", method = RequestMethod.GET)
+	public String emailSend(String memberEmail) throws Exception{
 		
         /* 인증번호(난수) 생성 */
         Random random = new Random();

@@ -75,7 +75,8 @@
                 <div class="input">
                     <span class="label">이메일<i class="required" aria-label="필수입력항목"></i></span>
                     <input type="text" title="이메일" placeholder="이메일" name="memberEmail" id = "memberEmail">
-                    <button type="button" class="btn-puple-white" onclick="emailCheck()"><span>인증번호 받기</span></button>
+                    <button type="button" class="btn-puple-white" onclick="emailCheck()"><span>중복확인</span></button>
+                    <!-- <button type="button" class="btn-puple-white" onclick="emailCheck()"><span>인증번호 받기</span></button> -->
                 </div>
             </div>
             <div class="cmm-form">
@@ -246,7 +247,7 @@
 	    		}
 	    	}; // 아이디 체크 끝
 	    	
-	    	//이메일 중복 체크
+	    	//이메일 인증번호 보내기
 	    	function emailCheck() {
 	    		var email = {
 	    				memberEmail : $('#memberEmail').val()
@@ -255,22 +256,37 @@
 	    		var checkBox = $('#checkEmailBox');
 	
 	    		if (email.memberEmail.length != "") {
-	    			$.ajax({
-	    				url : "/emailCheck",
-	    				type : "GET",
-	    				data : email,
-	    				success : function(data) {
-	    					alert("인증번호를 발송하였습니다.");
-	    					checkEmail.attr("disabled",false);
-	    					checkBox.attr("id", "mail_check_input_box_true");
-	    					code = data;
-	    				}
-	    			}); // ajax 끝
+	    				$.ajax({
+		    				url : "/emailCheck",
+		    				type : "POST",
+		    				data : email,
+		    				success : function(result) {
+		    					if (result == 1) {
+		    						alert("사용 불가능한 이메일입니다.");
+		    					} else if(result == 0){
+		    						/* $("#idCheck").attr("value","Y") */
+		    						alert("사용 가능한 이메일입니다.");
+		    						
+		    						$.ajax({
+		    		    				url : "/emailSend",
+		    		    				type : "GET",
+		    		    				data : email,
+		    		    				success : function(data) {
+		    		    					alert("인증번호를 발송하였습니다.");
+		    		    					checkEmail.attr("disabled",false);
+		    		    					checkBox.attr("id", "mail_check_input_box_true");
+		    		    					code = data;
+		    		    				}
+		    		    			}); // ajax 끝
+		    					}
+		    				}
+		    			}); // ajax 끝
+	    				
 	    		} else {
 	    			alert("이메일을 입력해주세요.");
 	    			signupForm.memberEmail.focus();
 	    		}
-	    	}; // 이메일 체크 끝
+	    	}; // 이메일 인증번호 보내기 끝
     		
 	    	/* 인증번호 비교 */
 	    	$("#emailNumber").blur(function(){
