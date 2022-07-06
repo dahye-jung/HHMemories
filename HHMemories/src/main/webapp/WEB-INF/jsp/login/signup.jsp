@@ -162,7 +162,7 @@
 	    				$("#phoneNumber").focus();
 	    				return false;
 	    			}
-	    			if($("#memberBirth").val()==""){
+	    			if($("#year").val()=="" || $("#month").val()=="" || $("#day").val()==""){
 	    				alert("생년월일을 선택해주세요.");
 	    				$("#memberBirth").focus();
 	    				return false;

@@ -18,8 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,7 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hhhmemories.cloud.mail.controller.mailController;
 import com.hhhmemories.cloud.member.service.MemberService;
 import com.hhhmemories.cloud.member.service.MemberVO;
-import com.hhhmemories.cloud.member.service.MemberValidator;
 
 /**
  * @author 
@@ -52,16 +49,6 @@ public class MemberController {
 	 @Autowired
 	 private JavaMailSender mailSender;
 	 
-	 @Autowired
-	 MemberValidator memberValidator;
-		
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-		 if (binder.getTarget() != null && binder.getTarget().equals(MemberVO.class)) {
-			binder.addValidators(memberValidator);
-		} 
-	}
-	
 	
 	/**
 	 * 로그인 페이지(GET)
