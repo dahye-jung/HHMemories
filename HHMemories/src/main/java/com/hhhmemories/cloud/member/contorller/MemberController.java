@@ -1,5 +1,6 @@
 package com.hhhmemories.cloud.member.contorller;
 
+import java.util.Locale;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -18,6 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hhhmemories.cloud.mail.controller.mailController;
 import com.hhhmemories.cloud.member.service.MemberService;
 import com.hhhmemories.cloud.member.service.MemberVO;
+import com.hhhmemories.cloud.member.service.MemberValidator;
 
 /**
  * @author 
@@ -49,6 +54,15 @@ public class MemberController {
 	 @Autowired
 	 private JavaMailSender mailSender;
 	 
+	 @Autowired
+	 MemberValidator memberValidator;
+	 
+	 @InitBinder
+		protected void initBinder(WebDataBinder binder) {
+			 if (binder.getTarget() != null && binder.getTarget().equals(MemberVO.class)) {
+				binder.addValidators(memberValidator);
+			} 
+		}
 	
 	/**
 	 * 로그인 페이지(GET)
@@ -128,7 +142,7 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signUp(HttpServletRequest httpreq,Model model,MemberVO memberVo,HttpServletResponse response, RedirectAttributes rttr) throws Exception{
+	public String signUp(HttpServletRequest httpreq,Model model,MemberVO memberVo,HttpServletResponse response, RedirectAttributes rttr,BindingResult result, Locale locale) throws Exception{
 		
 		String pass = passwordEncoder.encode(memberVo.getMemberPw());
 		
@@ -137,8 +151,11 @@ public class MemberController {
 		int idCheck = memberService.idCheck(memberVo);
 		int emailCheck = memberService.emailCheck(memberVo);
 		
+		memberValidator.validate(memberVo, result);
+		
 		if(idCheck == 0 || emailCheck == 0 ) {
 			memberService.insertMember(memberVo);
+			model.addAttribute("result",true);
 		}
 		
 		model.addAttribute("memberId", memberVo.getMemberId());
