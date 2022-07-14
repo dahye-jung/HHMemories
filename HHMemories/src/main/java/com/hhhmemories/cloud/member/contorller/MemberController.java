@@ -365,7 +365,7 @@ public class MemberController {
 			
 			// 임시비밀번호 DB에 저장
 			int result = memberService.updatePassword(vo);
-			System.out.println("결과 : " + result);
+			System.out.println("결과  : " + result);
 			
 			model.addAttribute("memberEmail", vo.getMemberEmail());
 			model.addAttribute("memberNm", vo.getMemberNm());
