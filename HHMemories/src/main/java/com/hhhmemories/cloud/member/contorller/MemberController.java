@@ -1,6 +1,6 @@
 package com.hhhmemories.cloud.member.contorller;
 
-import java.util.Locale;
+import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -8,6 +8,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -130,7 +132,7 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signUp(HttpServletRequest httpreq,Model model,MemberVO memberVo,HttpServletResponse response, RedirectAttributes rttr,BindingResult result, Locale locale) throws Exception{
+	public String signUp(HttpServletRequest httpreq,Model model,@Valid MemberVO memberVo,HttpServletResponse response, RedirectAttributes rttr,BindingResult result, Errors errors) throws Exception{
 		
 		String pass = passwordEncoder.encode(memberVo.getMemberPw());
 		
@@ -142,6 +144,22 @@ public class MemberController {
 		if(idCheck == 0 || emailCheck == 0 ) {
 			memberService.insertMember(memberVo);
 			model.addAttribute("result",true);
+		}
+		
+		if(errors.hasErrors()) {
+			//회원가입 실패시 입력 데이터 값을 유지
+			model.addAttribute("memberVo",memberVo);
+			
+			Map<String, String> validatorResult = memberService.validateHandling(errors);           
+			
+			for (String key : validatorResult.keySet()) {                
+				
+				model.addAttribute(key, validatorResult.get(key));            
+			
+			}
+			
+			return "login/signup";
+		
 		}
 		
 		model.addAttribute("memberId", memberVo.getMemberId());

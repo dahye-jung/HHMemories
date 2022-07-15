@@ -20,7 +20,7 @@
 
 <div id="view-wrap" data-layout="page" data-page-id="signUpForm" aria-hidden="false">
     <div id="content">
-       <form action="/signup" method="POST" id = "signupForm" name= "signupForm"> 
+       <form action="/signup" method="POST" id = "signupForm" name= "signupForm" modelAttribute = "memberVo"> 
         <div class="main-box">
            <div class="login-logo">
                 <img src="img/loginLogo03.png">
@@ -28,7 +28,7 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">이름<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="이름" placeholder="이름" id= "memberNm" name = "memberNm">
+                    <input type="text" title="이름" placeholder="이름" id= "memberNm" name = "memberNm" value="${memberVo.memberNm}">
                 </div>
             </div>
             <div class="cmm-form">
@@ -107,7 +107,7 @@
                 </div>
             </div>
             <div class="btn-box flex m-t40">
-                <button type="submit" class="btn-puple" id = "signUpComplete" name="signUpComplete"><span>확인</span></button>
+                <button type="submit" class="btn-puple" id = "signUpComplete"><span>확인</span></button>
                 <button type="button" class="btn-puple" id = "cencle" name = "cencle"><span>취소</span></button>
             </div>
         </div>
@@ -146,12 +146,12 @@
 	    				return false;
 	    			}
 	    			
-	    			/* var idChkVal = $("#idCheck").val();
+	    			var idChkVal = $("#idCheck").val();
 	    			if(idChkVal == "N"){
 	    				alert("중복확인 버튼을 눌러주세요.");
 	    			}else if(idChkVal == "Y"){
 	    				$("#signupForm").submit();
-	    			} */
+	    			}
 	    			
 	    			if($("#memberPw").val()==""){
 	    				alert("비밀번호를 입력해주세요.");

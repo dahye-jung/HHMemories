@@ -1,6 +1,10 @@
 package com.hhhmemories.cloud.member.service;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.validation.Errors;
 
 public interface MemberService {
 
@@ -48,4 +52,6 @@ public interface MemberService {
 	 * @throws Exception
 	*/
 	int updatePassword(MemberVO vo);
+
+	Map<String, String> validateHandling(Errors errors);
 }
