@@ -221,10 +221,10 @@
     .textarea textarea{position:relative;width:100%;line-height:0.23rem;color:#303741;font-size:0.15rem;background:transparent;box-sizing:border-box;z-index:1;}
     .textarea .cmm-num{position:absolute;right:0.16rem;bottom:0.16rem;color:#666;font-size:0.13rem;}
     /* Select */
-    .select > select{width:100%;padding:0.3rem 0 0.1rem 1.3rem;font-size:0.16rem;text-align:left;box-sizing:border-box;z-index:1;}
+    .select select{position:relative;width:100%;padding:0.3rem 0.7rem 0.1rem 0;font-size:0.16rem;text-align:right;box-sizing:border-box;z-index:1;}
+    .select select:after{display:block;position:absolute;right:0.1rem;content:'';width:0.1rem;height:0.1rem;border:0.01rem solid transparent;/*border-bottom-color:#493bac;border-right-color:#493bac*/}
     .select .flex{width:100%;padding-left:1.3rem;}
     /*.select.flex > .label + select{margin-left: 0.3rem;}*/
-    .select .flex select{width:100%;padding:0.3rem 0 0.1rem 0;}
     /*.select{display:flex;position:relative;border-bottom:solid 0.02rem #dcdcdc;}
     .select > select{display:none;width:100%;line-height:0.5rem;font-size:0.2rem;text-align:left;background:var(--icon-down) no-repeat right center/ 0.2rem auto;box-sizing:border-box;z-index:1;}
     .select > button{width:100%;text-align:left;background:var(--icon-down) no-repeat right center/ 0.2rem auto;box-sizing:border-box;z-index:1;}
