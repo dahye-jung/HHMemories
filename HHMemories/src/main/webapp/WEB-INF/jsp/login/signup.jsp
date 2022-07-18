@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,7 +21,7 @@
 
 <div id="view-wrap" data-layout="page" data-page-id="signUpForm" aria-hidden="false">
     <div id="content">
-       <form action="/signup" method="POST" id = "signupForm" name= "signupForm" modelAttribute = "memberVo"> 
+       <form action="/signup" method="POST" id = "signupForm" name= "signupForm"> 
         <div class="main-box">
            <div class="login-logo">
                 <img src="img/loginLogo03.png">
@@ -107,7 +108,7 @@
                 </div>
             </div>
             <div class="btn-box flex m-t40">
-                <button type="submit" class="btn-puple" id = "signUpComplete"><span>확인</span></button>
+                <button class="btn-puple" ><span>확인</span></button>
                 <button type="button" class="btn-puple" id = "cencle" name = "cencle"><span>취소</span></button>
             </div>
         </div>
@@ -133,7 +134,7 @@
 	    			location.href = "/login";
 	    		})
 	    		
-	    		$("#signUpComplete").on("click", function(){
+	    		/* $("#signUpComplete").on("click", function(){
 	    			
 	    			if($("#memberNm").val()==""){
 	    				alert("성명을 입력해주세요.");
@@ -188,7 +189,7 @@
 	    				addressFind();
 	    				return false;
 	    			}
-	    		});
+	    		}); */
 	    	})
 	
 	    	function setDateBox() {

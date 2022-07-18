@@ -1,33 +1,19 @@
 package com.hhhmemories.cloud.member.service;
 
-import java.util.Collection;
-import java.util.Collections;
-
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
-@Data
-public class MemberVO implements UserDetails{
-
-	private static final long serialVersionUID = 1L;
+public class MemberVO{
 
 	//회원 일련번호
 	private int memberSeq;
@@ -37,9 +23,9 @@ public class MemberVO implements UserDetails{
 	private String memberId;
 	
 	//회원 비밀번호
-	@NotBlank(message = "아이디를 입력해주세요.")
-	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\\\W)(?=\\\\S+$).{8,16}\r\n", message = "비밀번호는 8~16자 영문 대/소문자, 숫자, 특수문자를 사용하세요.")
 	private String memberPw;
+	
+	private String memberPwChk;
 
 	//회원명
 	private String memberNm;
@@ -126,6 +112,18 @@ public class MemberVO implements UserDetails{
 
 	public void setMemberPw(String memberPw) {
 		this.memberPw = memberPw;
+	}
+
+	public boolean isPwEualToCheckPw() {
+		return memberPw.equals(memberPwChk);
+	}
+	
+	public String getMemberPwChk() {
+		return memberPwChk;
+	}
+
+	public void setMemberPwChk(String memberPwChk) {
+		this.memberPwChk = memberPwChk;
 	}
 
 	public String getMemberNm() {
@@ -270,51 +268,6 @@ public class MemberVO implements UserDetails{
 
 	public void setUseYn(String useYn) {
 		this.useYn = useYn;
-	}
-
-	@Override
-	public String toString() {
-		return "MemberVO [memberSeq=" + memberSeq + ", memberId=" + memberId + ", memberPw=" + memberPw + ", memberNm="
-				+ memberNm + ", memberEmail=" + memberEmail + ", memberBirth=" + memberBirth + ", memberGender="
-				+ memberGender + ", phoneNumber=" + phoneNumber + ", loginLastDt=" + loginLastDt + ", pwChgDt="
-				+ pwChgDt + ", lockAt=" + lockAt + ", lockCnt=" + lockCnt + ", lockLastDt=" + lockLastDt + ", npwYn="
-				+ npwYn + ", verify=" + verify + ", zipCode=" + zipCode + ", address=" + address + ", addressDetail="
-				+ addressDetail + ", regDt=" + regDt + ", updDt=" + updDt + ", useYn=" + useYn + "]";
-	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Collections.singletonList(new SimpleGrantedAuthority(this.verify));
-	}
-
-	@Override
-	public String getPassword() {
-		return this.memberPw;
-	}
-
-	@Override
-	public String getUsername() {
-		return this.memberId;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
 	}
 
 	public String getYear() {

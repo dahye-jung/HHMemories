@@ -1,5 +1,6 @@
 package com.hhhmemories.cloud.member.contorller;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -22,6 +23,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,6 +34,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hhhmemories.cloud.mail.controller.mailController;
 import com.hhhmemories.cloud.member.service.MemberService;
 import com.hhhmemories.cloud.member.service.MemberVO;
+import com.hhhmemories.cloud.member.service.MemberValidator;
 
 /**
  * @author 
@@ -149,14 +154,6 @@ public class MemberController {
 		if(errors.hasErrors()) {
 			//회원가입 실패시 입력 데이터 값을 유지
 			model.addAttribute("memberVo",memberVo);
-			
-			Map<String, String> validatorResult = memberService.validateHandling(errors);           
-			
-			for (String key : validatorResult.keySet()) {                
-				
-				model.addAttribute(key, validatorResult.get(key));            
-			
-			}
 			
 			return "login/signup";
 		

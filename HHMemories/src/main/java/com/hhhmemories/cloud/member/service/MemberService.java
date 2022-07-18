@@ -52,6 +52,4 @@ public interface MemberService {
 	 * @throws Exception
 	*/
 	int updatePassword(MemberVO vo);
-
-	Map<String, String> validateHandling(Errors errors);
 }
