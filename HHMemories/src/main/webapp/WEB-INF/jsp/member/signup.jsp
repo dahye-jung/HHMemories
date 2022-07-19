@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -134,7 +136,7 @@
 	    			location.href = "/login";
 	    		})
 	    		
-	    		/* $("#signUpComplete").on("click", function(){
+	    		$("#signUpComplete").on("click", function(){
 	    			
 	    			if($("#memberNm").val()==""){
 	    				alert("성명을 입력해주세요.");
@@ -189,7 +191,7 @@
 	    				addressFind();
 	    				return false;
 	    			}
-	    		}); */
+	    		});
 	    	})
 	
 	    	function setDateBox() {
