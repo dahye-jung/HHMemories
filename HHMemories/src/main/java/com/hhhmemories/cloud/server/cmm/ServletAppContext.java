@@ -1,4 +1,4 @@
-package com.hhhmemories.cloud.cmm;
+package com.hhhmemories.cloud.server.cmm;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;

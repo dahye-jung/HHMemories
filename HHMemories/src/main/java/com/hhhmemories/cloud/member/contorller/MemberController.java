@@ -1,31 +1,23 @@
 package com.hhhmemories.cloud.member.contorller;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -34,7 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.hhhmemories.cloud.mail.controller.mailController;
 import com.hhhmemories.cloud.member.service.MemberService;
 import com.hhhmemories.cloud.member.service.MemberVO;
-import com.hhhmemories.cloud.member.service.MemberValidator;
 
 /**
  * @author 
@@ -79,7 +70,7 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signUp(HttpServletRequest httpreq,Model model,@Valid MemberVO memberVo,HttpServletResponse response, RedirectAttributes rttr,BindingResult result, Errors errors) throws Exception{
+	public String signUp(HttpServletRequest httpreq,Model model,@Validated MemberVO memberVo,HttpServletResponse response, RedirectAttributes rttr,BindingResult result, Errors errors) throws Exception{
 		
 		String pass = passwordEncoder.encode(memberVo.getMemberPw());
 		

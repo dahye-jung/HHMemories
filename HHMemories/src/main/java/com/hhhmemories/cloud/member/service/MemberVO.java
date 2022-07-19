@@ -19,7 +19,7 @@ public class MemberVO{
 	private int memberSeq;
 	
 	//회원 아이디
-	@NotBlank(message = "아이디를 입력해주세요.")
+	@NotBlank(message = "NAME_IS_MANDATORY")
 	private String memberId;
 	
 	//회원 비밀번호
@@ -89,7 +89,7 @@ public class MemberVO{
 	
 	//사용여부
 	private String useYn;
-
+	
 	public int getMemberSeq() {
 		return memberSeq;
 	}
