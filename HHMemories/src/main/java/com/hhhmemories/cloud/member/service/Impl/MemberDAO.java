@@ -17,10 +17,6 @@ public class MemberDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public MemberVO selectMemberInfo(MemberVO memberVo, HttpServletResponse response) throws Exception {
-		return sqlSession.selectOne("member.selectMemberInfo", memberVo);
-	}
-	
 	public int insertMember(MemberVO memberVo) throws Exception {
 		return sqlSession.insert("member.insertMember", memberVo);
 	}

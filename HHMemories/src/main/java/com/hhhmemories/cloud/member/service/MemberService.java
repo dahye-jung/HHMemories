@@ -1,21 +1,6 @@
 package com.hhhmemories.cloud.member.service;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.validation.Errors;
-
 public interface MemberService {
-
-	
-	/**
-	 * 로그인
-	 * 
-	 * @param MemberVO memberVo, HttpServletResponse response
-	 * @throws Exception
-	 */
-	MemberVO selectMemberInfo(MemberVO memberVo, HttpServletResponse response) throws Exception;
 	
 	/**
 	 * 회원가입

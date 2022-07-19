@@ -55,67 +55,9 @@ public class MemberController {
 	@Autowired
 	private mailController mailController;
 	
-	 @Autowired
-	 private JavaMailSender mailSender;
+	@Autowired
+	private JavaMailSender mailSender;
 	 
-	
-	/**
-	 * 로그인 페이지(GET)
-	 * 
-	 * @return 로그인 페이지
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginPage() throws Exception{
-		return "login/login";	
-	}
-	
-	/**
-	 * 로그인 기능(POST)
-	 * 
-	 * @param Model model,MemberVO memberVo, HttpServletRequest req, RedirectAttributes rttr, HttpServletResponse response
-	 * @return 로그인 기능
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String signin(MemberVO memberVo, HttpServletRequest req, RedirectAttributes rttr, HttpServletResponse response) throws Exception{
-		
-		HttpSession session = req.getSession();
-		
-		MemberVO user = memberService.selectMemberInfo(memberVo, response); // 로그인한 정보로 회원정보가 존재하는 지 조회
-		
-		if(user != null) { // 로그인 시도한 아이디가 실제로 존재할 경우
-			boolean passMatch = passwordEncoder.matches(memberVo.getMemberPw(), user.getMemberPw()); // 입력한 패스워드와 DB에 저장되어 있는 패스워드 비교	
-
-			if (passMatch) { // 패스워드가 동일할 경우	
-				logger.info("Method signin >>>>>>>> Login Success");
-				session.setAttribute("member", user);
-			} else { // 패스워드가 틀릴 경우.
-				logger.info("Method signin >>>>>>>> Login Fail");
-				session.setAttribute("member", null);
-				rttr.addFlashAttribute("msg", "비밀번호를 확인해주세요");
-				return "redirect:/login";
-			}
-		}
-
-		return "redirect:/index";
-	}
-	
-	/**
-	 * 로그아웃
-	 * 
-	 * @param 
-	 * @return 메인 페이지
-	 * @throws Exception
-	 */
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logOut(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		
-		 new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder
-	                .getContext().getAuthentication());
-		
-		return "redirect:/index";
-	}
 	
 	/**
 	 * 회원가입 페이지(GET)
@@ -126,7 +68,7 @@ public class MemberController {
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signUpForm(MemberVO memberVo) throws Exception{
 		
-		return "login/signup";
+		return "member/signup";
 	}
 	
 	/**
@@ -155,7 +97,7 @@ public class MemberController {
 			//회원가입 실패시 입력 데이터 값을 유지
 			model.addAttribute("memberVo",memberVo);
 			
-			return "login/signup";
+			return "member/signup";
 		
 		}
 		
@@ -163,7 +105,7 @@ public class MemberController {
 		model.addAttribute("memberNm", memberVo.getMemberNm());
 		model.addAttribute("memberEmail", memberVo.getMemberEmail());
 		
-		return "login/signUpComplete";
+		return "member/signUpComplete";
 	}
 	
 	/**
@@ -255,7 +197,7 @@ public class MemberController {
 	@RequestMapping(value = "/signUpComplete" , method = RequestMethod.GET)
 	public String signUpComplete() throws Exception{ 
 		
-		return "login/signUpComplete";
+		return "member/signUpComplete";
 	}
 	
 	/**
@@ -268,14 +210,14 @@ public class MemberController {
 	@RequestMapping(value = "/findId" , method = RequestMethod.GET)
 	public String findIdForm() throws Exception{ 
 		
-		return "login/findId";
+		return "member/findId";
 	}
 	
 	/**
 	 * 아이디찾기 기능
 	 * 
 	 * @param Model model,  @RequestParam("memberEmail") String memberEmail
-	 * @return login/findIdConfirm
+	 * @return member/findIdConfirm
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/findId" , method = RequestMethod.POST)
@@ -288,10 +230,10 @@ public class MemberController {
 			model.addAttribute("memberNm", member.getMemberNm());
 			model.addAttribute("regDt", member.getRegDt());
 		}else {
-			return "login/findIdReConfirm";
+			return "member/findIdReConfirm";
 		}
 		
-		return "login/findIdConfirm";
+		return "member/findIdConfirm";
 	}
 	
 	/**
@@ -304,7 +246,7 @@ public class MemberController {
 	@RequestMapping(value = "/findIdConfirm" , method = RequestMethod.GET)
 	public String  findIdConfirm() throws Exception{ 
 		
-		return "login/findIdConfirm";
+		return "member/findIdConfirm";
 	}
 	
 	/**
@@ -317,7 +259,7 @@ public class MemberController {
 	@RequestMapping(value = "/findIdReConfirm" , method = RequestMethod.GET)
 	public String  findIdReConfirm(Model model) throws Exception{ 
 		
-		return "login/findIdReConfirm";
+		return "member/findIdReConfirm";
 	}
 	
 	/**
@@ -331,7 +273,7 @@ public class MemberController {
 	public String findPwdForm(MemberVO memberVo, HttpServletResponse response) throws Exception{
 		
 		
-		return "login/findPwd";
+		return "member/findPwd";
 	}
 	
 	/**
@@ -371,11 +313,11 @@ public class MemberController {
 			model.addAttribute("memberEmail", vo.getMemberEmail());
 			model.addAttribute("memberNm", vo.getMemberNm());
 			
-			return "login/findPwConfirm";
+			return "member/findPwConfirm";
 		}
 
 
-		return "login/findIdReConfirm";
+		return "member/findIdReConfirm";
 	}
 	
 	/**

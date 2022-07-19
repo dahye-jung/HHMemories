@@ -27,18 +27,6 @@
 		<result property="regDt" column="reg_dt" />
 		<result property="updDt" column="upd_dt" />
 	</resultMap>
-
-	<!-- 로그인 정보 조회 -->
-	<select id="selectMemberInfo" resultMap="selectMemberInfo">
-		SELECT
-			member_seq,
-			member_id,
-			member_pw
-		FROM
-			tb_member
-		WHERE
-			member_id = #{memberId }
-	</select>
 	
 	<!-- 회원가입 -->
 	<insert id = "insertMember" parameterType="hashMap">
