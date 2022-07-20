@@ -111,7 +111,7 @@
                 </div>
             </div>
             <div class="btn-box flex m-t40">
-                <button type="button" class="btn-puple" id= "signUpComplete" name="signUpComplete"><span>확인</span></button>
+                <button type="submit" class="btn-puple" id= "signUpComplete" name="signUpComplete"><span>확인</span></button>
                 <button type="button" class="btn-puple" id = "cencle" name = "cencle"><span>취소</span></button>
             </div>
         </div>
@@ -144,18 +144,25 @@
 	    				$("#memberNm").focus();
 	    				return false;
 	    			}
+	    			
+	    			if(!isNaN(signupForm.memberNm.value.substr(0,1))){
+                        alert("성명은 숫자로 시작할 수 없습니다.");
+                        signupForm.memberNm.select();
+                        return false;
+                    }
+	    			
 	    			if($("#memberId").val()==""){
 	    				alert("아이디를 입력해주세요.");
 	    				$("#memberId").focus();
 	    				return false;
 	    			}
 	    			
-	    			var idChkVal = $("#idCheck").val();
-	    			if(idChkVal == "N"){
-	    				alert("중복확인 버튼을 눌러주세요.");
-	    			}else if(idChkVal == "Y"){
-	    				$("#signupForm").submit();
-	    			}
+	    			if(signupForm.memberId.value.length < 4 || signupForm.memberId.value.length > 12){
+                        alert("아이디는 4 ~ 12자 이내로 입력이 가능합니다.");
+                        signupForm.memberId.select();
+                        $("#memberId").focus();
+                        return;
+                    }
 	    			
 	    			if($("#memberPw").val()==""){
 	    				alert("비밀번호를 입력해주세요.");
@@ -163,10 +170,17 @@
 	    				return false;
 	    			}
 	    			if($("#phoneNumber").val()==""){
-	    				alert("휴대전화를 입력해주세요.");
+	    				alert("휴대전화번호를 입력해주세요.");
 	    				$("#phoneNumber").focus();
 	    				return false;
 	    			}
+	    			
+	    			if(isNaN(signupForm.phoneNumber.value.substr(0,1))){
+                        alert("휴대전화번호는 숫자로만 입력이 가능합니다.");
+                        signupForm.phoneNumber.select();
+                        return false;
+                    }
+	    			
 	    			if($("#year").val()=="" || $("#month").val()=="" || $("#day").val()==""){
 	    				alert("생년월일을 선택해주세요.");
 	    				$("#memberBirth").focus();
@@ -182,6 +196,7 @@
 	    				$("#emailNumber").focus();
 	    				return false;
 	    			}
+	    			
 	    			if($("#zipCode").val()==""){
 	    				alert("우편번호를 입력해주세요.");
 	    				addressFind();
