@@ -268,14 +268,13 @@
 		    						alert("사용 불가능한 이메일입니다.");
 		    					} else if(result == 0){
 		    						/* $("#idCheck").attr("value","Y") */
-		    						alert("사용 가능한 이메일입니다.");
+		    						alert("사용 가능한 이메일입니다.\n해당하는 이메일로 인증번호를 발송하였습니다.");
 		    						
 		    						$.ajax({
 		    		    				url : "/emailSend",
 		    		    				type : "GET",
 		    		    				data : email,
 		    		    				success : function(data) {
-		    		    					alert("인증번호를 발송하였습니다.");
 		    		    					checkEmail.attr("disabled",false);
 		    		    					checkBox.attr("id", "mail_check_input_box_true");
 		    		    					code = data;
