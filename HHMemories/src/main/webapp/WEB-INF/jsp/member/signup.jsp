@@ -110,7 +110,7 @@
                 </div>
             </div>
             <div class="btn-box flex m-t40">
-                <button class="btn-puple" ><span>확인</span></button>
+                <button type="button" class="btn-puple" id= "signUpComplete" name="signUpComplete"><span>확인</span></button>
                 <button type="button" class="btn-puple" id = "cencle" name = "cencle"><span>취소</span></button>
             </div>
         </div>
@@ -306,7 +306,6 @@
 	    		    /* checkResult.attr("class", "incorrect"); */
 	    		    }    
 	    	});	
-	    	
 	    	
 	    	// 우편번호찾기
 			function addressFind() {

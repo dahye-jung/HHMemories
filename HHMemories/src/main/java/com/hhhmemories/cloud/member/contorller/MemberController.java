@@ -71,7 +71,15 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public String signUp(HttpServletRequest httpreq,Model model,@Validated MemberVO memberVo,HttpServletResponse response, RedirectAttributes rttr,BindingResult result, Errors errors) throws Exception{
-		
+
+	    if(errors.hasErrors()) {
+            //회원가입 실패시 입력 데이터 값을 유지
+            model.addAttribute("memberVo",memberVo);
+            
+            return "member/signup";
+        
+        }
+	    
 		String pass = passwordEncoder.encode(memberVo.getMemberPw());
 		
 		memberVo.setMemberPw(pass);
@@ -84,13 +92,6 @@ public class MemberController {
 			model.addAttribute("result",true);
 		}
 		
-		if(errors.hasErrors()) {
-			//회원가입 실패시 입력 데이터 값을 유지
-			model.addAttribute("memberVo",memberVo);
-			
-			return "member/signup";
-		
-		}
 		
 		model.addAttribute("memberId", memberVo.getMemberId());
 		model.addAttribute("memberNm", memberVo.getMemberNm());
