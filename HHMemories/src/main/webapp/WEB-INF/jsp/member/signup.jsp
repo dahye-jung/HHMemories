@@ -48,12 +48,13 @@
                     <div class="check_font" id="pw_check"></div>
                 </div>
             </div>
-            <div class="cmm-form">
+            <div class="cmm-form" id = "memberPwChkBox">
                 <div class="input">
                     <span class="label">비밀번호 확인<i class="required" aria-label="필수입력항목"></i></span>
                     <input type="password" title="비밀번호 확인" placeholder="비밀번호 확인" id="memberPwChk" name = "memberPwChk">
-                    <div class="check_font" id="pw_check"></div>
                 </div>
+                    <div class= "clearfix"></div>
+                    <span id = "memberPwChk_input_box_warn"></span>
             </div>
             <div class="cmm-form">
                 <div class="input">
@@ -306,6 +307,24 @@
 	    		    /* checkResult.attr("class", "incorrect"); */
 	    		    }    
 	    	});	
+	    	
+            //비밀번호 확인
+            $('#memberPwChk').blur(function() {
+            	
+            	var chkResult = $("#memberPwChk_input_box_warn");
+            	
+                if ($('#memberPw').val() != $('#memberPwChk').val()) {
+                    if ($('#memberPwChk').val() != '') {
+                    	chkResult.html("비밀번호가 일치하지 않습니다.");
+                    	chkResult.css("color","red");
+                        $('#memberPwChk').val('');
+                        $('#memberPwChk').focus();
+                    }
+                }else{
+                	chkResult.html("비밀번호가 일치합니다.");
+                    chkResult.css("color","blue");
+                }
+            });//비밀번호 확인 끝
 	    	
 	    	// 우편번호찾기
 			function addressFind() {
