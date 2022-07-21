@@ -31,7 +31,7 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">이름<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" class="form-control" title="이름" placeholder="이름" id= "memberNm" name = "memberNm" maxlength="18">
+                    <input type="text" class="form-control" title="이름" placeholder="이름" id= "memberNm" name = "memberNm" maxlength="18" oninput="this.value = this.value.replace(/[^a-zA-Zㄱ-힣]+/g, '').replace(/(\..*)\./g);">
                 </div>
             </div>
             <div class="cmm-form">
@@ -44,17 +44,14 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">비밀번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="password" class="form-control" title="비밀번호" placeholder="비밀번호" id = "memberPw" name = "memberPw" maxlength="16">
-                    <div class="check_font" id="pw_check"></div>
+                    <input type="password" class="form-control" title="비밀번호" placeholder="비밀번호" id = "memberPw" name = "memberPw" maxlength="20">
                 </div>
             </div>
             <div class="cmm-form" id = "memberPwChkBox">
                 <div class="input">
                     <span class="label">비밀번호 확인<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="password" class="form-control" title="비밀번호 확인" placeholder="비밀번호 확인" id="memberPwChk" name = "memberPwChk" maxlength="16">
+                    <input type="password" class="form-control" title="비밀번호 확인" placeholder="비밀번호 확인" id="memberPwChk" name = "memberPwChk" maxlength="20">
                 </div>
-                    <div class= "clearfix"></div>
-                    <span id = "memberPwChk_input_box_warn"></span>
             </div>
             <div class="cmm-form">
                 <div class="input">
@@ -127,7 +124,7 @@
     	<script type="text/javascript" lang="javascript">
     	
     		var code = "";
-    	
+    		
 	    	$(document).ready(function(){
 	    		
 	    		setDateBox();
@@ -138,6 +135,9 @@
 	    		})
 	    		
 	    		$("#signUpComplete").on("click", function(){
+	    			
+	    			var regPass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/;
+	    			var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 	    			
 	    			if($("#memberNm").val()==""){
 	    				alert("성명을 입력해주세요.");
@@ -169,6 +169,13 @@
 	    				$("#memberPw").focus();
 	    				return false;
 	    			}
+	    			
+	    			if(!regPass.test($("#memberPw").val())){
+	    				alert("영문, 숫자, 특수기호 포합으로 8~20자리 이상 입력해주세요.");
+	    				$("#memberPw").focus();
+                        return false;
+	    			}
+	    			
 	    			if($("#phoneNumber").val()==""){
 	    				alert("휴대전화번호를 입력해주세요.");
 	    				$("#phoneNumber").focus();
@@ -185,6 +192,13 @@
 	    				$("#memberEmail").focus();
 	    				return false;
 	    			}
+	    			
+	    			if(!regEmail.test($("#memberEmail").val())){
+                        alert("이메일 형식이 올바르지 않습니다. 다시 입력해주세요.");
+                        $("#memberEmail").focus();
+                        return false;
+                    }
+	    			
 	    			if($("#emailNumber").val()==""){
 	    				alert("인증번호를 입력해주세요.");
 	    				$("#emailNumber").focus();
@@ -319,19 +333,14 @@
 	    	
             //비밀번호 확인
             $('#memberPwChk').blur(function() {
-            	
-            	var chkResult = $("#memberPwChk_input_box_warn");
-            	
                 if ($('#memberPw').val() != $('#memberPwChk').val()) {
                     if ($('#memberPwChk').val() != '') {
-                    	chkResult.html("비밀번호가 일치하지 않습니다.");
-                    	chkResult.css("color","red");
+                    	alert("비밀번호가 일치하지 않습니다.");
                         $('#memberPwChk').val('');
                         $('#memberPwChk').focus();
                     }
                 }else{
-                	chkResult.html("비밀번호가 일치합니다.");
-                    chkResult.css("color","blue");
+                	alert("비밀번호가 일치합니다.");
                 }
             });//비밀번호 확인 끝
 	    	
