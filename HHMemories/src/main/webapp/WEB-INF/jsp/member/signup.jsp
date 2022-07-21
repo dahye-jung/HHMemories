@@ -31,27 +31,27 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">이름<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="이름" placeholder="이름" id= "memberNm" name = "memberNm" value="${memberVo.memberNm}">
+                    <input type="text" class="form-control" title="이름" placeholder="이름" id= "memberNm" name = "memberNm" maxlength="18">
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">아이디<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="아이디" placeholder="아이디" id = "memberId" name = "memberId">
+                    <input type="text" class="form-control" title="아이디" placeholder="아이디" id = "memberId" name = "memberId" maxlength="12">
                     <button type="button" onclick = "idCheck()" class="btn-puple-white"><span>중복확인</span></button>
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">비밀번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="password" title="비밀번호" placeholder="비밀번호" id = "memberPw" name = "memberPw">
+                    <input type="password" class="form-control" title="비밀번호" placeholder="비밀번호" id = "memberPw" name = "memberPw" maxlength="16">
                     <div class="check_font" id="pw_check"></div>
                 </div>
             </div>
             <div class="cmm-form" id = "memberPwChkBox">
                 <div class="input">
                     <span class="label">비밀번호 확인<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="password" title="비밀번호 확인" placeholder="비밀번호 확인" id="memberPwChk" name = "memberPwChk">
+                    <input type="password" class="form-control" title="비밀번호 확인" placeholder="비밀번호 확인" id="memberPwChk" name = "memberPwChk" maxlength="16">
                 </div>
                     <div class= "clearfix"></div>
                     <span id = "memberPwChk_input_box_warn"></span>
@@ -59,7 +59,7 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">휴대전화번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="휴대전화번호" placeholder="휴대전화번호" id = "phoneNumber" name = "phoneNumber">
+                    <input type="text" class="form-control" title="휴대전화번호" placeholder="휴대전화번호" id = "phoneNumber" name = "phoneNumber" maxlength="12" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 </div>
             </div>
             <div class="cmm-form">
@@ -78,7 +78,7 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">이메일<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="이메일" placeholder="이메일" name="memberEmail" id = "memberEmail">
+                    <input type="text" class="form-control" title="이메일" placeholder="이메일" name="memberEmail" id = "memberEmail">
                     <button type="button" class="btn-puple-white" onclick="emailCheck()"><span>중복확인</span></button>
                     <!-- <button type="button" class="btn-puple-white" onclick="emailCheck()"><span>인증번호 받기</span></button> -->
                 </div>
@@ -86,7 +86,7 @@
             <div class="cmm-form">
                 <div class="input" id = "checkEmailBox">
                     <span class="label">인증번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="인증번호" placeholder="인증번호" id = "emailNumber" name = "emailNumber" disabled="disabled" style="background-color:#FFFFFF;">
+                    <input type="text" class="form-control" title="인증번호" placeholder="인증번호" id = "emailNumber" name = "emailNumber" disabled="disabled" style="background-color:#FFFFFF;">
                 </div>
                 	<div class= "clearfix"></div>
                 	<span id = "mail_check_input_box_warn"></span>
@@ -94,20 +94,20 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">우편번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="우편번호" placeholder="우편번호" id = "zipCode" name = "zipCode" readonly="readonly">
+                    <input type="text" class="form-control" title="우편번호" placeholder="우편번호" id = "zipCode" name = "zipCode" readonly="readonly">
                 	<button type="button" onclick = "addressFind()" class="btn-puple-white"><span>우편번호 찾기</span></button>
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">주소<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="주소" placeholder="주소" id = "address" name="address" readonly="readonly">
+                    <input type="text" class="form-control" title="주소" placeholder="주소" id = "address" name="address" readonly="readonly">
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">상세주소</span>
-                    <input type="text" title="상세주소" placeholder="상세주소" id= "addressDetail" name="addressDetail">
+                    <input type="text" class="form-control" title="상세주소" placeholder="상세주소" id= "addressDetail" name="addressDetail">
                 </div>
             </div>
             <div class="btn-box flex m-t40">
@@ -175,12 +175,6 @@
 	    				return false;
 	    			}
 	    			
-	    			if(isNaN(signupForm.phoneNumber.value.substr(0,1))){
-                        alert("휴대전화번호는 숫자로만 입력이 가능합니다.");
-                        signupForm.phoneNumber.select();
-                        return false;
-                    }
-	    			
 	    			if($("#year").val()=="" || $("#month").val()=="" || $("#day").val()==""){
 	    				alert("생년월일을 선택해주세요.");
 	    				$("#memberBirth").focus();
@@ -220,7 +214,7 @@
 			    $("#year").append("<option value=''>선택</option>");
 			
 			    // 올해 기준으로 -100년부터 +100년을 보여준다.
-			    for (var y = (com_year - 100); y <= (com_year + 100); y++) {
+			    for (var y = (com_year - 65); y <= (com_year + 20); y++) {
 			      $("#year").append("<option value='" + y + "'>" + y + " 년" + "</option>");
 			    }
 			
