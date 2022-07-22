@@ -75,7 +75,8 @@
         <!-- jQuery에서 제공하는 3.5.1 버전의 jQuery CDN 호스트 --> 
 		<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script type="text/javascript">
-	        $(document).ready(function(){
+	       
+        $(document).ready(function(){
 	    		$("#loginBtn").on("click", function(){
 	    			
 	    			var regPass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/;
