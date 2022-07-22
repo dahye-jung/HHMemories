@@ -1,7 +1,5 @@
 package com.hhhmemories.cloud.member.service;
 
-import javax.validation.constraints.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +17,6 @@ public class MemberVO{
 	private int memberSeq;
 	
 	//회원 아이디
-	@NotNull(message = "{memberId.notnull}")
 	private String memberId;
 	
 	//회원 비밀번호
