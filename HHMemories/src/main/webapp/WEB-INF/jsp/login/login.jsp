@@ -43,7 +43,7 @@
 							<div class="cmm-form">
 								<div class="input">
 									<input type="text" id="memberId" name="memberId" title="아이디"
-										placeholder="아이디">
+										placeholder="아이디" oninput="this.value = this.value.replace(/[^0-9a-z]+/g, '').replace(/(\..*)\./g);">
 									<!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
 								</div>
 							</div>
@@ -78,17 +78,27 @@
 	        $(document).ready(function(){
 	    		$("#loginBtn").on("click", function(){
 	    			
+	    			var regPass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/;
+	    			
 	    			if($("#memberId").val()==""){
 	    				alert("아이디를 입력해주세요.");
 	    				$("#memberId").focus();
 	    				return false;
-	    			}
+	    			}else if(signupForm.memberId.value.length < 4 || signupForm.memberId.value.length > 12){
+                        alert("아이디는 4 ~ 12자 이내로 입력이 가능합니다.");
+                        $("#memberId").focus();
+                        return false;
+                    }
 	    			
 	    			if($("#memberPw").val()==""){
 	    				alert("비밀번호를 입력해주세요.");
 	    				$("#memberPw").focus();
 	    				return false;
-	    			}
+	    			}else if(!regPass.test($("#memberPw").val())){
+                        alert("영문, 숫자, 특수문자($@$!%*#?&) 포합해서 8~20자리 이내로 입력해주세요.");
+                        $("#memberPw").focus();
+                        return false;
+                    }
 	    			
 	    		});
 	    	})

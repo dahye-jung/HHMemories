@@ -31,7 +31,7 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">이름<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" class="form-control" title="이름" placeholder="이름" id= "memberNm" name = "memberNm" oninput="this.value = this.value.replace(/[^a-zA-Zㄱ-힣]+/g, '').replace(/(\..*)\./g);">
+                    <input type="text" class="form-control" maxlength="10" title="이름" placeholder="이름" id= "memberNm" name = "memberNm" oninput="this.value = this.value.replace(/[^a-zA-Zㄱ-힣]+/g, '').replace(/(\..*)\./g);">
                 </div>
             </div>
             <div class="cmm-form">
@@ -143,7 +143,7 @@
 	    			var emailChkVal = $("#memberEmailCheck").val();
 	    			
 	    			if($("#memberNm").val()==""){
-	    				alert("성명을 입력해주세요.");
+	    				alert("이름을 입력해주세요.");
 	    				$("#memberNm").focus();
 	    				return false;
 	    			}
@@ -167,7 +167,7 @@
 	    				$("#memberPw").focus();
 	    				return false;
 	    			}else if(!regPass.test($("#memberPw").val())){
-	    				alert("영문, 숫자, 특수문자 포합해서 8~20자리 이상 입력해주세요.");
+	    				alert("영문, 숫자, 특수문자($@$!%*#?&) 포합해서 8~20자리 이내로 입력해주세요.");
 	    				$("#memberPw").focus();
                         return false;
 	    			}
@@ -177,7 +177,7 @@
                         $("#memberPwChk").focus();
                         return false;
                     }else if(!regPass.test($("#memberPwChk").val())){
-                        alert("영문, 숫자, 특수문자 포합해서 8~20자리 이상 입력해주세요.");
+                        alert("영문, 숫자, 특수문자($@$!%*#?&) 포합해서 8~20자리 이내로 입력해주세요.");
                         $("#memberPwChk").focus();
                         return false;
                     }
