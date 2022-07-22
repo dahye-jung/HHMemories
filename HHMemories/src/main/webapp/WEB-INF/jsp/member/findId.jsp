@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -35,7 +38,7 @@
                 <div class="box-form">
                     <div class="cmm-form">
                         <div class="input">
-                            <input type="text" title="이름" id = "memberNm" name="memberNm" placeholder="이름">
+                            <input type="text" title="이름" maxlength="10" id = "memberNm" name="memberNm" placeholder="이름" oninput="this.value = this.value.replace(/[^a-zA-Zㄱ-힣]+/g, '').replace(/(\..*)\./g);">
                             <!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
                         </div>
                     </div>
@@ -68,6 +71,8 @@
 	    		})
 	    		
 				$("#findIdConfirm").on("click", function(){
+					
+					var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 	    			
 	    			if($("#memberNm").val()==""){
 	    				alert("이름을 입력해주세요.");
@@ -79,7 +84,11 @@
 	    				alert("이메일을 입력해주세요.");
 	    				$("#memberEmail").focus();
 	    				return false;
-	    			}
+	    			}else if(!regEmail.test($("#memberEmail").val())){
+                        alert("이메일 형식이 올바르지 않습니다. 다시 입력해주세요.");
+                        $("#memberEmail").focus();
+                        return false;
+                    }
 	    			
 	    		});
 	    	})

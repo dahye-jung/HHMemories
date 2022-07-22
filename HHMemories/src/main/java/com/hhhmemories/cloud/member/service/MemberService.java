@@ -1,17 +1,6 @@
 package com.hhhmemories.cloud.member.service;
 
-import javax.servlet.http.HttpServletResponse;
-
 public interface MemberService {
-
-	
-	/**
-	 * 로그인
-	 * 
-	 * @param MemberVO memberVo, HttpServletResponse response
-	 * @throws Exception
-	 */
-	MemberVO selectMemberInfo(MemberVO memberVo, HttpServletResponse response) throws Exception;
 	
 	/**
 	 * 회원가입

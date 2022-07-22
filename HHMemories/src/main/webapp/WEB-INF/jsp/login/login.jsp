@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -40,7 +43,7 @@
 							<div class="cmm-form">
 								<div class="input">
 									<input type="text" id="memberId" name="memberId" title="아이디"
-										placeholder="아이디">
+										placeholder="아이디" oninput="this.value = this.value.replace(/[^0-9a-z]+/g, '').replace(/(\..*)\./g);">
 									<!-- <button class="btn-icon delete"><span>입력값 지우기</span></button> -->
 								</div>
 							</div>
@@ -72,20 +75,31 @@
         <!-- jQuery에서 제공하는 3.5.1 버전의 jQuery CDN 호스트 --> 
 		<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script type="text/javascript">
-	        $(document).ready(function(){
+	       
+        $(document).ready(function(){
 	    		$("#loginBtn").on("click", function(){
+	    			
+	    			var regPass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/;
 	    			
 	    			if($("#memberId").val()==""){
 	    				alert("아이디를 입력해주세요.");
 	    				$("#memberId").focus();
 	    				return false;
-	    			}
+	    			}else if(signupForm.memberId.value.length < 4 || signupForm.memberId.value.length > 12){
+                        alert("아이디는 4 ~ 12자 이내로 입력이 가능합니다.");
+                        $("#memberId").focus();
+                        return false;
+                    }
 	    			
 	    			if($("#memberPw").val()==""){
 	    				alert("비밀번호를 입력해주세요.");
 	    				$("#memberPw").focus();
 	    				return false;
-	    			}
+	    			}else if(!regPass.test($("#memberPw").val())){
+                        alert("영문, 숫자, 특수문자($@$!%*#?&) 포합해서 8~20자리 이내로 입력해주세요.");
+                        $("#memberPw").focus();
+                        return false;
+                    }
 	    			
 	    		});
 	    	})

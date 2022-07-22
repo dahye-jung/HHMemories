@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -28,34 +31,34 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">이름<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="이름" placeholder="이름" id= "memberNm" name = "memberNm">
+                    <input type="text" class="form-control" maxlength="10" title="이름" placeholder="이름" id= "memberNm" name = "memberNm" oninput="this.value = this.value.replace(/[^a-zA-Zㄱ-힣]+/g, '').replace(/(\..*)\./g);">
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">아이디<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="아이디" placeholder="아이디" id = "memberId" name = "memberId">
-                    <button type="button" onclick = "idCheck()" class="btn-puple-white"><span>중복확인</span></button>
+                    <input type="text" class="form-control" title="아이디" placeholder="아이디" id = "memberId" name = "memberId" oninput="this.value = this.value.replace(/[^0-9a-z]+/g, '').replace(/(\..*)\./g);">
+                    <button type="button" id="memberIdCheck" name = "memberIdCheck" onclick = "idCheck()" class="btn-puple-white" value = "N"><span>중복확인</span></button>
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">비밀번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="password" title="비밀번호" placeholder="비밀번호" id = "memberPw" name = "memberPw">
-                    <div class="check_font" id="pw_check"></div>
+                    <input type="password" class="form-control" title="비밀번호" placeholder="비밀번호" id = "memberPw" name = "memberPw" >
                 </div>
             </div>
-            <div class="cmm-form">
+            <div class="cmm-form" id = "memberPwChkBox">
                 <div class="input">
                     <span class="label">비밀번호 확인<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="password" title="비밀번호 확인" placeholder="비밀번호 확인" id="memberPwChk" name = "memberPwChk">
-                    <div class="check_font" id="pw_check"></div>
+                    <input type="password" class="form-control" title="비밀번호 확인" placeholder="비밀번호 확인" id="memberPwChk" name = "memberPwChk">
                 </div>
+                    <div class= "clearfix"></div>
+                    <span id = "memberPwChk_input_box_warn"></span>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">휴대전화번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="휴대전화번호" placeholder="휴대전화번호" id = "phoneNumber" name = "phoneNumber">
+                    <input type="text" class="form-control" title="휴대전화번호" placeholder="휴대전화번호" id = "phoneNumber" name = "phoneNumber" maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 </div>
             </div>
             <div class="cmm-form">
@@ -74,15 +77,14 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">이메일<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="이메일" placeholder="이메일" name="memberEmail" id = "memberEmail">
-                    <button type="button" class="btn-puple-white" onclick="emailCheck()"><span>중복확인</span></button>
-                    <!-- <button type="button" class="btn-puple-white" onclick="emailCheck()"><span>인증번호 받기</span></button> -->
+                    <input type="text" class="form-control" title="이메일" placeholder="이메일" name="memberEmail" id = "memberEmail">
+                    <button type="button" id="memberEmailCheck" name="memberEmailCheck" class="btn-puple-white" onclick="emailCheck()" value = "N"><span>중복확인</span></button>
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input" id = "checkEmailBox">
                     <span class="label">인증번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="인증번호" placeholder="인증번호" id = "emailNumber" name = "emailNumber" disabled="disabled" style="background-color:#FFFFFF;">
+                    <input type="text" class="form-control" title="인증번호" placeholder="인증번호" id = "emailNumber" name = "emailNumber" disabled="disabled" style="background-color:#FFFFFF;">
                 </div>
                 	<div class= "clearfix"></div>
                 	<span id = "mail_check_input_box_warn"></span>
@@ -90,24 +92,24 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">우편번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="우편번호" placeholder="우편번호" id = "zipCode" name = "zipCode" readonly="readonly">
+                    <input type="text" class="form-control" title="우편번호" placeholder="우편번호" id = "zipCode" name = "zipCode" readonly="readonly">
                 	<button type="button" onclick = "addressFind()" class="btn-puple-white"><span>우편번호 찾기</span></button>
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">주소<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" title="주소" placeholder="주소" id = "address" name="address" readonly="readonly">
+                    <input type="text" class="form-control" title="주소" placeholder="주소" id = "address" name="address" readonly="readonly">
                 </div>
             </div>
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">상세주소</span>
-                    <input type="text" title="상세주소" placeholder="상세주소" id= "addressDetail" name="addressDetail">
+                    <input type="text" class="form-control" title="상세주소" placeholder="상세주소" id= "addressDetail" name="addressDetail">
                 </div>
             </div>
             <div class="btn-box flex m-t40">
-                <button type="submit" class="btn-puple" id = "signUpComplete" name="signUpComplete"><span>확인</span></button>
+                <button type="submit" class="btn-puple" id= "signUpComplete" name="signUpComplete"><span>확인</span></button>
                 <button type="button" class="btn-puple" id = "cencle" name = "cencle"><span>취소</span></button>
             </div>
         </div>
@@ -123,7 +125,7 @@
     	<script type="text/javascript" lang="javascript">
     	
     		var code = "";
-    	
+    		
 	    	$(document).ready(function(){
 	    		
 	    		setDateBox();
@@ -135,54 +137,88 @@
 	    		
 	    		$("#signUpComplete").on("click", function(){
 	    			
+	    			var regPass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/;
+	    			var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+	    			var idChkVal = $("#memberIdCheck").val();
+	    			var emailChkVal = $("#memberEmailCheck").val();
+	    			
 	    			if($("#memberNm").val()==""){
-	    				alert("성명을 입력해주세요.");
+	    				alert("이름을 입력해주세요.");
 	    				$("#memberNm").focus();
 	    				return false;
 	    			}
+	    			
 	    			if($("#memberId").val()==""){
 	    				alert("아이디를 입력해주세요.");
 	    				$("#memberId").focus();
 	    				return false;
-	    			}
-	    			
-	    			/* var idChkVal = $("#idCheck").val();
-	    			if(idChkVal == "N"){
+	    			}else if(signupForm.memberId.value.length < 4 || signupForm.memberId.value.length > 12){
+                        alert("아이디는 4 ~ 12자 이내로 입력이 가능합니다.");
+                        $("#memberId").focus();
+                        return false;
+	    			}else if(idChkVal == "N"){
 	    				alert("중복확인 버튼을 눌러주세요.");
-	    			}else if(idChkVal == "Y"){
-	    				$("#signupForm").submit();
-	    			} */
+	    				$("#memberId").focus();
+                        return false;
+	    			}
 	    			
 	    			if($("#memberPw").val()==""){
 	    				alert("비밀번호를 입력해주세요.");
 	    				$("#memberPw").focus();
 	    				return false;
+	    			}else if(!regPass.test($("#memberPw").val())){
+	    				alert("영문, 숫자, 특수문자($@$!%*#?&) 포합해서 8~20자리 이내로 입력해주세요.");
+	    				$("#memberPw").focus();
+                        return false;
 	    			}
+	    			
+	    			if($("#memberPwChk").val() == ""){
+                        alert("비밀번호를 입력해주세요.");
+                        $("#memberPwChk").focus();
+                        return false;
+                    }else if(!regPass.test($("#memberPwChk").val())){
+                        alert("영문, 숫자, 특수문자($@$!%*#?&) 포합해서 8~20자리 이내로 입력해주세요.");
+                        $("#memberPwChk").focus();
+                        return false;
+                    }
+	    			
 	    			if($("#phoneNumber").val()==""){
-	    				alert("휴대전화를 입력해주세요.");
+	    				alert("휴대전화번호를 입력해주세요.");
 	    				$("#phoneNumber").focus();
 	    				return false;
 	    			}
+	    			
 	    			if($("#year").val()=="" || $("#month").val()=="" || $("#day").val()==""){
 	    				alert("생년월일을 선택해주세요.");
 	    				$("#memberBirth").focus();
 	    				return false;
 	    			}
+	    			
 	    			if($("#memberEmail").val()==""){
 	    				alert("이메일을 입력해주세요.");
 	    				$("#memberEmail").focus();
 	    				return false;
-	    			}
+	    			}else if(!regEmail.test($("#memberEmail").val())){
+                        alert("이메일 형식이 올바르지 않습니다. 다시 입력해주세요.");
+                        $("#memberEmail").focus();
+                        return false;
+                    }else if(emailChkVal == "N"){
+                        alert("중복확인 버튼을 눌러주세요.");
+                        $("#memberEmail").focus();
+                        return false;
+                    }
+	    			
 	    			if($("#emailNumber").val()==""){
 	    				alert("인증번호를 입력해주세요.");
-	    				$("#emailNumber").focus();
 	    				return false;
 	    			}
+	    			
 	    			if($("#zipCode").val()==""){
 	    				alert("우편번호를 입력해주세요.");
 	    				addressFind();
 	    				return false;
 	    			}
+	    			
 	    			if($("#address").val()==""){
 	    				alert("주소를 입력해주세요.");
 	    				addressFind();
@@ -201,7 +237,7 @@
 			    $("#year").append("<option value=''>선택</option>");
 			
 			    // 올해 기준으로 -100년부터 +100년을 보여준다.
-			    for (var y = (com_year - 100); y <= (com_year + 100); y++) {
+			    for (var y = (com_year - 65); y <= (com_year + 20); y++) {
 			      $("#year").append("<option value='" + y + "'>" + y + " 년" + "</option>");
 			    }
 			
@@ -226,7 +262,7 @@
 	    		var mem = {
 	    				memberId : $('#memberId').val()
 	    		}
-	
+	    		
 	    		if (mem.memberId.length != "") {
 	    			$.ajax({
 	    				url : "/idCheck",
@@ -236,18 +272,21 @@
 	    					if (result == 1) {
 	    						alert("사용 불가능한 아이디입니다.");
 	    					} else if(result == 0){
-	    						/* $("#idCheck").attr("value","Y") */
+	    						$("#memberIdCheck").attr("value", "Y");
 	    						alert("사용 가능한 아이디입니다.");
 	    					}
+	    				},
+	    				error : function(){
+	    					alert("요정실패");
 	    				}
 	    			}); // ajax 끝
-	    		} else {
-	    			alert("아이디를 입력해주세요.");
-	    			signupForm.memberId.focus();
-	    		}
+	    		}else {
+                    alert("아이디를 입력해주세요.");
+                    signupForm.memberId.focus();
+                }
 	    	}; // 아이디 체크 끝
 	    	
-	    	//이메일 인증번호 보내기
+	    	//이메일 체크 및 인증번호 보내기
 	    	function emailCheck() {
 	    		var email = {
 	    				memberEmail : $('#memberEmail').val()
@@ -264,29 +303,31 @@
 		    					if (result == 1) {
 		    						alert("사용 불가능한 이메일입니다.");
 		    					} else if(result == 0){
-		    						/* $("#idCheck").attr("value","Y") */
-		    						alert("사용 가능한 이메일입니다.");
+		    						$("#memberEmailCheck").attr("value", "Y");
+		    						alert("사용 가능한 이메일입니다.\n해당하는 이메일로 인증번호를 발송하였습니다.");
 		    						
 		    						$.ajax({
 		    		    				url : "/emailSend",
 		    		    				type : "GET",
 		    		    				data : email,
 		    		    				success : function(data) {
-		    		    					alert("인증번호를 발송하였습니다.");
 		    		    					checkEmail.attr("disabled",false);
 		    		    					checkBox.attr("id", "mail_check_input_box_true");
 		    		    					code = data;
 		    		    				}
 		    		    			}); // ajax 끝
 		    					}
-		    				}
+		    				},
+	                        error : function(){
+	                            alert("요정실패");
+	                        }
 		    			}); // ajax 끝
 	    				
 	    		} else {
 	    			alert("이메일을 입력해주세요.");
 	    			signupForm.memberEmail.focus();
 	    		}
-	    	}; // 이메일 인증번호 보내기 끝
+	    	}; // 이메일 체크 및 인증번호 보내기
     		
 	    	/* 인증번호 비교 */
 	    	$("#emailNumber").blur(function(){
@@ -305,6 +346,21 @@
 	    		    }    
 	    	});	
 	    	
+	    	/* 비밀번호 비교 */
+	    	$("#memberPwChk").blur(function(){
+	    	    
+	    		 var checkPwchk = $("#memberPwChk_input_box_warn");    // 비교 결과   
+	    		 
+	    		 if($("#memberPw").val() == $("#memberPwChk").val()){      // 일치할 경우
+	    			   checkPwchk.html("비밀번호가 일치합니다.");
+	    			   checkPwchk.css('color', 'blue');
+	    		        /* checkResult.attr("class", "correct");   */      
+	    		    } else {                                            // 일치하지 않을 경우
+	    		    	checkPwchk.html("비밀번호가 일치하지 않습니다.");
+	    		    	checkPwchk.css('color', 'red');    
+	    		        $("#memberPw").val().focus();
+	    		    }    
+	    	});	
 	    	
 	    	// 우편번호찾기
 			function addressFind() {
