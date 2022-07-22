@@ -37,9 +37,8 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">아이디<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" onkeydown="inputIdChk()" class="form-control" title="아이디" placeholder="아이디" id = "memberId" name = "memberId" oninput="this.value = this.value.replace(/[^0-9a-z]+/g, '').replace(/(\..*)\./g);">
-                    <button type="button" id="memberIdCheck" name = "memberIdCheck" onclick = "idCheck()" class="btn-puple-white"><span>중복확인</span></button>
-                    <input type="hidden" id = "memberIdCheckYn" name="memberIdCheckYn" value="memberIdUncheck">
+                    <input type="text" class="form-control" title="아이디" placeholder="아이디" id = "memberId" name = "memberId" oninput="this.value = this.value.replace(/[^0-9a-z]+/g, '').replace(/(\..*)\./g);">
+                    <button type="button" id="memberIdCheck" name = "memberIdCheck" onclick = "idCheck()" class="btn-puple-white" value = "N"><span>중복확인</span></button>
                 </div>
             </div>
             <div class="cmm-form">
@@ -59,7 +58,7 @@
             <div class="cmm-form">
                 <div class="input">
                     <span class="label">휴대전화번호<i class="required" aria-label="필수입력항목"></i></span>
-                    <input type="text" class="form-control" title="휴대전화번호" placeholder="휴대전화번호" id = "phoneNumber" name = "phoneNumber" maxlength="12" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                    <input type="text" class="form-control" title="휴대전화번호" placeholder="휴대전화번호" id = "phoneNumber" name = "phoneNumber" maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
                 </div>
             </div>
             <div class="cmm-form">
@@ -79,8 +78,7 @@
                 <div class="input">
                     <span class="label">이메일<i class="required" aria-label="필수입력항목"></i></span>
                     <input type="text" class="form-control" title="이메일" placeholder="이메일" name="memberEmail" id = "memberEmail">
-                    <button type="button" id="memberEmailCheck" name="memberEmailCheck" class="btn-puple-white" onclick="emailCheck()"><span>중복확인</span></button>
-                    <input type="hidden" id="emailCheckYn" name="emailCheckYn" value="memberEmailUncheck">
+                    <button type="button" id="memberEmailCheck" name="memberEmailCheck" class="btn-puple-white" onclick="emailCheck()" value = "N"><span>중복확인</span></button>
                 </div>
             </div>
             <div class="cmm-form">
@@ -141,6 +139,8 @@
 	    			
 	    			var regPass = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{10,}$/;
 	    			var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+	    			var idChkVal = $("#memberIdCheck").val();
+	    			var emailChkVal = $("#memberEmailCheck").val();
 	    			
 	    			if($("#memberNm").val()==""){
 	    				alert("성명을 입력해주세요.");
@@ -156,18 +156,18 @@
                         alert("아이디는 4 ~ 12자 이내로 입력이 가능합니다.");
                         $("#memberId").focus();
                         return false;
-                    }else if(signupForm.memberIdCheckYn.value!=1){
-                    	 alert("아이디 중복체크를 해주세요.");
-                         $("#memberId").focus();
-                         return false;
-                    }
+	    			}else if(idChkVal == "N"){
+	    				alert("중복확인 버튼을 눌러주세요.");
+	    				$("#memberId").focus();
+                        return false;
+	    			}
 	    			
 	    			if($("#memberPw").val()==""){
 	    				alert("비밀번호를 입력해주세요.");
 	    				$("#memberPw").focus();
 	    				return false;
 	    			}else if(!regPass.test($("#memberPw").val())){
-	    				alert("영문, 숫자, 특수문자 포합으로 8~20자리 이상 입력해주세요.");
+	    				alert("영문, 숫자, 특수문자 포합해서 8~20자리 이상 입력해주세요.");
 	    				$("#memberPw").focus();
                         return false;
 	    			}
@@ -177,7 +177,7 @@
                         $("#memberPwChk").focus();
                         return false;
                     }else if(!regPass.test($("#memberPwChk").val())){
-                        alert("영문, 숫자, 특수문자 포합으로 8~20자리 이상 입력해주세요.");
+                        alert("영문, 숫자, 특수문자 포합해서 8~20자리 이상 입력해주세요.");
                         $("#memberPwChk").focus();
                         return false;
                     }
@@ -202,15 +202,14 @@
                         alert("이메일 형식이 올바르지 않습니다. 다시 입력해주세요.");
                         $("#memberEmail").focus();
                         return false;
-                    }else if(signupForm.emailCheckYn.value!="memberEmailCheck"){
-                        alert("이메일 중복체크를 해주세요.");
+                    }else if(emailChkVal == "N"){
+                        alert("중복확인 버튼을 눌러주세요.");
                         $("#memberEmail").focus();
                         return false;
                     }
 	    			
 	    			if($("#emailNumber").val()==""){
 	    				alert("인증번호를 입력해주세요.");
-	    				$("#emailNumber").focus();
 	    				return false;
 	    			}
 	    			
@@ -258,21 +257,12 @@
 			
 			}
 	    	
-	    	function inputIdChk(){
-	    		var signupForm = document.signupForm;
-	    		var memberIdCheck = document.singupForm.memberIdCheck;
-	    		document.signupForm.memberIdCheckYn.value = "idUncheck";
-	    		memberIdCheck.disabled=false;
-	    		memberIdCheck.style.opacity=1;
-	    		memberIdCheck.style.cursor="pointer";
-	    	}
-	    	
 	    	//아이디 중복 체크
 	    	function idCheck() {
 	    		var mem = {
 	    				memberId : $('#memberId').val()
 	    		}
-	
+	    		
 	    		if (mem.memberId.length != "") {
 	    			$.ajax({
 	    				url : "/idCheck",
@@ -282,18 +272,21 @@
 	    					if (result == 1) {
 	    						alert("사용 불가능한 아이디입니다.");
 	    					} else if(result == 0){
-	    						/* $("#idCheck").attr("value","Y") */
+	    						$("#memberIdCheck").attr("value", "Y");
 	    						alert("사용 가능한 아이디입니다.");
 	    					}
+	    				},
+	    				error : function(){
+	    					alert("요정실패");
 	    				}
 	    			}); // ajax 끝
-	    		} else {
-	    			alert("아이디를 입력해주세요.");
-	    			signupForm.memberId.focus();
-	    		}
+	    		}else {
+                    alert("아이디를 입력해주세요.");
+                    signupForm.memberId.focus();
+                }
 	    	}; // 아이디 체크 끝
 	    	
-	    	//이메일 인증번호 보내기
+	    	//이메일 체크 및 인증번호 보내기
 	    	function emailCheck() {
 	    		var email = {
 	    				memberEmail : $('#memberEmail').val()
@@ -310,7 +303,7 @@
 		    					if (result == 1) {
 		    						alert("사용 불가능한 이메일입니다.");
 		    					} else if(result == 0){
-		    						/* $("#idCheck").attr("value","Y") */
+		    						$("#memberEmailCheck").attr("value", "Y");
 		    						alert("사용 가능한 이메일입니다.\n해당하는 이메일로 인증번호를 발송하였습니다.");
 		    						
 		    						$.ajax({
@@ -324,14 +317,17 @@
 		    		    				}
 		    		    			}); // ajax 끝
 		    					}
-		    				}
+		    				},
+	                        error : function(){
+	                            alert("요정실패");
+	                        }
 		    			}); // ajax 끝
 	    				
 	    		} else {
 	    			alert("이메일을 입력해주세요.");
 	    			signupForm.memberEmail.focus();
 	    		}
-	    	}; // 이메일 인증번호 보내기 끝
+	    	}; // 이메일 체크 및 인증번호 보내기
     		
 	    	/* 인증번호 비교 */
 	    	$("#emailNumber").blur(function(){
@@ -350,7 +346,7 @@
 	    		    }    
 	    	});	
 	    	
-	    	/* 인증번호 비교 */
+	    	/* 비밀번호 비교 */
 	    	$("#memberPwChk").blur(function(){
 	    	    
 	    		 var checkPwchk = $("#memberPwChk_input_box_warn");    // 비교 결과   

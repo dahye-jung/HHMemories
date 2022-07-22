@@ -4,7 +4,6 @@ import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -15,13 +14,10 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hhhmemories.cloud.mail.controller.mailController;
 import com.hhhmemories.cloud.member.service.MemberService;
@@ -70,16 +66,8 @@ public class MemberController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signUp(HttpServletRequest httpreq,Model model,@Validated MemberVO memberVo,HttpServletResponse response, RedirectAttributes rttr,BindingResult result, Errors errors) throws Exception{
+	public String signUp(Model model, MemberVO memberVo) throws Exception{
 
-	    if(errors.hasErrors()) {
-            //회원가입 실패시 입력 데이터 값을 유지
-            model.addAttribute("memberVo",memberVo);
-            
-            return "member/signup";
-        
-        }
-	    
 		String pass = passwordEncoder.encode(memberVo.getMemberPw());
 		
 		memberVo.setMemberPw(pass);
@@ -90,6 +78,8 @@ public class MemberController {
 		if(idCheck == 0 || emailCheck == 0 ) {
 			memberService.insertMember(memberVo);
 			model.addAttribute("result",true);
+		}else {
+		    return "/sigup";
 		}
 		
 		
@@ -111,7 +101,7 @@ public class MemberController {
 	@RequestMapping(value = "/idCheck", method = RequestMethod.POST)
 	public int idCheck(MemberVO memberVo) throws Exception{
 
-		int result = memberService.idCheck(memberVo);
+		int result =  memberService.idCheck(memberVo);
 		return result;
 		
 	}
@@ -146,9 +136,6 @@ public class MemberController {
         /* 인증번호(난수) 생성 */
         Random random = new Random();
         int checkNum = random.nextInt(888888) + 111111;
-        
-        logger.info("이메일 전송 확인 되라ㅏㅏㅏㅏㅏㅏㅏㅏㅏ");
-        logger.info("인증번호" + memberEmail);
         
         /* 이메일 보내기 */
         String setFrom = "hyesounglee@naver.com";
